@@ -5,7 +5,7 @@
   <title>创业平台 - <?php echo L('member','','member').L('manage_center');?></title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
+  <script async="" src="<?php echo WEB_PATH;?>statics/cy/js/analytics.js"></script>
   <script src="<?php echo WEB_PATH;?>statics/cy/js/particles-2487832520b97bc9fd5fbb30a3d867a4.js"></script>
   <link href="<?php echo WEB_PATH;?>statics/cy/css/application-6b1bb0142b9a63dc1316029dc52a322c.css" media="all" rel="stylesheet">
   <script src="<?php echo WEB_PATH;?>statics/cy/js/application-0f03036a9b29b502f76a708417d09644.js"></script>
@@ -17,7 +17,7 @@
   </style>
 </head>
 
-<body class="sessions-new ">
+<body class="passwords-new ">
 <!--[if lt IE 7]>
 <p class="browsehappy">
   You are using an <strong>outdated</strong>
@@ -28,7 +28,7 @@
 <![endif]-->
 
 <div id="particles-js">
-  <canvas width="1726" height="811" style="width: 100%; height: 100%;"></canvas>
+  <canvas width="1920" height="928" style="width: 100%; height: 100%;"></canvas>
 </div>
 
 <section class="wrapper">
@@ -40,7 +40,7 @@
           <a href="<?php echo APP_PATH;?>">
             <h1 class="header--logo__36kr">36kr</h1>
           </a>
-          <p class="header--logo__slogan" id="slogan" data-default="让创业更简单">让创业更简单</p>
+          <p class="header--logo__slogan" id="slogan" data-default="找回密码">找回密码</p>
         </div>
 
         <div class="header-help">
@@ -51,26 +51,20 @@
 
       <div class="main">
 
-        <div class="alert-tip"></div>
-
         <div class="main-login">
-          <form accept-charset="UTF-8" action="" autocomplete="off" 
-                class="simple_form new_user" data-remote="true" id="sign_in_form" method="post">
-
+          <form accept-charset="UTF-8" action="https://passport.36kr.com/users/password.json" autocomplete="off" class="simple_form new_user" data-remote="true" id="recorver_form" method="post">            
             <div class="form-group">
-              <input aria-required="true" autocomplete="false" class="string required form-control" id="userName" 
-                    name="userName" placeholder="请输入邮箱" required="required" type="text">
-              <input autocomplete="false" class="password optional form-control" id="userPass" 
-                    name="userPass" placeholder="请输入密码，不少于6位" required="required" type="password">
+              <input aria-required="true" autocomplete="false" class="string required form-control" id="userEmail" 
+                  name="userEmail" placeholder="请输入邮箱" required="required" type="text">
               <p class="error-msg" style="display: none"></p>
-            </div> 
+            </div>
             <div class="form-group">
-              <input class="btn input-submit"  data-register-text="登录" id="submit" name="commit" type="submit" value="登录">
-            </div>            
+              <input class="btn input-submit" id="submit" name="commit" type="submit" value="找回密码">
+            </div>
 
             <div class="actions cf">                        
-              <a class="reg" href="<?php echo APP_PATH;?>index.php?m=member&c=index&a=register" id="reg">注册</a>                                   
-              <a class="forget" href="<?php echo APP_PATH;?>index.php?m=member&c=index&a=public_forget_password" id="forgot_password">忘记密码</a>  
+              <a class="reg" href="<?php echo APP_PATH;?>index.php?m=member&c=index&a=register" id="reg">注册</a>
+              <a class="logi" href="<?php echo APP_PATH;?>index.php?m=member&c=index&a=login" id="logi">登录</a> 
             </div>
           </form>
         </div>
@@ -92,6 +86,5 @@
     </div>
   </div>
 </section>
-
 </body>
 </html>

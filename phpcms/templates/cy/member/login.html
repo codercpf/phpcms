@@ -44,7 +44,7 @@
         </div>
 
         <div class="header-help">
-          <a href="about.html" target="_blank" class="header-help__btn">帮助</a>
+          <a href="{APP_PATH}index.php?m=member&c=index&a=public_about" target="_blank" class="header-help__btn">帮助</a>
         </div>
 
       </header>
@@ -59,7 +59,7 @@
 
             <div class="form-group">
               <input aria-required="true" autocomplete="false" class="string required form-control" id="userName" 
-                    name="userName" placeholder="请输入手机号或邮箱" required="required" type="text">
+                    name="userName" placeholder="请输入邮箱" required="required" type="text">
               <input autocomplete="false" class="password optional form-control" id="userPass" 
                     name="userPass" placeholder="请输入密码，不少于6位" required="required" type="password">
               <p class="error-msg" style="display: none"></p>
@@ -70,7 +70,7 @@
 
             <div class="actions cf">                        
               <a class="reg" href="{APP_PATH}index.php?m=member&c=index&a=register" id="reg">注册</a>                                   
-              <a class="forget" href="{APP_PATH}index.php?m=member&c=index&a=getpassword" id="forgot_password">忘记密码</a>  
+              <a class="forget" href="{APP_PATH}index.php?m=member&c=index&a=public_forget_password" id="forgot_password">忘记密码</a>  
             </div>
           </form>
         </div>

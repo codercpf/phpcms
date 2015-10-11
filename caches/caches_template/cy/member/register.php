@@ -9,9 +9,9 @@
   <script src="<?php echo WEB_PATH;?>statics/cy/js/particles-2487832520b97bc9fd5fbb30a3d867a4.js"></script>
   <link href="<?php echo WEB_PATH;?>statics/cy/css/application-6b1bb0142b9a63dc1316029dc52a322c.css" media="all" rel="stylesheet">
   <script src="<?php echo WEB_PATH;?>statics/cy/js/application-0f03036a9b29b502f76a708417d09644.js"></script>
-  <!-- <script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>-->
-
-  <style type="text/css" id="hot_style_patch">
+  <!-- <script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+-->
+<style type="text/css" id="hot_style_patch">
       .main-wechat{ padding-top: 45px !important}
       .done, .alert { position: static !important}
   </style>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="header-help">
-          <a href="<?php echo APP_PATH;?>index.php?m=member&c=index&a=about" target="_blank" class="header-help__btn">帮助</a>
+          <a href="<?php echo APP_PATH;?>index.php?m=member&c=index&a=public_about" target="_blank" class="header-help__btn">帮助</a>
         </div>
 
       </header>
@@ -54,24 +54,26 @@
         <div class="alert-tip"></div>
 
         <div class="main-login">
-          <form accept-charset="UTF-8" action="" autocomplete="off" class="simple_form new_user" data-remote="true" id="sign_in_form" method="post">
+
+          <form accept-charset="UTF-8" action="<?php echo APP_PATH;?>index.php?m=member&c=index&a=register" autocomplete="off" class="simple_form new_user" method="post">
 
             <div class="form-group">
-              <input aria-required="true" autocomplete="false" class="string required form-control" id="userName" 
-                    name="userName" placeholder="请输入手机号或邮箱" required="required" type="text">
+              <input aria-required="true" autocomplete="false" class="string required form-control" id="userAccount" 
+                    name="userAccount" placeholder="请输入邮箱" required="required" type="email">
               <input autocomplete="false" class="password optional form-control" id="userPass" 
                     name="userPass" placeholder="请输入密码，不少于6位" required="required" type="password">
               <p class="error-msg" style="display: none"></p>
-            </div> 
-            <div class="form-group">
-              <input class="btn input-submit"  data-register-text="注册" id="submit" name="commit" type="submit" value="注册">
             </div>
-            
 
-            <div class="actions cf">                        
+            <div class="form-group">
+              <input type="submit" class="btn input-submit" name="dosubmit" value="注册">
+            </div>
+
+            <div class="actions cf">
               <a class="logi" href="<?php echo APP_PATH;?>index.php?m=member&c=index&a=login" id="logi">登录</a>
             </div>
           </form>
+
         </div>
 
         <div class="form-group third-part-login">
