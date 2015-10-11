@@ -836,6 +836,8 @@ class index extends foreground {
 		
 		if(isset($_POST['dosubmit'])) {
 			if(empty($_SESSION['connectid'])) {
+
+/*	//取消验证码判断，因没有用验证码
 				//判断验证码
 				$code = isset($_POST['code']) && trim($_POST['code']) ? trim($_POST['code']) : showmessage(L('input_code'), HTTP_REFERER);
 				if ($_SESSION['code'] != strtolower($code)) {
@@ -843,16 +845,26 @@ class index extends foreground {
 					showmessage(L('code_error'), HTTP_REFERER);
 				}
 				$_SESSION['code'] = '';
+*/
 			}
 			
-			$username = isset($_POST['username']) && is_username($_POST['username']) ? trim($_POST['username']) : showmessage(L('username_empty'), HTTP_REFERER);
-			$password = isset($_POST['password']) && trim($_POST['password']) ? trim($_POST['password']) : showmessage(L('password_empty'), HTTP_REFERER);
+			$username = isset($_POST['userAccount']) ? trim($_POST['userAccount']) : showmessage(L('username_empty'), HTTP_REFERER);
+			$password = isset($_POST['userPass']) && trim($_POST['userPass']) ? trim($_POST['userPass']) : showmessage(L('password_empty'), HTTP_REFERER);
 			$cookietime = intval($_POST['cookietime']);
 			$synloginstr = ''; //同步登陆js代码
+
+/*			echo "<pre>";
+			var_dump($_POST);
+			echo "<pre>";
+			exit();
+*/
 			
 			if(pc_base::load_config('system', 'phpsso')) {
 				$this->_init_phpsso();
 				$status = $this->client->ps_member_login($username, $password);
+
+//				echo $status; exit();
+
 				$memberinfo = unserialize($status);
 				
 				if(isset($memberinfo['uid'])) {
@@ -994,7 +1006,177 @@ class index extends foreground {
 			include template('member', 'login');
 		}
 	}
-  	
+
+	public function login02() {
+		$this->_session_start();
+		//获取用户siteid
+		$siteid = isset($_REQUEST['siteid']) && trim($_REQUEST['siteid']) ? intval($_REQUEST['siteid']) : 1;
+		//定义站点id常量
+		if (!defined('SITEID')) {
+			define('SITEID', $siteid);
+		}
+
+		if(isset($_POST['dosubmit'])) {
+			if(empty($_SESSION['connectid'])) {
+				//判断验证码
+				$code = isset($_POST['code']) && trim($_POST['code']) ? trim($_POST['code']) : showmessage(L('input_code'), HTTP_REFERER);
+				if ($_SESSION['code'] != strtolower($code)) {
+					$_SESSION['code'] = '';
+					showmessage(L('code_error'), HTTP_REFERER);
+				}
+				$_SESSION['code'] = '';
+			}
+
+			$username = isset($_POST['username']) && is_username($_POST['username']) ? trim($_POST['username']) : showmessage(L('username_empty'), HTTP_REFERER);
+			$password = isset($_POST['password']) && trim($_POST['password']) ? trim($_POST['password']) : showmessage(L('password_empty'), HTTP_REFERER);
+			$cookietime = intval($_POST['cookietime']);
+			$synloginstr = ''; //同步登陆js代码
+
+			if(pc_base::load_config('system', 'phpsso')) {
+				$this->_init_phpsso();
+				$status = $this->client->ps_member_login($username, $password);
+				$memberinfo = unserialize($status);
+
+				if(isset($memberinfo['uid'])) {
+					//查询帐号
+					$r = $this->db->get_one(array('phpssouid'=>$memberinfo['uid']));
+					if(!$r) {
+						//插入会员详细信息，会员不存在 插入会员
+						$info = array(
+							'phpssouid'=>$memberinfo['uid'],
+							'username'=>$memberinfo['username'],
+							'password'=>$memberinfo['password'],
+							'encrypt'=>$memberinfo['random'],
+							'email'=>$memberinfo['email'],
+							'regip'=>$memberinfo['regip'],
+							'regdate'=>$memberinfo['regdate'],
+							'lastip'=>$memberinfo['lastip'],
+							'lastdate'=>$memberinfo['lastdate'],
+							'groupid'=>$this->_get_usergroup_bypoint(),	//会员默认组
+							'modelid'=>10,	//普通会员
+						);
+
+						//如果是connect用户
+						if(!empty($_SESSION['connectid'])) {
+							$userinfo['connectid'] = $_SESSION['connectid'];
+						}
+						if(!empty($_SESSION['from'])) {
+							$userinfo['from'] = $_SESSION['from'];
+						}
+						unset($_SESSION['connectid'], $_SESSION['from']);
+
+						$this->db->insert($info);
+						unset($info);
+						$r = $this->db->get_one(array('phpssouid'=>$memberinfo['uid']));
+					}
+					$password = $r['password'];
+					$synloginstr = $this->client->ps_member_synlogin($r['phpssouid']);
+				} else {
+					if($status == -1) {	//用户不存在
+						showmessage(L('user_not_exist'), 'index.php?m=member&c=index&a=login');
+					} elseif($status == -2) { //密码错误
+						showmessage(L('password_error'), 'index.php?m=member&c=index&a=login');
+					} else {
+						showmessage(L('login_failure'), 'index.php?m=member&c=index&a=login');
+					}
+				}
+
+			} else {
+				//密码错误剩余重试次数
+				$this->times_db = pc_base::load_model('times_model');
+				$rtime = $this->times_db->get_one(array('username'=>$username));
+				if($rtime['times'] > 4) {
+					$minute = 60 - floor((SYS_TIME - $rtime['logintime']) / 60);
+					showmessage(L('wait_1_hour', array('minute'=>$minute)));
+				}
+
+				//查询帐号
+				$r = $this->db->get_one(array('username'=>$username));
+
+				if(!$r) showmessage(L('user_not_exist'),'index.php?m=member&c=index&a=login');
+
+				//验证用户密码
+				$password = md5(md5(trim($password)).$r['encrypt']);
+				if($r['password'] != $password) {
+					$ip = ip();
+					if($rtime && $rtime['times'] < 5) {
+						$times = 5 - intval($rtime['times']);
+						$this->times_db->update(array('ip'=>$ip, 'times'=>'+=1'), array('username'=>$username));
+					} else {
+						$this->times_db->insert(array('username'=>$username, 'ip'=>$ip, 'logintime'=>SYS_TIME, 'times'=>1));
+						$times = 5;
+					}
+					showmessage(L('password_error', array('times'=>$times)), 'index.php?m=member&c=index&a=login', 3000);
+				}
+				$this->times_db->delete(array('username'=>$username));
+			}
+
+			//如果用户被锁定
+			if($r['islock']) {
+				showmessage(L('user_is_lock'));
+			}
+
+			$userid = $r['userid'];
+			$groupid = $r['groupid'];
+			$username = $r['username'];
+			$nickname = empty($r['nickname']) ? $username : $r['nickname'];
+
+			$updatearr = array('lastip'=>ip(), 'lastdate'=>SYS_TIME);
+			//vip过期，更新vip和会员组
+			if($r['overduedate'] < SYS_TIME) {
+				$updatearr['vip'] = 0;
+			}
+
+			//检查用户积分，更新新用户组，除去邮箱认证、禁止访问、游客组用户、vip用户，如果该用户组不允许自助升级则不进行该操作
+			if($r['point'] >= 0 && !in_array($r['groupid'], array('1', '7', '8')) && empty($r[vip])) {
+				$grouplist = getcache('grouplist');
+				if(!empty($grouplist[$r['groupid']]['allowupgrade'])) {
+					$check_groupid = $this->_get_usergroup_bypoint($r['point']);
+
+					if($check_groupid != $r['groupid']) {
+						$updatearr['groupid'] = $groupid = $check_groupid;
+					}
+				}
+			}
+
+			//如果是connect用户
+			if(!empty($_SESSION['connectid'])) {
+				$updatearr['connectid'] = $_SESSION['connectid'];
+			}
+			if(!empty($_SESSION['from'])) {
+				$updatearr['from'] = $_SESSION['from'];
+			}
+			unset($_SESSION['connectid'], $_SESSION['from']);
+
+			$this->db->update($updatearr, array('userid'=>$userid));
+
+			if(!isset($cookietime)) {
+				$get_cookietime = param::get_cookie('cookietime');
+			}
+			$_cookietime = $cookietime ? intval($cookietime) : ($get_cookietime ? $get_cookietime : 0);
+			$cookietime = $_cookietime ? SYS_TIME + $_cookietime : 0;
+
+			$phpcms_auth = sys_auth($userid."\t".$password, 'ENCODE', get_auth_key('login'));
+
+			param::set_cookie('auth', $phpcms_auth, $cookietime);
+			param::set_cookie('_userid', $userid, $cookietime);
+			param::set_cookie('_username', $username, $cookietime);
+			param::set_cookie('_groupid', $groupid, $cookietime);
+			param::set_cookie('_nickname', $nickname, $cookietime);
+			//param::set_cookie('cookietime', $_cookietime, $cookietime);
+			$forward = isset($_POST['forward']) && !empty($_POST['forward']) ? urldecode($_POST['forward']) : 'index.php?m=member&c=index';
+			showmessage(L('login_success').$synloginstr, $forward);
+		} else {
+			$setting = pc_base::load_config('system');
+			$forward = isset($_GET['forward']) && trim($_GET['forward']) ? urlencode($_GET['forward']) : '';
+
+			$siteid = isset($_REQUEST['siteid']) && trim($_REQUEST['siteid']) ? intval($_REQUEST['siteid']) : 1;
+			$siteinfo = siteinfo($siteid);
+
+			include template('member', 'login');
+		}
+	}
+
 	public function logout() {
 		$setting = pc_base::load_config('system');
 		//snda退出
@@ -1708,10 +1890,139 @@ class index extends foreground {
 	 * 找回密码
 	 * 新增加短信找回方式 
 	 */
-	public function public_forget_password () {
-		
+
+	public function public_getpassword () {
+
 		$email_config = getcache('common', 'commons');
-		
+
+		//SMTP MAIL 二种发送模式
+		if($email_config['mail_type'] == '1'){
+			if(empty($email_config['mail_user']) || empty($email_config['mail_password'])) {
+				showmessage(L('email_config_empty'), HTTP_REFERER);
+			}
+		}
+		$this->_session_start();
+		$member_setting = getcache('member_setting');
+
+		if(isset($_POST['dosubmit'])) {
+
+			$memberinfo = $this->db->get_one(array('email'=>$_POST['userEmail']));
+
+			if(!empty($memberinfo['email'])) {
+				$email = $memberinfo['email'];
+			} else {
+				showmessage('该邮箱未注册', HTTP_REFERER);
+			}
+
+			pc_base::load_sys_func('mail');
+
+			$code = sys_auth($memberinfo['userid']."\t".microtime(true), 'ENCODE', get_auth_key('email'));
+			$url = APP_PATH."index.php?m=member&c=index&a=public_setpassword&code=$code";
+			$message = $member_setting['forgetpassword'];
+			$message = str_replace(array('{click}','{url}'), array('<a href="'.$url.'">'.L('please_click').'</a>',$url), $message);
+
+			//获取站点名称
+			$sitelist = getcache('sitelist', 'commons');
+
+			if(isset($sitelist[$memberinfo['siteid']]['name'])) {
+				$sitename = $sitelist[$memberinfo['siteid']]['name'];
+			} else {
+				$sitename = 'PHPCMS_V9_MAIL';
+			}
+			sendmail($email, L('forgetpassword'), $message, '', '', $sitename);
+			showmessage('操作成功！请登录邮箱重置密码', 'index.php?m=member&c=index&a=login','5000');
+		}
+		else {
+			$siteid = isset($_REQUEST['siteid']) && trim($_REQUEST['siteid']) ? intval($_REQUEST['siteid']) : 1;
+			$siteinfo = siteinfo($siteid);
+
+			include template('member', 'forget_password');
+		}
+	}
+
+	public function public_setpassword(){
+
+		$email_config = getcache('common', 'commons');
+
+		//SMTP MAIL 二种发送模式
+		if($email_config['mail_type'] == '1'){
+			if(empty($email_config['mail_user']) || empty($email_config['mail_password'])) {
+				showmessage(L('email_config_empty'), HTTP_REFERER);
+			}
+		}
+		$this->_session_start();
+		$member_setting = getcache('member_setting');
+
+		if($_GET['code'])
+		{
+			$hour = date('y-m-d h', SYS_TIME);
+			$code = sys_auth($_GET['code'], 'DECODE', get_auth_key('email'));
+			$code = explode("\t", $code);
+
+			if(is_array($code) && is_numeric($code[0]) && date('y-m-d h', SYS_TIME) == date('y-m-d h', $code[1])) {
+
+				$memberinfo = $this->db->get_one(array('userid'=>$code[0]));
+/*
+ * 				 				//根据用户ID获取用户完整信息
+                                echo "<pre>";
+                                var_dump($memberinfo);
+                                echo "<pre>";
+                                exit();
+*/
+
+				if(empty($memberinfo['phpssouid'])) {
+					showmessage(L('operation_failure'), 'index.php?m=member&c=index&a=login');
+				}
+				else
+				{
+					include template('member', 'reset_password');
+					exit();
+				}
+
+				$updateinfo = array();
+
+//此处设置新密码
+				$password = random(8,"23456789abcdefghkmnrstwxy");
+
+				$updateinfo['password'] = password($password, $memberinfo['encrypt']);
+
+				$this->db->update($updateinfo, array('userid'=>$code[0]));
+				if(pc_base::load_config('system', 'phpsso')) {
+					//初始化phpsso
+					$this->_init_phpsso();
+					$this->client->ps_member_edit('', $email, '', $password, $memberinfo['phpssouid'], $memberinfo['encrypt']);
+				}
+				$email = $memberinfo['email'];
+				//获取站点名称
+				$sitelist = getcache('sitelist', 'commons');
+				if(isset($sitelist[$memberinfo['siteid']]['name'])) {
+					$sitename = $sitelist[$memberinfo['siteid']]['name'];
+				} else {
+					$sitename = 'PHPCMS_V9_MAIL';
+				}
+				pc_base::load_sys_func('mail');
+				sendmail($email, L('forgetpassword'), "New password:".$password, '', '', $sitename);
+				showmessage(L('operation_success').L('newpassword').':'.$password);
+
+			} else {
+				showmessage('该链接已过期', 'index.php?m=member&c=index&a=login');
+			}
+		}else{
+			showmessage(L('operation_failure'), 'index.php?m=member&c=index&a=login');
+		}
+	}
+
+
+	public function public_forget_password () {
+
+		$email_config = getcache('common', 'commons');
+/*
+		//显示后台配置的管理员邮箱信息
+		echo "<pre>";
+		var_dump($email_config);
+		echo "<pre>";
+		exit();
+*/
 		//SMTP MAIL 二种发送模式
  		if($email_config['mail_type'] == '1'){
 			if(empty($email_config['mail_user']) || empty($email_config['mail_password'])) {
@@ -1720,18 +2031,23 @@ class index extends foreground {
 		}
 		$this->_session_start();
 		$member_setting = getcache('member_setting');
+
 		if(isset($_POST['dosubmit'])) {
+/*
+			//去掉验证码
 			if ($_SESSION['code'] != strtolower($_POST['code'])) {
 				showmessage(L('code_error'), HTTP_REFERER);
 			}
-			
-			$memberinfo = $this->db->get_one(array('email'=>$_POST['email']));
+*/
+			$memberinfo = $this->db->get_one(array('email'=>$_POST['userEmail']));
+
 			if(!empty($memberinfo['email'])) {
 				$email = $memberinfo['email'];
 			} else {
-				showmessage(L('email_error'), HTTP_REFERER);
+//				showmessage(L('email_error'), HTTP_REFERER);
+				showmessage('该邮箱未注册', HTTP_REFERER);
 			}
-			
+
 			pc_base::load_sys_func('mail');
 
 			$code = sys_auth($memberinfo['userid']."\t".microtime(true), 'ENCODE', get_auth_key('email'));
@@ -1739,29 +2055,58 @@ class index extends foreground {
 			$url = APP_PATH."index.php?m=member&c=index&a=public_forget_password&code=$code";
 			$message = $member_setting['forgetpassword'];
 			$message = str_replace(array('{click}','{url}'), array('<a href="'.$url.'">'.L('please_click').'</a>',$url), $message);
+
 			//获取站点名称
 			$sitelist = getcache('sitelist', 'commons');
-			
+
+/*			echo "<pre>";
+			var_dump($sitelist);
+			echo "<pre>";
+			exit();
+*/
 			if(isset($sitelist[$memberinfo['siteid']]['name'])) {
 				$sitename = $sitelist[$memberinfo['siteid']]['name'];
 			} else {
 				$sitename = 'PHPCMS_V9_MAIL';
 			}
 			sendmail($email, L('forgetpassword'), $message, '', '', $sitename);
-			showmessage(L('operation_success'), 'index.php?m=member&c=index&a=login');
-		} elseif($_GET['code']) {
+			showmessage('操作成功！请登录邮箱重置密码', 'index.php?m=member&c=index&a=login','5000');
+		}
+
+//在浏览器中点击链接，获取code
+
+		elseif($_GET['code'])
+		{
 			$hour = date('y-m-d h', SYS_TIME);
 			$code = sys_auth($_GET['code'], 'DECODE', get_auth_key('email'));
 			$code = explode("\t", $code);
+/*
+ * 			//code获取用户ID
+			echo "<pre>";
+			var_dump($code);
+			echo "<pre>";
+			exit();
+*/
 
 			if(is_array($code) && is_numeric($code[0]) && date('y-m-d h', SYS_TIME) == date('y-m-d h', $code[1])) {
+
 				$memberinfo = $this->db->get_one(array('userid'=>$code[0]));
-				
+/*
+ * 				//根据用户ID获取用户完整信息
+				echo "<pre>";
+				var_dump($memberinfo);
+				echo "<pre>";
+				exit();
+*/
 				if(empty($memberinfo['phpssouid'])) {
 					showmessage(L('operation_failure'), 'index.php?m=member&c=index&a=login');
 				}
+
 				$updateinfo = array();
+
+//此处设置新密码
 				$password = random(8,"23456789abcdefghkmnrstwxy");
+
 				$updateinfo['password'] = password($password, $memberinfo['encrypt']);
 				
 				$this->db->update($updateinfo, array('userid'=>$code[0]));
@@ -1793,7 +2138,94 @@ class index extends foreground {
 			include template('member', 'forget_password');
 		}
 	}
-	
+
+
+	public function public_forget_password02 () {
+
+		$email_config = getcache('common', 'commons');
+
+		//SMTP MAIL 二种发送模式
+		if($email_config['mail_type'] == '1'){
+			if(empty($email_config['mail_user']) || empty($email_config['mail_password'])) {
+				showmessage(L('email_config_empty'), HTTP_REFERER);
+			}
+		}
+		$this->_session_start();
+		$member_setting = getcache('member_setting');
+		if(isset($_POST['dosubmit'])) {
+			if ($_SESSION['code'] != strtolower($_POST['code'])) {
+				showmessage(L('code_error'), HTTP_REFERER);
+			}
+
+			$memberinfo = $this->db->get_one(array('email'=>$_POST['email']));
+			if(!empty($memberinfo['email'])) {
+				$email = $memberinfo['email'];
+			} else {
+				showmessage(L('email_error'), HTTP_REFERER);
+			}
+
+			pc_base::load_sys_func('mail');
+
+			$code = sys_auth($memberinfo['userid']."\t".microtime(true), 'ENCODE', get_auth_key('email'));
+
+			$url = APP_PATH."index.php?m=member&c=index&a=public_forget_password&code=$code";
+			$message = $member_setting['forgetpassword'];
+			$message = str_replace(array('{click}','{url}'), array('<a href="'.$url.'">'.L('please_click').'</a>',$url), $message);
+			//获取站点名称
+			$sitelist = getcache('sitelist', 'commons');
+
+			if(isset($sitelist[$memberinfo['siteid']]['name'])) {
+				$sitename = $sitelist[$memberinfo['siteid']]['name'];
+			} else {
+				$sitename = 'PHPCMS_V9_MAIL';
+			}
+			sendmail($email, L('forgetpassword'), $message, '', '', $sitename);
+			showmessage(L('operation_success'), 'index.php?m=member&c=index&a=login');
+		} elseif($_GET['code']) {
+			$hour = date('y-m-d h', SYS_TIME);
+			$code = sys_auth($_GET['code'], 'DECODE', get_auth_key('email'));
+			$code = explode("\t", $code);
+
+			if(is_array($code) && is_numeric($code[0]) && date('y-m-d h', SYS_TIME) == date('y-m-d h', $code[1])) {
+				$memberinfo = $this->db->get_one(array('userid'=>$code[0]));
+
+				if(empty($memberinfo['phpssouid'])) {
+					showmessage(L('operation_failure'), 'index.php?m=member&c=index&a=login');
+				}
+				$updateinfo = array();
+				$password = random(8,"23456789abcdefghkmnrstwxy");
+				$updateinfo['password'] = password($password, $memberinfo['encrypt']);
+
+				$this->db->update($updateinfo, array('userid'=>$code[0]));
+				if(pc_base::load_config('system', 'phpsso')) {
+					//初始化phpsso
+					$this->_init_phpsso();
+					$this->client->ps_member_edit('', $email, '', $password, $memberinfo['phpssouid'], $memberinfo['encrypt']);
+				}
+				$email = $memberinfo['email'];
+				//获取站点名称
+				$sitelist = getcache('sitelist', 'commons');
+				if(isset($sitelist[$memberinfo['siteid']]['name'])) {
+					$sitename = $sitelist[$memberinfo['siteid']]['name'];
+				} else {
+					$sitename = 'PHPCMS_V9_MAIL';
+				}
+				pc_base::load_sys_func('mail');
+				sendmail($email, L('forgetpassword'), "New password:".$password, '', '', $sitename);
+				showmessage(L('operation_success').L('newpassword').':'.$password);
+
+			} else {
+				showmessage(L('operation_failure'), 'index.php?m=member&c=index&a=login');
+			}
+
+		} else {
+			$siteid = isset($_REQUEST['siteid']) && trim($_REQUEST['siteid']) ? intval($_REQUEST['siteid']) : 1;
+			$siteinfo = siteinfo($siteid);
+
+			include template('member', 'forget_password');
+		}
+	}
+
 	/**
 	*通过手机修改密码
 	*方式：用户发送HHPWD afei985#821008 至 1065788 ，PHPCMS进行转发到网站运营者指定的回调地址，在回调地址程序进行密码修改等操作,处理成功时给用户发条短信确认。
