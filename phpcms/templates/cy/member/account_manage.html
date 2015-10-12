@@ -1,0 +1,193 @@
+{template 'content', 'header'}
+
+<link href="http://www.cyzone.cn/cyzone.png" sizes="114x114" rel="apple-touch-icon">
+
+<link rel="stylesheet" href="http://tpl4.cyzone.cn/templates/cyzonev2/styles/animate.min.css">
+<link rel="stylesheet" href="http://tpl3.cyzone.cn/templates/cyzonev2/styles/commen.css?20150908">
+<script type="text/javascript" src="http://tpl3.cyzone.cn/templates/cyzonev2/js/lib/jquery.min.js"></script>
+<link type="text/css" href="http://tpl2.cyzone.cn/templates/cyzonev2/styles/member.css" rel="stylesheet" />
+<script type="text/javascript" src="http://tpl3.cyzone.cn/templates/cyzonev2/js/m.js"></script>
+<link rel="stylesheet" media="all and (max-width: 1200px)" href="http://tpl4.cyzone.cn/templates/cyzonev2/styles/auto.css">
+
+<div id="main" class="com-width mt20 clearfix">
+	<div id="member" class="clearfix">
+
+		{template 'member','account_manage_left'}
+
+		<div id="member-content" class="member-content fr">
+			<div class="member-account">
+				<div class="member-content-hd">
+					<span class="ui-tab-tit show-item">基本资料</span>
+					<span class="ui-tab-tit">修改头像</span>
+					<span class="ui-tab-tit">修改密码</span>
+				</div>
+				<div class="member-bd mt20">
+
+					<div class="member-account-manage-form show-item">
+						<div class="form-item">
+							<div class="form-item-txt"> <i>*</i>
+								邮箱
+							</div>
+							<input type="text" name="email" placeholder="邮箱" value="{$memberinfo['email']}" disabled="disabled">
+						</div>
+						<form action="?m=member&c=index&a=account_manage_info" method="post" id="account-manage-form">
+							<div class="form-item">
+								<div class="form-item-txt"> <i>*</i>昵称</div>
+								<input type="text" name="nickname" value="{$memberinfo['nickname']}" placeholder="昵称" datatype="*1-16">
+							</div>
+							<div class="form-item">
+								<div class="form-item-txt">手机号码</div>
+								<input type="text" value="{$memberinfo['mobile']}" name="mobile" placeholder="请输入11位手机号码" datatype="m" ignore="ignore">
+							</div>
+							<div class="form-item">
+								<div class="form-item-txt">性别</div>
+								<div class="fl sex">
+									<input type="radio" value="0" name="sex" id="men" {if $memberinfo['sex']==0}checked="checked"{/if}>
+									<label for="men">男</label>
+									<input type="radio" value="1" name="sex" id="women" {if $memberinfo['sex']==1}checked="checked"{/if}>
+									<label for="women">女</label>
+								</div>
+							</div>
+							<div class="form-item">
+								<div class="form-item-txt">所在地</div>
+								<script type="text/javascript" src="http://js.cyzone.cn/statics/js/linkage/js/jquery.ld.js"></script>
+								<input type="hidden" name="info[areaid]"  id="areaid" value="0" />
+								<input type="hidden" name="old_areaid" value="0" />
+								<select  class="pc-select-areaid" name="sheng" id="areaid-1" width="100">
+									<option value="">{if $memberinfo['sheng']!=''}{$memberinfo['sheng']}{else}省/市{/if}</option>
+								</select>
+								<select  class="pc-select-areaid" name="shi" id="areaid-2" width="100">
+									<option value="">{if $memberinfo['shi']!=''}{$memberinfo['shi']}{else}地/州{/if}</option>
+								</select>
+								<select  class="pc-select-areaid" name="xian" id="areaid-3" width="100">
+									<option value="">{if $memberinfo['xian']!=''}{$memberinfo['xian']}{else}县/区{/if}</option>
+								</select>
+								<script type="text/javascript">
+                $(function(){
+                    var $ld5 = $(".pc-select-areaid");
+                    $ld5.ld({
+                        ajaxOptions:{
+                            "url":"/api.php?op=get_linkage&act=ajax_select&keyid=1&parent_id=0"
+                        },
+                        
+                        defaultParentId:0
+                        
+                    });
+                    var ld5_api = $ld5.ld("api");
+                    ld5_api.selected([],function(){});
+                    $ld5.bind("change", function onchange(e){
+                        var $target = $(e.target);
+                        var index = $ld5.index($target);
+                        if( $ld5.eq(index).val()!="" ) {
+                            $("#areaid").val($ld5.eq(index).val());
+                        } else {//选择空选项则id值选择上一级id
+                            $("#areaid").val($ld5.eq(index-1).val());
+                        }
+                        index++;
+                        $ld5.eq(index).show();
+                    });
+                });
+            </script>
+								<!--  <input type="text">--></div>
+							<div class="form-item">
+								<div class="form-item-txt">详细地址</div>
+								<input type="text" value="{$memberinfo['dizhi']}" name="dizhi"></div>
+							<div class="form-item">
+								<div class="form-item-txt">&nbsp;</div>
+								<!-- <input type="hidden" value="1" name="dosubmit" /> -->
+								<input type="submit" name="dosubmit" class="form-btn btn-orange account-manage-btn" value="保存"></div>
+						</form>
+					</div>
+
+					<div class="member-avatar-form hide">
+						<table>
+							<tbody>
+								<tr>
+									<td valign="top" align="right">
+										<script language="javascript" type="text/javascript" src="http://js.cyzone.cn/statics/js/swfobject.js"></script>
+										<script type="text/javascript">
+											var flashvars = {
+												'upurl':"aHR0cDovL3d3dy5jeXpvbmUuY24vaW5kZXgucGhwP209bWVtYmVyJmM9aW5kZXgmYT1hY2NvdW50X21hbmFnZV9hdmF0YXImZGF0YT01NTY4M0szX0dZTjVXMGpyM3ZTYTUtcHZULXZnWGpaRXJSSXlKM0VUV2xEXy1WMDdHT2NQS3VyXzRLMGVmLVdFVWlEM2FJLTlnOEpLcDZwMExnaVEzd3lEeXlLc1hXcVlVUFAyWFZha2N4b3NsX1UwTmczbXJpSHJ5TldKdkUzdlJTazU=&callback=return_avatar&"
+											}; 
+											var params = {
+												'align':'middle',
+												'play':'true',
+												'loop':'false',
+												'scale':'showall',
+												'wmode':'window',
+												'devicefont':'true',
+												'id':'Main',
+												'bgcolor':'#ffffff',
+												'name':'Main',
+												'allowscriptaccess':'always'
+											}; 
+											var attributes = {}; 
+											swfobject.embedSWF('http://css.cyzone.cn/statics/images/main.swf', 'myContent', '490', '434', '9.0.0', 'http://css.cyzone.cn/statics/images/expressInstall.swf', flashvars, params, attributes);
+											function return_avatar(data)
+											{
+												data = eval('('+ data +')');
+												if(data.code == 1)
+												{
+													window.location.reload();
+												}
+												else
+												{
+													alert(data.msg);
+												}
+											}
+										</script>
+										<div id="myContent"></div>
+									</td>
+									<td valign="top">
+										<ul class="col-avatar" id="avatarlist" style="margin-left:50px;">
+											<li>
+												<img class="big-avatar" src="http://www.cyzone.cn/uploadfile/avatar/000/49/09/17_avatar_big.jpg" onerror="this.onerror=null;this.src='http://css.cyzone.cn/statics/images/noavatar_big.gif'" />
+												<br />
+												头像200 x 200
+											</li>
+											<li>
+												<img class="middle-avatar" src="http://www.cyzone.cn/uploadfile/avatar/000/49/09/17_avatar_middle.jpg" onerror="this.onerror=null;this.src='http://css.cyzone.cn/statics/images/noavatar_middle.gif'" />
+												<br />
+												头像120 x 120
+											</li>
+											<li>
+												<img class="small-avatar" src="http://www.cyzone.cn/uploadfile/avatar/000/49/09/17_avatar_small.jpg" onerror="this.onerror=null;this.src='http://css.cyzone.cn/statics/images/noavatar_small.gif'" />
+												<br />
+												头像48 x 48
+											</li>
+										</ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="member-setpasswd-form hide">
+						<form action="?m=member&c=index&a=account_manage_password" method="post" id="account-manage-password-form">
+							<div class="form-item">
+								<div class="form-item-txt">当前密码</div>
+								<input name="info[password]" type="password" id="password" datatype="*" ajaxurl="?m=member&c=index&a=public_checkpwd_ajax"></div>
+							<div class="form-item">
+								<div class="form-item-txt">新密码</div>
+								<input name="info[newpassword]" type="password"  datatype="*6-16"></div>
+							<div class="form-item">
+								<div class="form-item-txt">确认新密码</div>
+								<input name="info[renewpassword]" type="password"  datatype="*6-16" recheck="info[newpassword]"></div>
+							<div class="form-item">
+								<div class="form-item-txt">&nbsp;</div>
+								<input type="hidden" value="1" name="dosubmit" />
+								<input type="submit"  name="dosubmit" class="form-btn btn-orange" value="保存"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<!-- <script src="http://tpl4.cyzone.cn/templates/cyzonev2/js/sea.js"></script>
+<script src="http://tpl0.cyzone.cn/templates/cyzonev2/js/lib/seajs-css.js"></script>
+<script type="text/javascript" src="http://tpl0.cyzone.cn/templates/cyzonev2/js/sea_config.js"></script> -->
+{template 'content', 'footer'}

@@ -554,13 +554,15 @@ class index extends foreground {
 	
 	public function account_manage() {
 		$memberinfo = $this->memberinfo;
-/*
+
 		//输出当前用户的全部信息
 		echo "<pre>";
 		var_dump($memberinfo);
 		echo "<pre>";
 		exit();
-*/
+
+
+
 		//初始化phpsso
 		$phpsso_api_url = $this->_init_phpsso();
 		//获取头像数组
@@ -642,40 +644,6 @@ class index extends foreground {
 	public function account_manage_info() {
 		if(isset($_POST['dosubmit'])) {
 			//更新用户昵称
-/*
-			$updateinfo['nickname'] = isset($_POST['nickname']) ? trim($_POST['nickname']) : '';
-			$updateinfo['mobile'] = isset($_POST['mobile']) ? trim($_POST['mobile']) : '';
-			$this->db->update($updateinfo, array('userid'=>$this->memberinfo['userid']));
-*/
-
-			$updateinfo['nickname'] = isset($_POST['nickname']) ? trim($_POST['nickname']):'';
-			$updateinfo['mobile']	= isset($_POST['mobile']) ? trim($_POST['mobile']):'';
-			$updateinfo['sex']	= isset($_POST['sex']) ? trim($_POST['sex']):'0';
-
-			$updateinfo['sheng']	= isset($_POST['sheng']) ? trim($_POST['sheng']):'0';
-			$updateinfo['shi']	= isset($_POST['shi']) ? trim($_POST['shi']):'0';
-			$updateinfo['xian']	= isset($_POST['xian']) ? trim($_POST['xian']):'0';
-
-			$updateinfo['dizhi']	= isset($_POST['dizhi']) ? trim($_POST['dizhi']):'';
-
-
-//			$this->db->update($updateinfo, array('userid'=>$this->memberinfo['userid']));
-
-			echo "<pre>";
-			var_dump($updateinfo);
-			echo "<pre>";
-			exit();
-
-
-
-
-
-
-
-
-
-
-
 			$nickname = isset($_POST['nickname']) && is_username(trim($_POST['nickname'])) ? trim($_POST['nickname']) : '';
 			$nickname = safe_replace($nickname);
 			if($nickname) {
@@ -687,10 +655,6 @@ class index extends foreground {
 				$cookietime = $_cookietime ? TIME + $_cookietime : 0;
 				param::set_cookie('_nickname', $nickname, $cookietime);
 			}
-
-
-
-
 			require_once CACHE_MODEL_PATH.'member_input.class.php';
 			require_once CACHE_MODEL_PATH.'member_update.class.php';
 			$member_input = new member_input($this->memberinfo['modelid']);
@@ -2136,6 +2100,8 @@ class index extends foreground {
 			showmessage(L('operation_failure'), 'index.php?m=member&c=index&a=login');
 		}
 	}
+
+
 
 
 	public function public_forget_password () {
