@@ -262,7 +262,6 @@ class index extends foreground {
 								}
 							}
 						}
-						
 						$formValidator = $member_form->formValidator;
 					}
 				}
@@ -563,9 +562,29 @@ class index extends foreground {
 */
 		//初始化phpsso
 		$phpsso_api_url = $this->_init_phpsso();
+		$ps_auth_key = pc_base::load_config('system', 'phpsso_auth_key');
+		$auth_data = $this->client->auth_data(array('uid'=>$this->memberinfo['phpssouid'],'sys_auth_time'=>microtime(true)), '', $ps_auth_key);
+		$upurl = base64_encode($phpsso_api_url.'/index.php?m=phpsso&c=index&a=uploadavatar&auth_data='.$auth_data);
 		//获取头像数组
 		$avatar = $this->client->ps_getavatar($this->memberinfo['phpssouid']);
-	
+
+		include template('member', 'account_manage');
+	}
+
+	public function account_manage02() {
+		$memberinfo = $this->memberinfo;
+		/*
+                //输出当前用户的全部信息
+                echo "<pre>";
+                var_dump($memberinfo);
+                echo "<pre>";
+                exit();
+        */
+		//初始化phpsso
+		$phpsso_api_url = $this->_init_phpsso();
+		//获取头像数组
+		$avatar = $this->client->ps_getavatar($this->memberinfo['phpssouid']);
+
 		$grouplist = getcache('grouplist');
 		$member_model = getcache('member_model', 'commons');
 
@@ -630,7 +649,7 @@ class index extends foreground {
 		$upurl = base64_encode($phpsso_api_url.'/index.php?m=phpsso&c=index&a=uploadavatar&auth_data='.$auth_data);
 		//获取头像数组
 		$avatar = $this->client->ps_getavatar($this->memberinfo['phpssouid']);
-		
+
 		include template('member', 'account_manage_avatar');
 	}
 
@@ -640,101 +659,107 @@ class index extends foreground {
 	}
 
 	public function account_manage_info() {
-		if(isset($_POST['dosubmit'])) {
-			//更新用户昵称
-/*
-			$updateinfo['nickname'] = isset($_POST['nickname']) ? trim($_POST['nickname']) : '';
-			$updateinfo['mobile'] = isset($_POST['mobile']) ? trim($_POST['mobile']) : '';
-			$this->db->update($updateinfo, array('userid'=>$this->memberinfo['userid']));
-*/
-
+		if(isset($_POST['dosubmit01'])) {
 			$updateinfo['nickname'] = isset($_POST['nickname']) ? trim($_POST['nickname']):'';
 			$updateinfo['mobile']	= isset($_POST['mobile']) ? trim($_POST['mobile']):'';
 			$updateinfo['sex']	= isset($_POST['sex']) ? trim($_POST['sex']):'0';
+			$updateinfo['address']	= isset($_POST['address']) ? trim($_POST['address']):'';
+			/*
+                        echo "<pre>";
+                        var_dump($updateinfo);
+                        echo "<pre>";
+                        exit();
+            */
+			$this->db->update($updateinfo, array('userid'=>$this->memberinfo['userid']));
+			showmessage(L('operation_success'), HTTP_REFERER);
 
-			$updateinfo['sheng']	= isset($_POST['sheng']) ? trim($_POST['sheng']):'0';
-			$updateinfo['shi']	= isset($_POST['shi']) ? trim($_POST['shi']):'0';
-			$updateinfo['xian']	= isset($_POST['xian']) ? trim($_POST['xian']):'0';
+//			if(t==1){
+//				$updateinfo['nickname'] = isset($_POST['nickname']) ? trim($_POST['nickname']):'';
+//				$updateinfo['mobile']	= isset($_POST['mobile']) ? trim($_POST['mobile']):'';
+//				$updateinfo['sex']	= isset($_POST['sex']) ? trim($_POST['sex']):'0';
+//				$updateinfo['address']	= isset($_POST['address']) ? trim($_POST['address']):'';
+///*
+//            echo "<pre>";
+//            var_dump($updateinfo);
+//            echo "<pre>";
+//            exit();
+//*/
+//				$this->db->update($updateinfo, array('userid'=>$this->memberinfo['userid']));
+//				showmessage(L('operation_success'), HTTP_REFERER);
+//			}
+//			if(t==2){
+//				echo "here";
+//				exit();
+//
+//				$updateinfo = array();
+//				if(!is_password($_POST['info']['password'])) {
+//					showmessage(L('password_format_incorrect'), HTTP_REFERER);
+//				}
+//				if($this->memberinfo['password'] != password($_POST['info']['password'], $this->memberinfo['encrypt'])) {
+//					showmessage(L('old_password_incorrect'), HTTP_REFERER);
+//				}
+//
+//
+//				$newpassword = password($_POST['newpassword'], $this->memberinfo['encrypt']);
+//				$updateinfo['password'] = $newpassword;
+//
+//				$this->db->update($updateinfo, array('userid'=>$this->memberinfo['userid']));
+//
+//				if(pc_base::load_config('system', 'phpsso')) {
+//					//初始化phpsso
+//					$this->_init_phpsso();
+//					$res = $this->client->ps_member_edit('','', $_POST['password'], $_POST['newpassword'], $this->memberinfo['phpssouid'], $this->memberinfo['encrypt']);
+//					$message_error = array('-1'=>L('user_not_exist'), '-2'=>L('old_password_incorrect'), '-3'=>L('param_error'));
+//					if ($res < 0) showmessage($message_error[$res]);
+//				}
+//				showmessage(L('operation_success'), HTTP_REFERER);
+//			}
+		} elseif(isset($_POST['dosubmit02'])) {
 
-			$updateinfo['dizhi']	= isset($_POST['dizhi']) ? trim($_POST['dizhi']):'';
 
+			$password=isset($_POST['password']) ? trim($_POST['password']):'';
+			$newpassword01=isset($_POST['newpassword']) ? trim($_POST['newpassword']):'';
+			$renewpassword=isset($_POST['renewpassword']) ? trim($_POST['renewpassword']):'';
 
-//			$this->db->update($updateinfo, array('userid'=>$this->memberinfo['userid']));
-
-			echo "<pre>";
-			var_dump($updateinfo);
-			echo "<pre>";
-			exit();
-
-
-
-
-
-
-
-
-
-
-
-			$nickname = isset($_POST['nickname']) && is_username(trim($_POST['nickname'])) ? trim($_POST['nickname']) : '';
-			$nickname = safe_replace($nickname);
-			if($nickname) {
-				$this->db->update(array('nickname'=>$nickname), array('userid'=>$this->memberinfo['userid']));
-				if(!isset($cookietime)) {
-					$get_cookietime = param::get_cookie('cookietime');
-				}
-				$_cookietime = $cookietime ? intval($cookietime) : ($get_cookietime ? $get_cookietime : 0);
-				$cookietime = $_cookietime ? TIME + $_cookietime : 0;
-				param::set_cookie('_nickname', $nickname, $cookietime);
+			$updateinfo = array();
+			if(!is_password($_POST['password'])) {
+				showmessage(L('password_format_incorrect'), HTTP_REFERER);
+			}
+			if($this->memberinfo['password'] != password($_POST['password'], $this->memberinfo['encrypt'])) {
+				showmessage(L('old_password_incorrect'), HTTP_REFERER);
 			}
 
-
-
-
-			require_once CACHE_MODEL_PATH.'member_input.class.php';
-			require_once CACHE_MODEL_PATH.'member_update.class.php';
-			$member_input = new member_input($this->memberinfo['modelid']);
-			$modelinfo = $member_input->get($_POST['info']);
-
-			$this->db->set_model($this->memberinfo['modelid']);
-			$membermodelinfo = $this->db->get_one(array('userid'=>$this->memberinfo['userid']));
-			if(!empty($membermodelinfo)) {
-				$this->db->update($modelinfo, array('userid'=>$this->memberinfo['userid']));
-			} else {
-				$modelinfo['userid'] = $this->memberinfo['userid'];
-				$this->db->insert($modelinfo);
+			if($newpassword01 != $renewpassword){
+				showmessage('两次输入的新密码不一致', HTTP_REFERER);
 			}
 
+			$newpassword = password($_POST['newpassword'], $this->memberinfo['encrypt']);
+			$updateinfo['password'] = $newpassword;
+
+			$this->db->update($updateinfo, array('userid'=>$this->memberinfo['userid']));
+
+			if(pc_base::load_config('system', 'phpsso')) {
+				//初始化phpsso
+				$this->_init_phpsso();
+				$res = $this->client->ps_member_edit('','', $_POST['password'], $_POST['newpassword'], $this->memberinfo['phpssouid'], $this->memberinfo['encrypt']);
+				$message_error = array('-1'=>L('user_not_exist'), '-2'=>L('old_password_incorrect'), '-3'=>L('param_error'));
+				if ($res < 0) showmessage($message_error[$res]);
+			}
 			showmessage(L('operation_success'), HTTP_REFERER);
 		} else {
+
+			$show_validator = true;
 			$memberinfo = $this->memberinfo;
-			//获取会员模型表单
-			require CACHE_MODEL_PATH.'member_form.class.php';
-			$member_form = new member_form($this->memberinfo['modelid']);
-			$this->db->set_model($this->memberinfo['modelid']);
 
-			$membermodelinfo = $this->db->get_one(array('userid'=>$this->memberinfo['userid']));
-			$forminfos = $forminfos_arr = $member_form->get($membermodelinfo);
+			//初始化phpsso
+			$phpsso_api_url = $this->_init_phpsso();
+			$ps_auth_key = pc_base::load_config('system', 'phpsso_auth_key');
+			$auth_data = $this->client->auth_data(array('uid'=>$this->memberinfo['phpssouid'],'sys_auth_time'=>microtime(true)), '', $ps_auth_key);
+			$upurl = base64_encode($phpsso_api_url.'/index.php?m=phpsso&c=index&a=uploadavatar&auth_data='.$auth_data);
+			//获取头像数组
+			$avatar = $this->client->ps_getavatar($this->memberinfo['phpssouid']);
 
-			//万能字段过滤
-			foreach($forminfos as $field=>$info) {
-				if($info['isomnipotent']) {
-					unset($forminfos[$field]);
-				} else {
-					if($info['formtype']=='omnipotent') {
-						foreach($forminfos_arr as $_fm=>$_fm_value) {
-							if($_fm_value['isomnipotent']) {
-								$info['form'] = str_replace('{'.$_fm.'}',$_fm_value['form'], $info['form']);
-							}
-						}
-						$forminfos[$field]['form'] = $info['form'];
-					}
-				}
-			}
-
-			$formValidator = $member_form->formValidator;
-
-			include template('member', 'account_manage_info');
+			include template('member', 'account_manage');
 		}
 	}
 

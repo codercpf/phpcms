@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+	<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+	<meta name="keywords" content="{$SEO['keyword']}">
+	<meta name="description" content="{$SEO['description']}">
+
+	<link href="{WEB_PATH}statics/cy/css/application-25c061b6812a335274613e0652c8ed2f.css" media="all" rel="stylesheet">
+	<!-- <script src="{WEB_PATH}statics/cy/js/jweixin-1.0.0.js"></script> -->
+	<script src="{WEB_PATH}statics/cy/js/application-b9bf4d65691ee1d3061d9563a2e7af31.js"></script>
+	<!--[if lt IE 9]>
+	<script src="https://kryptoners.b0.upaiyun.com/vender/html5shiv/dist/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body style="padding-top: 0px;">
+	<link rel="stylesheet" type="text/css" href="{WEB_PATH}statics/cy/css/header2.css">
+	<link rel="stylesheet" type="text/css" href="{WEB_PATH}statics/cy/css/animate.min.css">
+
+	<header class="common-header J_commonHeaderWrapper animated fadeInDown" data-stat-module="dingbudaohang" style="position: relative;">
+		<div class="container">
+			<a class="logo" href="{APP_PATH}">
+				<img src="{WEB_PATH}statics/cy/images/logo.png" alt="">
+			</a>
+			<nav>
+				<ul class="J_navList">							
+					<li name="news" class="active">
+						<a href="{APP_PATH}">首页</a>
+					</li>
+							
+					<li>
+						<a href="javascript:void(0)" >
+							创业者 <i class="headericon-arrow-drop-down"></i>
+						</a>
+						<div class="service-wrap pop-up">
+							<div class="menu">
+								<a href="#">我要融资</a>
+								<a href="#">商业计划书</a>
+								<a href="#">寻求报道</a>
+								<a href="#">孵化器入驻</a>
+							</div>
+						</div>
+					</li>			
+				</ul>
+			</nav>
+
+			<div class="right-col J_rightNavWrapper">
+				<ul class="sub-nav">
+					<li class="search-item">
+						<a href="javascript:void(0)"data-stat-hover="sousuo">
+							<i class="headericon-header-search"></i>
+							搜索
+						</a>
+						<div class="search-wrap pop-up">
+							<div class="searchbar">
+
+								<form action="{APP_PATH}index.php" class="J_searchForm" method="get" target="_blank">
+									<input type="hidden" name="m" value="search"/>
+									<input type="hidden" name="c" value="index"/>
+									<input type="hidden" name="a" value="init"/>
+									<input type="hidden" name="typeid" value="{$typeid}" id="typeid"/>
+									<input type="hidden" name="siteid" value="{$siteid}" id="siteid"/>
+					                <input type="text" class="text" name="q" id="q" placeholder="搜索"/>
+					                <button class="headericon-header-search search-icon" type="submit" data-stat-click="sousuo"></button>
+					                <!-- <input type="submit" value="搜 索" class="button" /> 源文件-->
+					            </form>
+							</div>
+						</div>	
+
+
+<!-- 
+						<div class="search fr show-search clearfix" id="search" style="width: 32px;">
+							<form action="http://www.cyzone.cn/index.php" class="search-form fl" name="search-myform" method="get" style="display: none;">
+								<input type="hidden" name="m" value="search">
+								<input type="hidden" name="c" value="index">
+								<input type="hidden" name="a" value="init">
+								<input type="hidden" name="typeid" value="" id="typeid">
+								<input type="hidden" name="siteid" value="1" id="siteid">
+								<input type="text" name="wd" class="search-input" placeholder="创业">
+								<input type="submit" class="hide">
+							</form>
+							<i class="search-show FontAwesome fl"></i>
+						</div>
+ -->
+					</li>
+
+							<li><input type="text" style="width: 50px" visible="false" /></li>
+
+{if $_username}
+<!-- 已登录 -->
+					<li class="user-menu" style="display: block;">
+						<a href="{APP_PATH}index.php?m=member&c=index&a=account_manage" class="head-avatar" data-stat-hover="touxiang">
+							<img src="{WEB_PATH}statics/cy/images/noavatar.png" alt="">
+						</a>
+						<div class="menu-wrap pop-up">
+							<div class="menu">
+								<a href="{APP_PATH}index.php?m=member&c=index&a=favorite" class="ico-collect" target="_blank">
+									<i class="ico"></i>收藏</a>
+								<a href="{APP_PATH}index.php?m=member&c=index&a=comment" class="ico-comment" target="_blank">
+									<i class="ico"></i>评论</a>
+								<a href="{APP_PATH}contribute" class="ico-contributors" target="_blank">
+									<i class="ico"></i>投稿</a>
+								<a href="{APP_PATH}index.php?m=member&c=index&a=account_manage" class="ico-setting" target="_blank">
+									<i class="ico"></i>设置</a>
+								<a href="{APP_PATH}index.php?m=member&c=index&a=logout" class="ico-logout">
+									<i class="ico"></i>退出</a>
+							</div>
+						</div>
+					</li>
+{else}
+<!-- 未登录 -->
+					<li class="login-actions">
+						<a href="{APP_PATH}index.php?m=member&c=index&a=login" target="_blank" class="login-link J_login" >
+							<i class="headericon-header-user"></i>
+							登录
+						</a>
+					</li>
+{/if}
+
+
+<!-- 用户中心结束 -->
+
+				</ul>
+			</div>
+		</div>
+	</header>

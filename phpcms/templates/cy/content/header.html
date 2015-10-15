@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -8,8 +7,6 @@
 	<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
 	<meta name="keywords" content="{$SEO['keyword']}">
 	<meta name="description" content="{$SEO['description']}">
-
-
 
 	<link href="{WEB_PATH}statics/cy/css/application-25c061b6812a335274613e0652c8ed2f.css" media="all" rel="stylesheet">
 	<!-- <script src="{WEB_PATH}statics/cy/js/jweixin-1.0.0.js"></script> -->
@@ -25,64 +22,31 @@
 
 	<header class="common-header J_commonHeaderWrapper animated fadeInDown" data-stat-module="dingbudaohang" style="position: relative;">
 		<div class="container">
-			<a class="logo" href="#">
+			<a class="logo" href="{APP_PATH}">
 				<img src="{WEB_PATH}statics/cy/images/logo.png" alt="">
 			</a>
 			<nav>
-				<ul class="J_navList">
-							<li >
-								<input type="text" style="width: 30px" visible="false" />
-							</li>
-					<li name="news" class="active">
-						<a href="#">首页</a>
+				<ul class="J_navList">							
+					<li name="news" class="active" style="padding-right: 40px">
+						<a href="{APP_PATH}">首页</a>
 					</li>
-							<li >
-								<input type="text" style="width: 60px" visible="false" />
-							</li>
+					
+{pc:content  action="category" siteid="1" catid="0" num="3"}
+{loop $data $v}
 					<li>
-						<a href="javascript:void(0)" >
-							创业者 <i class="headericon-arrow-drop-down"></i>
-						</a>
-						<div class="service-wrap pop-up">
+						<a href="{$v[url]}" >{$v[catname]}<i class="headericon-arrow-drop-down"></i></a>
+						<div class="service-wrap pop-up" >
+
 							<div class="menu">
-								<a href="#">我要融资</a>
-								<a href="#">商业计划书</a>
-								<a href="#">寻求报道</a>
-								<a href="#">孵化器入驻</a>
-								<!-- <a href="http://chuang.36kr.com/"class="mobile-hide"data-stat-click="chuangyefuwu">创业服务</a> -->
+							{loop subcat($v['catid']) $vv}
+								<a href="{$vv[url]}">{$vv[catname]}</a>
+							{/loop}
 							</div>
+							
 						</div>
 					</li>
-							<li>
-								<input type="text" style="width: 40px" visible="false" />
-							</li>
-					<li>
-						<a href="javascript:void(0)">
-							投资人 <i class="headericon-arrow-drop-down"></i>
-						</a>
-						<div class="service-wrap pop-up">
-							<div class="menu">
-								<a href="#">入驻平台</a>
-								<a href="#">投资人物</a>
-								<a href="#">看项目</a>
-							</div>
-						</div>
-					</li>
-							<li >
-								<input type="text" style="width: 40px" visible="false" />
-							</li>
-					<li>
-						<a href="javascript:void(0)">
-							发现<i class="headericon-arrow-drop-down"></i>
-						</a>
-						<div class="service-wrap pop-up"style="right:-40px;">
-							<div class="menu">
-								<a href="#">创业公司</a>
-								<a href="#">项目库</a>
-								<a href="#">近期活动</a>
-							</div>
-						</div>
-					</li>					
+{/loop}
+{/pc}
 				</ul>
 			</nav>
 

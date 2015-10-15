@@ -1,0 +1,65 @@
+{template 'content', 'header'}
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/commen.css">
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/member.css" />
+
+
+<div id="main" class="com-width mt20 clearfix">
+	<div id="member" class="clearfix">
+		{template 'member','account_manage_left'}
+		
+		<div id="member-content" class="member-content fr">
+			<div class="member-collect">
+				<div class="member-content-hd">
+					<span class="ui-tab-tit show-item">我的收藏</span>
+				</div>
+
+				<div class="member-bd">
+
+					<ul class="member-collect-list">
+						{loop $favoritelist $k $v}
+							<li class="member-collect-item">
+								<a href="{$v['url']}" target="_blank" class="collect-tit fl">{$v['title']}</a>
+								<!-- <td>{format::date($v['adddate'], 1)}</td> -->
+								<a href="index.php?m=member&c=index&a=favorite&id={$v['id']}" class="collect-btn fr">取消收藏</a>
+							</li>
+						{/loop}						
+
+<!-- 
+						<li class="member-collect-item">
+							<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://www.cyzone.cn/a/20150925/281060.html?utm_s" class="collect-tit fl">为什么互联网医疗消灭不了黄牛？</a>
+							<a href="javascript:;" data-modelid="1" data-id="281060" class="collect-btn fr">取消收藏</a>
+						</li>						
+ -->
+						<li class="member-collect-item hide no-item">
+							<a class="collect-tit fl">您还没有收藏的文章哦</a>
+						</li>
+					</ul>
+<!-- 
+					<form method="post" action="" id="myform" name="myform">
+						<table width="100%" cellspacing="0" class="table_form">
+							<tr>
+								<td>{L('title')}</td>
+								<td>{L('adddate')}</td>
+								<td>{L('operation')}</td>
+							</tr>
+							{loop $favoritelist $k $v}
+							<tr>
+								<td><a href="{$v['url']}" target="_blank">{$v['title']}</a></td>
+								<td>{format::date($v['adddate'], 1)}</td>
+								<td><a href="index.php?m=member&c=index&a=favorite&id={$v['id']}">{L('delete')}</a></td>
+							</tr>
+							{/loop}
+						</table>
+					</form>
+
+ -->
+				</div>
+				<div id="pages">{$pages}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <script src="{WEB_PATH}statics/cy/js/sea.js"></script>
+<script src="{WEB_PATH}statics/cy/js/sea_config.js"></script>
+<script src="{WEB_PATH}statics/cy/js/seajs-css.js"></script> -->
