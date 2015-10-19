@@ -49,28 +49,51 @@
 
 			</div>
 
+<!-- 
+		<div class="news-hot" style="height:100px;">
+
+
+                    <div >
+{pc:content  action="position" posid="2" order="listorder DESC" num="4"}
+{loop $data $r}
+                        <h4 class="blue"><a href="{$r[url]}" title="{$r[title]}">{str_cut($r[title],36,'')}</a></h4>
+                        <p><img src="{thumb($r[thumb],90,60)}" width="90" height="60"/>{str_cut($r[description],112)}</p>
+                        <div class="bk20 hr"><hr/></div>
+{/loop}
+{/pc}   
+                    </div>
+        </div>
+ -->
+
 			<div class="index-wrap-content  mt20 clearfix">
 				<!--首页中间-->
 				<div id="content" class="index-content fr">
 					<div id="content-list" class="cyzone-data">
 						<div class="articles">
+{pc:content  action="position" posid="2" order="listorder DESC" num="4"}
+{loop $data $r}
+
 							<div class="content-item clearfix" data-articleid="281798">
 								<div class="item-img fl">
-									<a href="http://www.cyzone.cn/a/20151015/281798.html" target="_blank">
-										<img src="{WEB_PATH}statics/cy/cyimages/thumb_230_147_20151015111839433.jpg" alt="" title="">
+									<a href="{$r[url]}" target="_blank">
+										<img src="{thumb($r[thumb],230,147)}" alt="" title="">
 									</a>
 								</div>
 								<div class="item-info fr">
 									<h3 class="item-tit">
-										<a href="http://www.cyzone.cn/a/20151015/281798.html" target="_blank">原天音通信集团副董事长杨超加入360；Facebook将推新闻聚合应用Notify</a>
+										<a href="{$r[url]}">{str_cut($r[title],36,'')}</a>
 									</h3>
-									<p class="item-intro">与Twitter用户一样，Facebook用户可实时获取新闻内容。</p>
-									<p class="item-other">
-										<span class="author fl">Hepburn</span>
-										<span class="time fr" data-time="1444878676" title="2015/10/15 上午11:11:16">17分钟前</span>
-									</p>
+									<p class="item-intro">{str_cut($r[description],250)}</p>
+<!-- 
+																		<p class="item-other">
+																			<span class="author fl">Hepburn</span>
+																			<span class="time fr" data-time="1444878676" title="2015/10/15 上午11:11:16">17分钟前</span>
+																		</p>
+-->									
 								</div>
 							</div>
+{/loop}
+{/pc}
 						</div>
 					</div>
 

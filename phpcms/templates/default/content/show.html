@@ -33,6 +33,8 @@
                 <strong>上一篇：</strong><a href="{$previous_page[url]}">{$previous_page[title]}</a><br />
                 <strong>下一篇：</strong><a href="{$next_page[url]}">{$next_page[title]}</a>
             </p>
+            
+
           {pc:content action="relation" relation="$relation" id="$id" catid="$catid" num="5" keywords="$rs[keywords]"}
               {if $data}
                 <div class="related">
@@ -45,9 +47,13 @@
                 </div>
               {/if}
           {/pc}
+
+
           <div class="bk15"></div>
             {if module_exists('mood')}<script type="text/javascript" src="{APP_PATH}index.php?m=mood&c=index&a=init&id={id_encode($catid,$id,$siteid)}"></script>{/if}
       </div>
+
+
       <div class="Article-Tool">
           分享到：
 		  <img src="http://v.t.qq.com/share/images/s/weiboicon16.png" style="padding-bottom:3px;" onclick="postToWb();" class="cu" title="分享到腾讯微博"/><script type="text/javascript">
@@ -72,6 +78,9 @@
 	  </span>
 
 	  </div>
+
+
+
       <div class="bk10"></div>
       {if $allow_comment && module_exists('comment')}
       <iframe src="{APP_PATH}index.php?m=comment&c=index&a=init&commentid={id_encode("content_$catid",$id,$siteid)}&iframe=1" width="100%" height="100%" id="comment_iframe" frameborder="0" scrolling="no"></iframe>

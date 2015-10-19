@@ -1,0 +1,39 @@
+
+<div class="main">
+	<div class="col-left">
+
+        <div class="slide">
+            <div class="FocusPic">
+            {pc:content  action="position" posid="1"  order="listorder DESC" thumb="1" num="5"}
+                <div class="content" id="main-slide">
+                    <div class="changeDiv">
+                    {loop $data $r}
+                        <a href="{$r['url']}" title="{str_cut($r['title'],30)}">
+                            <img src="{thumb($r['thumb'],700,260)}" alt="{$r['title']}" width="700" height="260" />
+                        </a>
+                    {/loop}
+                    </div>
+                </div>
+            {/pc}
+            </div>
+            <div class="bk10"></div>
+        </div>
+        
+
+
+
+        <div class="box">
+        		<h5>图片新闻</h5>
+          {pc:content  action="position" posid="12" thumb="1" order="listorder DESC" num="10"}
+            <ul class="content news-photo picbig">
+             {loop $data $r}
+            	<li>
+                    <div class="img-wrap">
+                        <a href="{$r[url]}" title="{$r[title]}"><img src="{thumb($r[thumb],110,0)}" title="{$r[title]}"/></a>
+                    </div>
+                    <a href="{$r[url]}" title="{$r[title]}">{str_cut($r[title],20)}</a>
+                </li>
+                {/loop}
+            </ul>
+            {/pc}
+        </div>

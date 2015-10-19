@@ -1,0 +1,30 @@
+<div class="main">
+	<div class="col-left">
+    	<div class="news-hot">
+        	<div class="content">
+        	{pc:content  action="position" posid="2" order="listorder DESC" num="4"}
+        	 {loop $data $r}
+                <h4 class="blue"><a href="{$r[url]}" title="{$r[title]}">{str_cut($r[title],36,'')}</a></h4>
+                <p>{if $n==1}<img src="{thumb($r[thumb],90,60)}" width="90" height="60"/>{/if}{str_cut($r[description],112)}</p>
+                <div class="bk20 hr"><hr /></div>
+               {/loop}  
+             {/pc}   
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="FocusPic">
+            {pc:content  action="position" posid="1"  order="listorder DESC" thumb="1" num="5"}
+            	<div class="content" id="main-slide">
+                    <div class="changeDiv">  
+                    {loop $data $r}
+                        <a href="{$r['url']}" title="{str_cut($r['title'],30)}"><img src="{thumb($r['thumb'],700,260)}" alt="{$r['title']}" width="700" height="260" /></a>
+                    {/loop}
+                    </div>
+                </div>
+            {/pc}
+            </div>        	
+        </div>
+        <div class="bk10"></div>
+    </div>
+</div>
