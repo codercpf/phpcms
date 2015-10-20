@@ -1,359 +1,287 @@
 <?php defined('IN_PHPCMS') or exit('No permission resources.'); ?><?php include template('content', 'header'); ?>
+<link rel="stylesheet" href="<?php echo WEB_PATH;?>statics/cy/css/commen.css">
+<link type="text/css" href="<?php echo WEB_PATH;?>statics/cy/css/index.css" rel="stylesheet">
+<script type="text/javascript" src="<?php echo WEB_PATH;?>statics/cy/js/jquery.min2.js"></script>
 
-	<link rel="stylesheet" href="<?php echo WEB_PATH;?>statics/cy/css/commen.css">
-	<link type="text/css" href="<?php echo WEB_PATH;?>statics/cy/css/index.css" rel="stylesheet">
-	<script type="text/javascript" src="<?php echo WEB_PATH;?>statics/cy/js/jquery.min2.js"></script>
+<div id="main" class="com-width mt90 clearfix">
 
-	<div id="main" class="com-width mt90 clearfix">
+	<div class="index-wrap fl">
+		<div class="index-wrap-hd clearfix">
 
-		<div class="index-wrap fl">
-			<div class="index-wrap-hd clearfix">
-
-				<div id="index-slider" class="fr">
-<?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=dcd1c47627b910509414b85662be50cc&action=position&posid=1&order=listorder+DESC&thumb=1&num=5\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'position')) {$data = $content_tag->position(array('posid'=>'1','order'=>'listorder DESC','thumb'=>'1','limit'=>'5',));}?>
-					<div class="slider-content has-dots" style="width: 890px; height: 350px; overflow: hidden;">
-						<a href="javascript:;" class="slider-prev" style="opacity: 1;"></a>
-						<a href="javascript:;" class="slider-next" style="opacity: 1;"></a>
-						<ul style="position: relative; left: -200%; width: 600%; height: 350px;">
-<?php $n=1;if(is_array($data)) foreach($data AS $r) { ?>
-							<li class="slider-item" style="float: left;">
-								<a href="<?php echo $r['url'];?>" target="_blank" >
-									<img src="<?php echo thumb($r['thumb'],890,350);?>" alt="<?php echo $r['title'];?>" class="slider-img" title="">
-									<span class="slider-info"><?php echo $r['title'];?></span>
-								</a>
-							</li>
-<?php $n++;}unset($n); ?>							
-						</ul>
-<?php if(defined('IN_ADMIN') && !defined('HTML')) {echo '</div>';}?>												
-					</div>
+			<div id="index-slider" class="fr">
+				<?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=dcd1c47627b910509414b85662be50cc&action=position&posid=1&order=listorder+DESC&thumb=1&num=5\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'position')) {$data = $content_tag->position(array('posid'=>'1','order'=>'listorder DESC','thumb'=>'1','limit'=>'5',));}?>
+				<div class="slider-content has-dots" style="width: 890px; height: 350px; overflow: hidden;">
+					<a href="javascript:;" class="slider-prev" style="opacity: 1;"></a>
+					<a href="javascript:;" class="slider-next" style="opacity: 1;"></a>
+					<ul style="position: relative; left: -200%; width: 600%; height: 350px;">
+						<?php $n=1;if(is_array($data)) foreach($data AS $r) { ?>
+						<li class="slider-item" style="float: left;">
+							<a href="<?php echo $r['url'];?>" target="_blank" >
+								<img src="<?php echo thumb($r['thumb'],890,350);?>" alt="<?php echo $r['title'];?>" class="slider-img" title="">
+								<span class="slider-info"><?php echo $r['title'];?></span>
+							</a>
+						</li>
+						<?php $n++;}unset($n); ?>
+					</ul>					
 				</div>
+				<?php if(defined('IN_ADMIN') && !defined('HTML')) {echo '</div>';}?>
+			</div>
 
-<!-- 
+			<!-- 
 				<div class="slide">
-		            <div class="FocusPic">
-		            <?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=dcd1c47627b910509414b85662be50cc&action=position&posid=1&order=listorder+DESC&thumb=1&num=5\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'position')) {$data = $content_tag->position(array('posid'=>'1','order'=>'listorder DESC','thumb'=>'1','limit'=>'5',));}?>
-		                <div class="content" id="main-slide">
-		                    <div class="changeDiv">  
-		                    <?php $n=1;if(is_array($data)) foreach($data AS $r) { ?>
-		                        <a href="<?php echo $r['url'];?>" title="<?php echo str_cut($r['title'],30);?>">
-		                            <img src="<?php echo thumb($r['thumb'],700,260);?>" alt="<?php echo $r['title'];?>" width="700" height="260" />
-		                        </a>
-		                    <?php $n++;}unset($n); ?>
-		                    </div>
-		                </div>
-		            <?php if(defined('IN_ADMIN') && !defined('HTML')) {echo '</div>';}?>
-		            </div>
-		            <div class="bk10"></div>
-		        </div>
- -->
-
-			</div>
-
-			<div class="index-wrap-content  mt20 clearfix">
-				<!--首页中间-->
-				<div id="content" class="index-content fr">
-					<div id="content-list" class="cyzone-data">
-						<div class="articles">
-							<div class="content-item clearfix" data-articleid="281798">
-								<div class="item-img fl">
-									<a href="http://www.cyzone.cn/a/20151015/281798.html" target="_blank">
-										<img src="<?php echo WEB_PATH;?>statics/cy/cyimages/thumb_230_147_20151015111839433.jpg" alt="" title="">
-									</a>
-								</div>
-								<div class="item-info fr">
-									<h3 class="item-tit">
-										<a href="http://www.cyzone.cn/a/20151015/281798.html" target="_blank">原天音通信集团副董事长杨超加入360；Facebook将推新闻聚合应用Notify</a>
-									</h3>
-									<p class="item-intro">与Twitter用户一样，Facebook用户可实时获取新闻内容。</p>
-									<p class="item-other">
-										<span class="author fl">Hepburn</span>
-										<span class="time fr" data-time="1444878676" title="2015/10/15 上午11:11:16">17分钟前</span>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="ui-more">
-						<a href="javascript:;">
-							<span class="cyzone-more-txt">加载更多</span>
+			<div class="FocusPic">
+				<?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=dcd1c47627b910509414b85662be50cc&action=position&posid=1&order=listorder+DESC&thumb=1&num=5\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'position')) {$data = $content_tag->position(array('posid'=>'1','order'=>'listorder DESC','thumb'=>'1','limit'=>'5',));}?>
+				<div class="content" id="main-slide">
+					<div class="changeDiv">
+						<?php $n=1;if(is_array($data)) foreach($data AS $r) { ?>
+						<a href="<?php echo $r['url'];?>" title="<?php echo str_cut($r['title'],30);?>">
+							<img src="<?php echo thumb($r['thumb'],700,260);?>" alt="<?php echo $r['title'];?>" width="700" height="260" />
 						</a>
+						<?php $n++;}unset($n); ?>
 					</div>
 				</div>
+				<?php if(defined('IN_ADMIN') && !defined('HTML')) {echo '</div>';}?>
 			</div>
+			<div class="bk10"></div>
 		</div>
+		-->
+	</div>
 
-		<!--首页右侧-->
-		<div id="sidebar" class="sidebar fr">
+	<!-- 
+		<div class="news-hot" style="height:100px;">
 
-			<!--排行榜-->
-			<div id="sidebar-rank" class="sidebar-rank">
-				<div class="sidebar-rank-tit">
-					<a class="current" href="javascript:;">日排行</a>
-					<a href="javascript:;">周排行</a>
-					<a class="rank-tit-end" href="javascript:;">月排行</a>
-				</div>
-				<div class="sidebar-rank-content">
-					<ul class="sidebar-rank-item show-item">
-						<li>
-							<a href="http://www.cyzone.cn/a/20151014/281742.html" target="_blank" >
-								<span class="rank-num">1</span>
-								Uber CEO18岁就开始创业；董明珠...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151014/281774.html" target="_blank" >
-								<span class="rank-num">2</span>
-								我家楼下的O2O混战实录——不作死...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151013/281704.html" target="_blank" >
-								<span class="rank-num">3</span>
-								2015双11全球狂欢节“剁手指南”：...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151014/281758.html" target="_blank" >
-								<span class="rank-num">4</span>
-								以游族网络为例，看企业孵化器如何...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151014/281730.html" target="_blank" >
-								<span class="rank-num">5</span>
-								中小手机厂商遇倒闭潮：沦为小米华...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151014/281764.html" target="_blank" >
-								<span class="rank-num">6</span>
-								创业，切莫孤注一掷【读历史知创业...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151014/281756.html" target="_blank" >
-								<span class="rank-num">7</span>
-								2015年家政O2O行业分析报告：得阿...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151014/281773.html" target="_blank" >
-								<span class="rank-num">8</span>
-								阎焱：拥抱90后创业是扯淡；暴风科...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151014/281720.html" target="_blank" >
-								<span class="rank-num">9</span>
-								喵鲜生：备货全球，大数据如何助力...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151014/281767.html" target="_blank" >
-								<span class="rank-num">10</span>
-								谁说产品经理不是“麒麟才子”呢?
-							</a>
-						</li>
-					</ul>
-
-					<ul class="sidebar-rank-item">
-						<li>
-							<a href="http://www.cyzone.cn/a/20151013/281718.html" target="_blank" >
-								<span class="rank-num">1</span>
-								阎焱：创业数据造假已成常态，投资...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151009/281438.html" target="_blank" >
-								<span class="rank-num">2</span>
-								90后创业者：为何我创业多次仍然失...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151010/281497.html" target="_blank" >
-								<span class="rank-num">3</span>
-								历经数月呕心整理国内最全上门O2O...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151010/281503.html" target="_blank" >
-								<span class="rank-num">4</span>
-								投资界名人马云思聪在教主“世纪婚...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151008/281447.html" target="_blank" >
-								<span class="rank-num">5</span>
-								马云：别把我们和电商混为一谈，阿...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151010/281523.html" target="_blank" >
-								<span class="rank-num">6</span>
-								产品经理再忙也要看《琅琊榜》
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151008/281446.html" target="_blank" >
-								<span class="rank-num">7</span>
-								10.8日融资： “挖挖”获数百万...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151012/281643.html" target="_blank" >
-								<span class="rank-num">8</span>
-								从0到30万教师，阿里云如何助力跟...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151012/281636.html" target="_blank" >
-								<span class="rank-num">9</span>
-								乔布斯也有“毒舌”一面；马化腾低...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20151013/281691.html" target="_blank" >
-								<span class="rank-num">10</span>
-								艾问徐小平：人人都可以创业吗？
-							</a>
-						</li>
-					</ul>
-
-					<ul class="sidebar-rank-item">
-						<li>
-							<a href="http://www.cyzone.cn/a/20151013/281718.html" target="_blank" >
-								<span class="rank-num">1</span>
-								阎焱：创业数据造假已成常态，投资...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20150916/280600.html" target="_blank" >
-								<span class="rank-num">2</span>
-								寒冬之际，90后创业者应该反思什么...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20150916/280626.html" target="_blank" >
-								<span class="rank-num">3</span>
-								阿里前副总裁：阿里巴巴给我上的10...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20150916/280588.html" target="_blank" >
-								<span class="rank-num">4</span>
-								直击德国工业（一）： 宝马工厂实...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20150916/280604.html" target="_blank" >
-								<span class="rank-num">5</span>
-								360周鸿祎：产品经理要有“四心”
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20150915/280539.html" target="_blank" >
-								<span class="rank-num">6</span>
-								没发现敌人？这只能说明你的产品没...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20150915/280484.html" target="_blank" >
-								<span class="rank-num">7</span>
-								看360、小米、腾讯、搜狗等大公司...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20150915/280487.html" target="_blank" >
-								<span class="rank-num">8</span>
-								9.15融资清单：空格90天完成A轮1...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20150916/280586.html" target="_blank" >
-								<span class="rank-num">9</span>
-								烧钱也换不来用户的上门美容，出路...
-							</a>
-						</li>
-						<li>
-							<a href="http://www.cyzone.cn/a/20150915/280504.html" target="_blank" >
-								<span class="rank-num">10</span>
-								洪泰基金吴恒：互联网公司烧钱也要...
-							</a>
-						</li>
-					</ul>
-
+	<div >
+		<?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=79d92623a8337007f1f3bcdd35d5f304&action=position&posid=2&order=listorder+DESC&num=4\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'position')) {$data = $content_tag->position(array('posid'=>'2','order'=>'listorder DESC','limit'=>'4',));}?>
+<?php $n=1;if(is_array($data)) foreach($data AS $r) { ?>
+		<h4 class="blue">
+			<a href="<?php echo $r['url'];?>" title="<?php echo $r['title'];?>"><?php echo str_cut($r[title],36,'');?></a>
+		</h4>
+		<p>
+			<img src="<?php echo thumb($r[thumb],90,60);?>" width="90" height="60"/>
+			<?php echo str_cut($r[description],112);?>
+		</p>
+		<div class="bk20 hr">
+			<hr/>
+		</div>
+		<?php $n++;}unset($n); ?>
+<?php if(defined('IN_ADMIN') && !defined('HTML')) {echo '</div>';}?>
+	</div>
+</div>
+-->
+<div class="index-wrap-content  mt20 clearfix">
+	<!--首页中间-->
+	<div id="content" class="index-content fr">
+		<div id="content-list" class="cyzone-data">
+			<div class="articles">
+<?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=79d92623a8337007f1f3bcdd35d5f304&action=position&posid=2&order=listorder+DESC&num=4\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'position')) {$data = $content_tag->position(array('posid'=>'2','order'=>'listorder DESC','limit'=>'4',));}?>
+<?php $n=1;if(is_array($data)) foreach($data AS $r) { ?>
+				<div class="content-item clearfix" data-articleid="281798">
+					<div class="item-img fl">
+						<a href="<?php echo $r['url'];?>" target="_blank">
+							<img src="<?php echo thumb($r[thumb],230,147);?>" alt="" title=""></a>
+					</div>
+					<div class="item-info fr">
+						<h3 class="item-tit">
+							<a href="<?php echo $r['url'];?>"><?php echo str_cut($r[title],36,'');?></a>
+						</h3>
+						<p class="item-intro"><?php echo str_cut($r[description],250);?></p>
+						<!-- 
+																		<p class="item-other">
+						<span class="author fl">Hepburn</span>
+						<span class="time fr" data-time="1444878676" title="2015/10/15 上午11:11:16">17分钟前</span>
+					</p>
+					-->
 				</div>
 			</div>
-
-			<div class="sidebar-specail">
-				<div class="specail-hd clearfix">
-					<span class="global-tit fl">专栏</span>
-					<a class="fr FontAwesome block-tit-contributors" href="http://www.cyzone.cn/category/679/" target="_blank">
-						更多 <i></i>
-					</a>
-				</div>
-				<div class="specail-content">
-
-					<div class="specail-item clearfix">
-						<div class="specail-img fl">
-							<a href="http://www.cyzone.cn/a/20151015/281619.html">
-								<img class="middle-avatar" src="<?php echo WEB_PATH;?>statics/cy/cyimages/94_avatar_middle.jpg">
-							</a>
-						</div>
-						<div class="specail-title">
-							<a href="http://www.cyzone.cn/a/20151015/281619.html">如何通过2天的地推，获取到初创产品的第一批10w用户</a>
-						</div>
-					</div>
-					<div class="specail-item clearfix">
-						<div class="specail-img fl">
-							<a href="http://www.cyzone.cn/a/20151014/281774.html">
-								<img class="middle-avatar" src="<?php echo WEB_PATH;?>statics/cy/cyimages/58_avatar_middle.jpg">
-							</a>
-						</div>
-						<div class="specail-title">
-							<a href="http://www.cyzone.cn/a/20151014/281774.html">我家楼下的O2O混战实录——不作死也得死，早餐外卖快收手吧！</a>
-						</div>
-					</div>
-					<div class="specail-item clearfix">
-						<div class="specail-img fl">
-							<a href="http://www.cyzone.cn/a/20151014/281743.html">
-								<img class="middle-avatar" src="<?php echo WEB_PATH;?>statics/cy/cyimages/45_avatar_middle.jpg">
-							</a>
-						</div>
-						<div class="specail-title">
-							<a href="http://www.cyzone.cn/a/20151014/281743.html">信天创投王晔：17会火下去吗？【投资人说】</a>
-						</div>
-					</div>
-					<div class="specail-item clearfix">
-						<div class="specail-img fl">
-							<a href="http://www.cyzone.cn/a/20151013/281718.html">
-								<img class="middle-avatar" src="<?php echo WEB_PATH;?>statics/cy/cyimages/12_avatar_middle.jpg">
-							</a>
-						</div>
-						<div class="specail-title">
-							<a href="http://www.cyzone.cn/a/20151013/281718.html">阎焱：创业数据造假已成常态，投资史上20年未见</a>
-						</div>
-					</div>
-					<div class="specail-item clearfix">
-						<div class="specail-img fl">
-							<a href="http://www.cyzone.cn/a/20151013/281694.html">
-								<img class="middle-avatar" src="<?php echo WEB_PATH;?>statics/cy/cyimages/00_avatar_middle.jpg">
-							</a>
-						</div>
-						<div class="specail-title">
-							<a href="http://www.cyzone.cn/a/20151013/281694.html">创业者如何发现开放却未知的秘密（之二）【投资人说】</a>
-						</div>
-					</div>
-
-				</div>
-			</div>
-
+<?php $n++;}unset($n); ?>
+<?php if(defined('IN_ADMIN') && !defined('HTML')) {echo '</div>';}?>
 		</div>
 	</div>
 
-	<script src="<?php echo WEB_PATH;?>statics/cy/js/sea.js"></script>
-	<!-- <script src="<?php echo WEB_PATH;?>statics/cy/cyimages/seajs-css.js"></script>-->
-	<script type="text/javascript" src="<?php echo WEB_PATH;?>statics/cy/js/sea_config.js"></script>
+	<div class="ui-more">
+		<a href="javascript:;">
+			<span class="cyzone-more-txt">加载更多</span>
+		</a>
+	</div>
+</div>
+</div>
+</div>
 
+<!--首页右侧-->
+<div id="sidebar" class="sidebar fr">
+
+
+<!-- 排行榜 -->
+<link type="text/css" href="<?php echo WEB_PATH;?>statics/cy/css/style(1).css" rel="stylesheet">
+<script type="text/javascript" src="<?php echo WEB_PATH;?>statics/cy/js/jquery.min2.js"></script>
+<script type="text/javascript" src="<?php echo WEB_PATH;?>statics/cy/js/jquery.idTabs.min.js"></script>
+
+<div class="R-mainbox1 mar-b20">
+<h3 class="zlzj-title">
+<span>排行榜</span>
+</h3>
+<div class="top-list">
+<ul class="top-list-ul">
+	<li>
+		<a href="#top-list-1" class="selected">日</a>
+	</li>
+	<li>
+		<a href="#top-list-2">周</a>
+	</li>
+	<li>
+		<a href="#top-list-3">月</a>
+	</li>
+</ul>
+<div id="top-list-1" style="display: block;">
+
+	<ul class="wpp-list item">
+		<li class="title-li"> <i class="q-number s-1">1</i>
+			<a href="http://www.woshipm.com/zhichang/219994.html" title="为什么你昨天的去哪儿产品经理面试挂了？" class="wpp-post-title" target="_blank">为什么你昨天的去哪儿产品经理面试挂了？</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-2">2</i>
+			<a href="http://www.woshipm.com/pd/156698.html" title="【干货】H5页面制作免费工具大集合" class="wpp-post-title" target="_blank">【干货】H5页面制作免费工具大集合</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-3">3</i>
+			<a href="http://www.woshipm.com/operate/219947.html" title="O2O运营中的几个关键环节" class="wpp-post-title" target="_blank">O2O运营中的几个关键环节</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-4">4</i>
+			<a href="http://www.woshipm.com/operate/220049.html" title="不会数据分析的产品不是一个好运营" class="wpp-post-title" target="_blank">不会数据分析的产品不是一个好运营</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-5">5</i>
+			<a href="http://www.woshipm.com/rp/39203.html" title="Axure教程 axure新手入门基础（1）" class="wpp-post-title" target="_blank">Axure教程 axure新手入门基础（1）</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-6">6</i>
+			<a href="http://www.woshipm.com/it/219463.html" title="从产品经理的角度算一算，做一个app需要多少钱" class="wpp-post-title" target="_blank">从产品经理的角度算一算，做一个app需要多少钱</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-7">7</i>
+			<a href="http://www.woshipm.com/it/220079.html" title="2015年第42周干货精选：为烂产品做运营是怎样一种体验？" class="wpp-post-title" target="_blank">2015年第42周干货精选：为烂产品做运营是怎样一种体验？</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-8">8</i>
+			<a href="http://www.woshipm.com/ucd/219942.html" title="毕业生问：怎么样成为一名及格的设计师？" class="wpp-post-title" target="_blank">毕业生问：怎么样成为一名及格的设计师？</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-9">9</i>
+			<a href="http://www.woshipm.com/operate/220179.html" title="不懂放权给用户？活该忙成狗—类类教你如何四两拨千斤！" class="wpp-post-title" target="_blank">不懂放权给用户？活该忙成狗—类类教你如何四两拨千斤！</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-10">10</i>
+			<a href="http://www.woshipm.com/pmd/220030.html" title="0岁产品经理：如何写需求文档" class="wpp-post-title" target="_blank">0岁产品经理：如何写需求文档</a>
+		</li>
+
+	</ul>
+</div>
+<div id="top-list-2" style="display: none;">
+	<ul class="wpp-list item">
+		<li class="title-li">
+			<i class="q-number s-1">1</i>
+			<a href="http://www.woshipm.com/rp/39203.html" title="Axure教程 axure新手入门基础（1）" class="wpp-post-title" target="_blank">Axure教程 axure新手入门基础（1）</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-2">2</i>
+			<a href="http://www.woshipm.com/pd/156698.html" title="【干货】H5页面制作免费工具大集合" class="wpp-post-title" target="_blank">【干货】H5页面制作免费工具大集合</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-3">3</i>
+			<a href="http://www.woshipm.com/operate/216106.html" title="APP推广 | 这应该是最完整的地推方案了" class="wpp-post-title" target="_blank">APP推广 | 这应该是最完整的地推方案了</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-4">4</i>
+			<a href="http://www.woshipm.com/pmd/216870.html" title="产品小白，是如何准备成为一名产品经理的" class="wpp-post-title" target="_blank">产品小白，是如何准备成为一名产品经理的</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-5">5</i>
+			<a href="http://www.woshipm.com/pmd/217105.html" title="求职产品助理的一个月感想" class="wpp-post-title" target="_blank">求职产品助理的一个月感想</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-6">6</i>
+			<a href="http://www.woshipm.com/rp/211554.html" title="Word产品需求文档，已经过时了" class="wpp-post-title" target="_blank">Word产品需求文档，已经过时了</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-7">7</i>
+			<a href="http://www.woshipm.com/operate/218403.html" title="通杀互联网、实体店的6大营销策略，附带18个真实小案例！" class="wpp-post-title" target="_blank">通杀互联网、实体店的6大营销策略，附带18个真实小案例！</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-8">8</i>
+			<a href="http://www.woshipm.com/rp/39208.html" title="Axure教程 axure新手入门基础（2）" class="wpp-post-title" target="_blank">Axure教程 axure新手入门基础（2）</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-9">9</i>
+			<a href="http://www.woshipm.com/operate/217629.html" title="如何规划设计一个月加粉10万的微信互动原型？" class="wpp-post-title" target="_blank">如何规划设计一个月加粉10万的微信互动原型？</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-10">10</i>
+			<a href="http://www.woshipm.com/pd/216882.html" title="减少改稿15招！从开发角度聊聊如何洞悉隐性需求？" class="wpp-post-title" target="_blank">减少改稿15招！从开发角度聊聊如何洞悉隐性需求？</a>
+		</li>
+
+	</ul>
+</div>
+<div id="top-list-3" style="display: none;">
+	<ul class="wpp-list item">
+		<li class="title-li">
+			<i class="q-number s-1">1</i>
+			<a href="http://www.woshipm.com/pd/156698.html" title="【干货】H5页面制作免费工具大集合" class="wpp-post-title" target="_blank">【干货】H5页面制作免费工具大集合</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-2">2</i>
+			<a href="http://www.woshipm.com/rp/39203.html" title="Axure教程 axure新手入门基础（1）" class="wpp-post-title" target="_blank">Axure教程 axure新手入门基础（1）</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-3">3</i>
+			<a href="http://www.woshipm.com/rp/211554.html" title="Word产品需求文档，已经过时了" class="wpp-post-title" target="_blank">Word产品需求文档，已经过时了</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-4">4</i>
+			<a href="http://www.woshipm.com/rp/39208.html" title="Axure教程 axure新手入门基础（2）" class="wpp-post-title" target="_blank">Axure教程 axure新手入门基础（2）</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-5">5</i>
+			<a href="http://www.woshipm.com/pmd/121796.html" title="如何写一份风投喜欢的商业计划书（二）" class="wpp-post-title" target="_blank">如何写一份风投喜欢的商业计划书（二）</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-6">6</i>
+			<a href="http://www.woshipm.com/rp/39224.html" title="Axure教程 axure新手入门基础（3）" class="wpp-post-title" target="_blank">Axure教程 axure新手入门基础（3）</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-7">7</i>
+			<a href="http://www.woshipm.com/pd/215213.html" title="三种常见「产品流程图」是如何思考与绘制出来的？" class="wpp-post-title" target="_blank">三种常见「产品流程图」是如何思考与绘制出来的？</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-8">8</i>
+			<a href="http://www.woshipm.com/pmd/211482.html" title="产品经理思维框架 | 三维思考模型" class="wpp-post-title" target="_blank">产品经理思维框架 | 三维思考模型</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-9">9</i>
+			<a href="http://www.woshipm.com/operate/216106.html" title="APP推广 | 这应该是最完整的地推方案了" class="wpp-post-title" target="_blank">APP推广 | 这应该是最完整的地推方案了</a>
+		</li>
+		<li class="title-li">
+			<i class="q-number s-10">10</i>
+			<a href="http://www.woshipm.com/rp/64741.html" title="15款优秀移动APP产品原型设计工具" class="wpp-post-title" target="_blank">15款优秀移动APP产品原型设计工具</a>
+		</li>
+	</ul>
+</div>
+</div>
+</div>
+
+<script>
+      jQuery(document).ready(function($) {
+        $(".top-list ul").idTabs();
+      });
+    </script>
+
+<!-- 排行榜结束 -->
+
+</div>
+</div>
+
+<script src="<?php echo WEB_PATH;?>statics/cy/js/sea.js"></script>
+<!-- <script src="<?php echo WEB_PATH;?>statics/cy/cyimages/seajs-css.js"></script>
+-->
+<script type="text/javascript" src="<?php echo WEB_PATH;?>statics/cy/js/sea_config.js"></script>
 <?php include template('content', 'footer'); ?>

@@ -1,0 +1,269 @@
+{template 'content', 'header'}
+
+	<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/commen.css">
+	<link type="text/css" href="{WEB_PATH}statics/cy/css/index.css" rel="stylesheet">
+	<script type="text/javascript" src="{WEB_PATH}statics/cy/js/jquery.min2.js"></script>
+
+	<div id="main" class="com-width mt90 clearfix">
+
+		<div class="index-wrap fl">
+			<div class="index-wrap-hd clearfix">
+
+				<div id="index-slider" class="fr">
+{pc:content  action="position" posid="1"  order="listorder DESC" thumb="1" num="5"}
+					<div class="slider-content has-dots" style="width: 890px; height: 350px; overflow: hidden;">
+						<a href="javascript:;" class="slider-prev" style="opacity: 1;"></a>
+						<a href="javascript:;" class="slider-next" style="opacity: 1;"></a>
+						<ul style="position: relative; left: -200%; width: 600%; height: 350px;">
+{loop $data $r}
+							<li class="slider-item" style="float: left;">
+								<a href="{$r['url']}" target="_blank" >
+									<img src="{thumb($r['thumb'],890,350)}" alt="{$r['title']}" class="slider-img" title="">
+									<span class="slider-info">{$r['title']}</span>
+								</a>
+							</li>
+{/loop}							
+						</ul>
+{/pc}												
+					</div>
+				</div>
+
+<!-- 
+				<div class="slide">
+		            <div class="FocusPic">
+		            {pc:content  action="position" posid="1"  order="listorder DESC" thumb="1" num="5"}
+		                <div class="content" id="main-slide">
+		                    <div class="changeDiv">  
+		                    {loop $data $r}
+		                        <a href="{$r['url']}" title="{str_cut($r['title'],30)}">
+		                            <img src="{thumb($r['thumb'],700,260)}" alt="{$r['title']}" width="700" height="260" />
+		                        </a>
+		                    {/loop}
+		                    </div>
+		                </div>
+		            {/pc}
+		            </div>
+		            <div class="bk10"></div>
+		        </div>
+ -->
+
+			</div>
+
+<!-- 
+		<div class="news-hot" style="height:100px;">
+
+
+                    <div >
+{pc:content  action="position" posid="2" order="listorder DESC" num="4"}
+{loop $data $r}
+                        <h4 class="blue"><a href="{$r[url]}" title="{$r[title]}">{str_cut($r[title],36,'')}</a></h4>
+                        <p><img src="{thumb($r[thumb],90,60)}" width="90" height="60"/>{str_cut($r[description],112)}</p>
+                        <div class="bk20 hr"><hr/></div>
+{/loop}
+{/pc}   
+                    </div>
+        </div>
+ -->
+
+			<div class="index-wrap-content  mt20 clearfix">
+				<!--首页中间-->
+				<div id="content" class="index-content fr">
+					<div id="content-list" class="cyzone-data">
+						<div class="articles">
+{pc:content  action="position" posid="2" order="listorder DESC" num="4"}
+{loop $data $r}
+
+							<div class="content-item clearfix" data-articleid="281798">
+								<div class="item-img fl">
+									<a href="{$r[url]}" target="_blank">
+										<img src="{thumb($r[thumb],230,147)}" alt="" title="">
+									</a>
+								</div>
+								<div class="item-info fr">
+									<h3 class="item-tit">
+										<a href="{$r[url]}">{str_cut($r[title],36,'')}</a>
+									</h3>
+									<p class="item-intro">{str_cut($r[description],250)}</p>
+<!-- 
+																		<p class="item-other">
+																			<span class="author fl">Hepburn</span>
+																			<span class="time fr" data-time="1444878676" title="2015/10/15 上午11:11:16">17分钟前</span>
+																		</p>
+-->									
+								</div>
+							</div>
+{/loop}
+{/pc}
+						</div>
+					</div>
+
+					<div class="ui-more">
+						<a href="javascript:;">
+							<span class="cyzone-more-txt">加载更多</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--首页右侧-->
+		<div id="sidebar" class="sidebar fr">
+
+
+<link type="text/css" href="{WEB_PATH}statics/cy/css/tabulous.css" rel="stylesheet">
+<script type="text/javascript" src="{WEB_PATH}statics/cy/js/jquery.min2.js"></script>
+<script type="text/javascript" src="{WEB_PATH}statics/cy/js/tabulous.js"></script>
+<script>
+	$(function(){
+		$('.tabs').tabulous({
+		effect: 'flip'
+		});
+	});
+</script>
+
+<!-- 
+			排行榜
+			<div id="sidebar-rank" class="sidebar-rank">
+				<div class="sidebar-rank-tit">
+					<a href="#tabs-1">日排行</a>
+					<a href="#tabs-2">周排行</a>
+					<a href="#tabs-3">月排行</a>
+				</div>
+
+				<div class="sidebar-rank-content">				
+					
+					<div id="tabs_container">
+						<div id="tabs-1">
+							<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus.</p>
+							<p>Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla<a href="http://www.dowebok.com/"></a>. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+						</div>
+
+						<div id="tabs-2">
+							<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor.</p>
+						</div>
+
+						<div id="tabs-3">
+							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem.</p>
+							<p>Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales.</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="sidebar-specail">
+				<div class="specail-hd clearfix">
+					<span class="global-tit fl">专栏</span>
+					<a class="fr FontAwesome block-tit-contributors" href="http://www.cyzone.cn/category/679/" target="_blank">
+						更多 <i></i>
+					</a>
+				</div>
+				<div class="specail-content">
+
+					<div class="specail-item clearfix">
+						<div class="specail-img fl">
+							<a href="http://www.cyzone.cn/a/20151015/281619.html">
+								<img class="middle-avatar" src="{WEB_PATH}statics/cy/cyimages/94_avatar_middle.jpg">
+							</a>
+						</div>
+						<div class="specail-title">
+							<a href="http://www.cyzone.cn/a/20151015/281619.html">如何通过2天的地推，获取到初创产品的第一批10w用户</a>
+						</div>
+					</div>
+					<div class="specail-item clearfix">
+						<div class="specail-img fl">
+							<a href="http://www.cyzone.cn/a/20151014/281774.html">
+								<img class="middle-avatar" src="{WEB_PATH}statics/cy/cyimages/58_avatar_middle.jpg">
+							</a>
+						</div>
+						<div class="specail-title">
+							<a href="http://www.cyzone.cn/a/20151014/281774.html">我家楼下的O2O混战实录——不作死也得死，早餐外卖快收手吧！</a>
+						</div>
+					</div>
+					<div class="specail-item clearfix">
+						<div class="specail-img fl">
+							<a href="http://www.cyzone.cn/a/20151014/281743.html">
+								<img class="middle-avatar" src="{WEB_PATH}statics/cy/cyimages/45_avatar_middle.jpg">
+							</a>
+						</div>
+						<div class="specail-title">
+							<a href="http://www.cyzone.cn/a/20151014/281743.html">信天创投王晔：17会火下去吗？【投资人说】</a>
+						</div>
+					</div>
+					<div class="specail-item clearfix">
+						<div class="specail-img fl">
+							<a href="http://www.cyzone.cn/a/20151013/281718.html">
+								<img class="middle-avatar" src="{WEB_PATH}statics/cy/cyimages/12_avatar_middle.jpg">
+							</a>
+						</div>
+						<div class="specail-title">
+							<a href="http://www.cyzone.cn/a/20151013/281718.html">阎焱：创业数据造假已成常态，投资史上20年未见</a>
+						</div>
+					</div>
+					<div class="specail-item clearfix">
+						<div class="specail-img fl">
+							<a href="http://www.cyzone.cn/a/20151013/281694.html">
+								<img class="middle-avatar" src="{WEB_PATH}statics/cy/cyimages/00_avatar_middle.jpg">
+							</a>
+						</div>
+						<div class="specail-title">
+							<a href="http://www.cyzone.cn/a/20151013/281694.html">创业者如何发现开放却未知的秘密（之二）【投资人说】</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+ -->
+<!-- 排行榜示例 -->
+
+		<link type="text/css" href="{WEB_PATH}statics/cy/css/tabulous.css" rel="stylesheet">
+		<script type="text/javascript" src="{WEB_PATH}statics/cy/js/jquery.min2.js"></script>
+		<script type="text/javascript" src="{WEB_PATH}statics/cy/js/tabulous.js"></script>
+		<script>
+			$(function(){
+				$('.tabs').tabulous({
+					effect: 'scaleUp'
+				});
+			});
+		</script>
+		
+		<div class="main">
+			<div class="mianc">				
+				
+				<div class="tabs">
+					<ul>
+						<li><a href="#tabs-1" title="">Tab 1</a></li>
+						<li><a href="#tabs-2" title="">Tab 2</a></li>
+						<li><a href="#tabs-3" title="">Tab 3</a></li>
+					</ul>					
+
+					<div id="tabs_container">
+						<div id="tabs-1">
+							<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus.</p>
+							<p>Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla<a href="http://www.dowebok.com/"></a>. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+						</div>
+
+						<div id="tabs-2">
+							<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor.</p>
+						</div>
+
+						<div id="tabs-3">
+							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem.</p>
+							<p>Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales.</p>
+						</div>
+					</div>
+				</div>
+
+			</div>	
+		</div>
+ 
+<!-- 示例结束 -->
+
+		</div>
+	</div>
+
+	<script src="{WEB_PATH}statics/cy/js/sea.js"></script>
+	<!-- <script src="{WEB_PATH}statics/cy/cyimages/seajs-css.js"></script>-->
+	<script type="text/javascript" src="{WEB_PATH}statics/cy/js/sea_config.js"></script>
+
+{template 'content', 'footer'}

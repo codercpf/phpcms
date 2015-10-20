@@ -385,7 +385,7 @@ return array (
     'parentdir' => 'chuangyezhe/',
     'catdir' => 'rongzi',
     'url' => 'http://phpcms/index.php?m=content&c=index&a=lists&catid=12',
-    'items' => '0',
+    'items' => '2',
     'hits' => '0',
     'setting' => 'array (
   \'workflowid\' => \'\',
