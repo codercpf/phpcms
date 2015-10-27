@@ -7,6 +7,97 @@
 	-webkit-font-smoothing: antialiased
 }
 
+/*在线投稿*/
+.t_left {
+	color: #888;
+	font-size: 14px
+}
+
+.table_form td{
+	padding:10px 0;
+	text-align: left;
+	/*line-height: 40px;*/
+}
+
+.cont{	
+	padding-right: 200px;	
+}
+
+.cont form th {
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	text-align: right;
+	padding-right: 10px;
+	vertical-align: middle;
+}
+
+.duan1 {
+	width: 40%;
+	height: 32px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px
+}
+
+#title {
+	width: 40%;
+	height: 32px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px
+}
+#keywords {
+	width: 280px;
+	height: 32px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px
+}
+.contribute-btn{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	color: #fff;
+	border: none;
+	padding: 0 40px;
+	border-radius: 5px	
+}
+#description{
+	width: 100% !important;
+	height: 46px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px
+}
+
+/* 
+#thumb {
+	width: 40%;
+	height: 32px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px
+}
+*/
+
+/*我的文章*/
+.table-list th{	
+	height: 40px;
+	line-height: 40px;
+	text-align: center;	
+	vertical-align: middle;
+}
+.table-list td{	
+	padding:10px 0;
+	vertical-align: middle;
+}
+
+
+
+
+
+
 body,
 div,
 dl,
@@ -343,7 +434,11 @@ li {
 }
 
 .mt20 {
-	margin-top: 20px
+	margin-top: 20px;
+	padding-top: 20px;
+	background-color: #fff;
+	border-radius: 7px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .mt90 {
@@ -919,7 +1014,16 @@ input.Validform_error {
 }
 
 .list-wrap {
-	width: 643px
+	width: 895px;
+	padding: 20px;		
+	border-radius:7px;
+	background-color: #fff;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.item-other .time{
+	color: #aaa;
+	font-size: 14px;	
 }
 
 .magazine-wrap {
@@ -927,7 +1031,8 @@ input.Validform_error {
 }
 
 .sidebar {
-	width: 280px
+	width: 280px;
+	margin-right: 10px;
 }
 
 .sidebar .sidebar-ad {

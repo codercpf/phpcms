@@ -31,18 +31,18 @@
 						<a href="<?php echo APP_PATH;?>">首页</a>
 					</li>
 					
-<?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=0fa069dc93252f180378d7c17a382965&action=category&siteid=1&catid=0&num=3\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'category')) {$data = $content_tag->category(array('siteid'=>'1','catid'=>'0','limit'=>'3',));}?>
+<?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=9b7be0edd38f1ca1423251fdce9e2bfa&action=category&siteid=1&catid=0&num=4\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'category')) {$data = $content_tag->category(array('siteid'=>'1','catid'=>'0','limit'=>'4',));}?>
 <?php $n=1;if(is_array($data)) foreach($data AS $v) { ?>
 					<li>
-						<a href="<?php echo $v['url'];?>" ><?php echo $v['catname'];?><i class="headericon-arrow-drop-down"></i></a>
+						<!-- <a href="<?php echo $v['url'];?>" ><?php echo $v['catname'];?><i class="headericon-arrow-drop-down"></i></a> -->
+						<a><?php echo $v['catname'];?><i class="headericon-arrow-drop-down"></i></a>
 						<div class="service-wrap pop-up" >
 
 							<div class="menu">
 							<?php $n=1;if(is_array(subcat($v['catid']))) foreach(subcat($v['catid']) AS $vv) { ?>
 								<a href="<?php echo $vv['url'];?>"><?php echo $vv['catname'];?></a>
 							<?php $n++;}unset($n); ?>
-							</div>
-							
+							</div>							
 						</div>
 					</li>
 <?php $n++;}unset($n); ?>
@@ -52,7 +52,7 @@
 
 			<div class="right-col J_rightNavWrapper">
 				<ul class="sub-nav">
-					<li class="search-item">
+					<li class="search-item" style="padding-right: 40px;">
 						<a href="javascript:void(0)"data-stat-hover="sousuo">
 							<i class="headericon-header-search"></i>
 							搜索
@@ -88,15 +88,13 @@
 							<i class="search-show FontAwesome fl"></i>
 						</div>
  -->
-					</li>
-
-							<li><input type="text" style="width: 50px" visible="false" /></li>
+					</li>						
 
 <?php if($_username) { ?>
 <!-- 已登录 -->
 					<li class="user-menu" style="display: block;">
 						<a href="<?php echo APP_PATH;?>index.php?m=member&c=index&a=account_manage" class="head-avatar" data-stat-hover="touxiang">
-							<img src="<?php echo WEB_PATH;?>statics/cy/images/noavatar.png" alt="">
+							<img src="<?php echo $touxiang;?>" width="60" height="60" onerror="this.src='<?php echo WEB_PATH;?>statics/cy/images/noavatar.png'">
 						</a>
 						<div class="menu-wrap pop-up">
 							<div class="menu">

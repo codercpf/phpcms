@@ -25,9 +25,23 @@ class index extends foreground {
 		//获取头像数组
 		$avatar = $this->client->ps_getavatar($this->memberinfo['phpssouid']);
 
+		param::set_cookie('_touxiang', $avatar[90], $cookietime);
+
+//
+//		echo $avatar[90];
+//		exit();
+//
+//		$arr_touxiang= serialize($avatar);
+//		param::set_cookie('_touxiang', $arr_touxiang, $cookietime);
+////		echo $arr_touxiang;exit();
+
+
+		$_username = param::get_cookie('_username');
+		$touxiang=$avatar[90];
+
 		$grouplist = getcache('grouplist');
 		$memberinfo['groupname'] = $grouplist[$memberinfo[groupid]]['name'];
-		include template('member', 'index');
+		include template('member', 'account_manage');
 	}
 	
 	public function register() {
@@ -560,6 +574,9 @@ class index extends foreground {
 		echo "<pre>";
 		exit();
 */
+		$_username=param::get_cookie('_username');
+		$touxiang = param::get_cookie('_touxiang');
+
 		//初始化phpsso
 		$phpsso_api_url = $this->_init_phpsso();
 		$ps_auth_key = pc_base::load_config('system', 'phpsso_auth_key');
@@ -997,6 +1014,12 @@ class index extends foreground {
 //				echo $status; exit();
 
 				$memberinfo = unserialize($status);
+/*
+				echo "<pre>";
+				var_dump($memberinfo);
+				echo "<pre>";
+				exit();
+*/
 				
 				if(isset($memberinfo['uid'])) {
 					//查询帐号
@@ -1071,7 +1094,10 @@ class index extends foreground {
 				}
 				$this->times_db->delete(array('username'=>$username));
 			}
-			
+
+			//已经登录成功
+
+
 			//如果用户被锁定
 			if($r['islock']) {
 				showmessage(L('user_is_lock'));
@@ -1339,6 +1365,11 @@ class index extends foreground {
 	 * 
 	 */
 	public function favorite() {
+
+		$_username=param::get_cookie('_username');
+		$touxiang = param::get_cookie('_touxiang');
+//		echo $_username;exit();
+
 		$this->favorite_db = pc_base::load_model('favorite_model');
 		$memberinfo = $this->memberinfo;
 		if(isset($_GET['id']) && trim($_GET['id'])) {

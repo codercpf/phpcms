@@ -652,6 +652,9 @@ class content extends admin {
 
 	//文章预览
 	public function public_preview() {
+
+		$touxiang = param::get_cookie('_touxiang');
+
 		$catid = intval($_GET['catid']);
 		$id = intval($_GET['id']);
 		

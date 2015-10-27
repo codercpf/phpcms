@@ -31,18 +31,18 @@
 						<a href="{APP_PATH}">首页</a>
 					</li>
 					
-{pc:content  action="category" siteid="1" catid="0" num="3"}
+{pc:content  action="category" siteid="1" catid="0" num="4"}
 {loop $data $v}
 					<li>
-						<a href="{$v[url]}" >{$v[catname]}<i class="headericon-arrow-drop-down"></i></a>
+						<!-- <a href="{$v[url]}" >{$v[catname]}<i class="headericon-arrow-drop-down"></i></a> -->
+						<a>{$v[catname]}<i class="headericon-arrow-drop-down"></i></a>
 						<div class="service-wrap pop-up" >
 
 							<div class="menu">
 							{loop subcat($v['catid']) $vv}
 								<a href="{$vv[url]}">{$vv[catname]}</a>
 							{/loop}
-							</div>
-							
+							</div>							
 						</div>
 					</li>
 {/loop}
@@ -52,7 +52,7 @@
 
 			<div class="right-col J_rightNavWrapper">
 				<ul class="sub-nav">
-					<li class="search-item">
+					<li class="search-item" style="padding-right: 40px;">
 						<a href="javascript:void(0)"data-stat-hover="sousuo">
 							<i class="headericon-header-search"></i>
 							搜索
@@ -88,15 +88,13 @@
 							<i class="search-show FontAwesome fl"></i>
 						</div>
  -->
-					</li>
-
-							<li><input type="text" style="width: 50px" visible="false" /></li>
+					</li>						
 
 {if $_username}
 <!-- 已登录 -->
 					<li class="user-menu" style="display: block;">
 						<a href="{APP_PATH}index.php?m=member&c=index&a=account_manage" class="head-avatar" data-stat-hover="touxiang">
-							<img src="{WEB_PATH}statics/cy/images/noavatar.png" alt="">
+							<img src="{$touxiang}" width="60" height="60" onerror="this.src='{WEB_PATH}statics/cy/images/noavatar.png'">
 						</a>
 						<div class="menu-wrap pop-up">
 							<div class="menu">

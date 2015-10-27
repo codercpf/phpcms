@@ -1,0 +1,96 @@
+{template "content","header"}
+<!--main-->
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/commen.css">
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/list.css">
+
+<div id="main" class="com-width mt90 clearfix">
+
+    <div class="list-wrap fl">      
+        
+        <div class="articles-list">
+
+{pc:content action="lists" catid="$catid" num="10" order="id DESC" page="$page"}        
+{loop $data $r}
+    {if $n==1}<div class="content-item-notop content-item clearfix">{else}<div class="content-item clearfix">{/if}
+        <div class="item-img fl">
+            <a href="{$r[url]}" target="_blank">
+            <img src="{thumb($r[thumb],186,118,0)}" alt="" title="">
+            </a>
+        </div>
+        <div class="item-info fr">
+            <h2 class="item-tit">
+                <a href="{$r[url]}" target="_blank">{$r[title]}</a>
+            </h2>
+            <p class="item-intro">
+                {str_cut($r[description],300)}
+            </p>
+            <p class="item-other">
+            <!-- <span class="author fl">{$r[username]}</span> -->
+            <span class="time fr" data-time="{$r[inputtime]}" title="{date('Y-m-d H:i:s',$r[inputtime])}">{date('Y-m-d',$r[inputtime])}</span>
+            </p>
+        </div> 
+    </div>    
+    <hr>
+{/loop}        
+    <div id="pages" class="page-box">{$pages}</div>    
+{/pc}
+
+        </div>        
+    </div>
+
+    <!--首页右侧-->
+    {template 'content', 'rightside'}
+<!--首页右侧-->
+</div>
+
+
+
+
+
+<!-- 
+<div class="main">
+这是list2.html页面
+<div class="col-left">
+        <div class="crumbs"><a href="{siteurl($siteid)}">首页</a><span> > </span>{catpos($catid)} 列表</div>
+        
+{pc:content action="lists" catid="$catid" num="25" order="id DESC" page="$page"}
+        <ul class="list lh24 f14">
+{loop $data $r}
+    <li><span class="rt">{date('Y-m-d H:i:s',$r[inputtime])}</span>·<a href="{$r[url]}" target="_blank"{title_style($r[style])}>{$r[title]}</a></li>
+    {if $n%5==0}<li class="bk20 hr"></li>{/if}
+{/loop}
+        </ul>
+        <div id="pages" class="text-c">{$pages}</div>
+{/pc}
+
+  </div>
+ -->
+<!--     <div class="col-auto">
+        <div class="box">
+            <h5 class="title-2">频道总排行</h5>
+             {pc:content action="hits" catid="$catid" num="10" order="views DESC" cache="3600"}
+            <ul class="content digg">
+                {loop $data $r}
+                    <li><a href="{$r[url]}" target="_blank">{$r[title]}</a></li>
+                {/loop}
+            </ul>
+            {/pc}
+        </div>
+        <div class="bk10"></div>
+        <div class="box">
+            <h5 class="title-2">频道本月排行</h5>
+             {pc:content action="hits" catid="$catid" num="8" order="monthviews DESC" cache="3600"}
+            <ul class="content rank">
+                {loop $data $r}
+                <li><span>{number_format($r[monthviews])}</span><a href="{$r[url]}"{title_style($r[style])} class="title" title="{$r[title]}">{str_cut($r[title],56,'...')}</a></li>
+                {/loop}
+            </ul>
+            {/pc}
+        </div>
+    </div>
+</div>
+ -->
+
+
+
+{template "content","footer"}

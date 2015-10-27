@@ -491,7 +491,7 @@
 }
 
 .index-content .cyzone-data .content-item {
-	padding: 20px 0;
+	padding: 10px 0;
 	border-bottom: 1px solid #eee
 }
 
@@ -507,7 +507,8 @@
 }
 
 .index-content .cyzone-data .content-item .item-info {
-	width: 650px
+	width: 630px;
+	margin-right: 10px;
 }
 
 .index-content .cyzone-data .content-item .item-info .item-tit {

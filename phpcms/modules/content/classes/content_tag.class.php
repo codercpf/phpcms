@@ -144,6 +144,45 @@ class content_tag {
 		if($data['id']) unset($key_array[$data['id']]);
 		return $key_array;
 	}
+
+
+
+// 全站排行榜
+/**
+* sitehits站点点击排行
+* @param $data
+*/
+function sitehits($data){
+	if(empty($data['siteid'])) return false;
+	$siteid = intval($data['siteid']);
+	$this->hits_db = pc_base::load_model('hits_model');
+	$category_content = getcache('category_content','commons');
+	$catid = '';
+	//获取站点下所有栏目ID
+	foreach($category_content as $key=>$val){
+		if($val==$siteid){
+			$catid .= $comma.$key;
+			$comma=',';
+		}
+	}
+	//获取点击排行
+	$r = $this->hits_db->select('catid in('.$catid.')','hitsid',$data['limit'],$data['order']);
+	$return = array();
+	$sitemodel_model_db = pc_base::load_model('sitemodel_model');
+	$this->db_config = pc_base::load_config('database');
+	$tablepre = $this->db_config['default']['tablepre'];
+	foreach($r as $key){
+		preg_match_all('/-(\d+)-/',$key['hitsid'],$modelid);
+		$id = substr($key['hitsid'],(strpos($key['hitsid'],'-',2)+1));
+		$tablename = $sitemodel_model_db->get_one(array('modelid'=>$modelid[1][0]),'tablename');
+		$this->db->table_name = $tablepre.$tablename['tablename'];
+		$return[] = array_merge($return,$this->db->get_one(array('id'=>$id)));
+	}
+	return $return;
+}
+
+
+
 	
 	/**
 	 * 排行榜标签

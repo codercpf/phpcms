@@ -1,0 +1,220 @@
+{template 'content', 'header'}
+
+	<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/commen.css">
+	<link type="text/css" href="{WEB_PATH}statics/cy/css/article.css" rel="stylesheet">
+	<!-- <link type="text/css"  href="{WEB_PATH}statics/cy/css/index.css" rel="stylesheet"> -->
+	<script type="text/javascript" src="{WEB_PATH}statics/cy/js/jquery.min2.js"></script>
+
+		<div id="main" class="com-width mt90 clearfix">
+
+		<div class="list-wrap fl" style="width: 890px;/* margin-right:55px; */">
+
+			<div id="article">
+				<!--文章标题/摘要/作者/来源-->
+				<div id="article-hd" class="clearfix">
+					<h1 class="article-tit">{$title}</h1>
+
+					<div class="article-copyform clearfix">
+
+						<div class="article-type fl"></div>
+						<div class="article-author fl">{$copyfrom}</div>
+						<div class="article-time fl" data-time="" title="">{$inputtime}</div>
+						
+					</div>
+					<p class="article-introduction">{$description}</p>
+				</div>
+
+
+				<!--文章主体内容-->
+				<div id="article-content">
+					{$content}
+					<p style="text-align: right;">（编辑：Zoey)</p>
+				</div>
+
+
+				<!--文章标签-->
+				<div id="article-tag" class="clearfix">
+					<div class="article-tag-box fl">
+						<span>标签:</span>
+						<a href="#">通用</a>
+						<a href="#">自动驾驶汽车</a>
+					</div>
+
+
+<!-- 文章分享 -->
+					<div class="article-share fr" id="article-end-share">						
+
+						<span id='favorite' class="article-pos-collect article-end-collect" data-modelid="9">
+							<a href="javascript:;" onclick="add_favorite('{addslashes($title)}');" class="t6">
+								<i class="share-collect"></i><em>收藏</em>
+							</a>
+						</span>
+
+						<span class="ly_share">
+							<a class="lingying" onclick="postToWb();" ><em>腾讯微博</em></a>
+							<script type="text/javascript">
+								function postToWb(){
+										var _t = encodeURI(document.title);
+										var _url = encodeURIComponent(document.location);
+										var _appkey = encodeURI("cba3558104094dbaa4148d8caa436a0b");
+										var _pic = encodeURI('{$thumb}');
+										var _site = '';
+										var _u = 'http://v.t.qq.com/share/share.php?url='+_url+'&appkey='+_appkey+'&site='+_site+'&pic='+_pic+'&title='+_t;
+										window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
+								}
+							</script>
+						</span>
+
+						<span class="article-pos-weibo article-end-weibo">
+							<a class="share-weibo" onclick="postToSina();"><i class="share-weibo"></i><em>新浪微博</em></a>
+							<script type="text/javascript">
+								function postToSina(){
+									var _t = encodeURI(document.title);
+									var _url = encodeURIComponent(document.location);
+									// var _appkey = encodeURI("cba3558104094dbaa4148d8caa436a0b");
+									var _appkey = '3172366919';
+
+									var _pic = encodeURI('{$thumb}');
+									var _site = '';
+
+									var _u = 'http://v.t.sina.com.cn/share/share.php?url='+_url+'&appkey='+_appkey+'&title='+encodeURIComponent('{new_addslashes($title)}');
+									window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
+								}
+							</script>							
+						</span>
+
+						<!-- 分享到微信 -->
+<!-- 
+						<span class="article-pos-weixin article-end-weixin" data-url="http://kuailiyu.cyzone.cn/article/15166.html">
+							<i class="share-weixin"></i>
+							<em>微信</em>
+							<div class="share-weixin-dropdown" style="display: none;">
+								<img class="QrCodeImg" alt="" src="./includefiles/qrcode.php">
+							</div>
+						</span>
+-->						
+						<!-- 微信分享结束 -->
+
+					</div>
+<!-- 分享结束 -->
+				</div>
+
+
+
+				<!--相关文章 相关产品-->
+{pc:content action="relation" relation="$relation" id="$id" catid="$catid" num="5" keywords="$rs[keywords]"}
+{if $data}				
+				<div class="article-related">
+					<div class="related-hd">
+						<span class="ui-tab-tit  show-item">相关文章</span>
+					</div>
+					<div class="related-bd">
+						<ul class="related-item show-item" style="display: block;">
+{loop $data $r}
+							<li>
+								<p>
+									<a href="{$r[url]}" target="_blank" class="related-article-tit fl">{$r[title]}</a>									
+									<span class="fr related-article-time" data-time="{$r[inputtime]}" title="{$r[inputtime]}">({date('Y-m-d',$r[inputtime])})</span>
+								</p>
+								<p></p>
+							</li>
+{/loop}		
+						</ul>
+					</div>
+				</div>
+{/if}
+{/pc}
+			</div>
+
+<!-- 文章评论 -->
+<!-- 
+多说评论框 start
+		<div class="ds-thread" data-category="$catid" data-thread-key="{id_encode("content_$catid",$id,$siteid)}" data-title="{new_addslashes($title)}"></div>
+		多说评论框 end
+		多说公共JS代码 start (一个网页只需插入一次)
+		<script type="text/javascript">
+	var duoshuoQuery = {short_name:"localpc"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+多说公共JS代码 end
+ -->
+
+
+	{if $allow_comment && module_exists('comment')}
+      <iframe src="{APP_PATH}index.php?m=comment&c=index&a=init&commentid={id_encode("content_$catid",$id,$siteid)}&iframe=1" width="100%" height="100%" id="comment_iframe" frameborder="0" scrolling="no"></iframe>
+      <div class="box">
+        		<h5>评论排行</h5>
+				 {pc:comment action="bang" siteid="$siteid" cache="60"}
+            	<ul class="content list blue f14 row-2">
+				{loop $data $r}
+                	<li>·<a href="{$r[url]}" target="_blank">{str_cut($r[title], 40)}</a>
+                		<span>({$r[total]})</span>
+                		<span>{$r[commentid]}</span>
+                	</li>
+				{/loop}
+                </ul>
+				{/pc}
+        </div>
+    {/if}
+<!-- 评论结束 -->
+
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+/*
+	function show_ajax(obj) {
+		var keywords = $(obj).text();
+		var offset = $(obj).offset();
+		var jsonitem = '';
+		$.getJSON("{APP_PATH}index.php?m=content&c=index&a=json_list&type=keyword&modelid={$modelid}&id={$id}&keywords="+encodeURIComponent(keywords),
+				function(data){
+				var j = 1;
+				var string = "<div class='point key-float'><div style='position:relative'><div class='arro'></div>";
+				string += "<a href='JavaScript:;' onclick='$(this).parent().parent().remove();' hidefocus='true' class='close'><span>关闭</span></a><div class='contents f12'>";
+				if(data!=0) {
+				  $.each(data, function(i,item){
+					j = i+1;
+					jsonitem += "<a href='"+item.url+"' target='_blank'>"+j+"、"+item.title+"</a><BR>";
+					
+				  });
+					string += jsonitem;
+				} else {
+					string += '没有找到相关的信息！';
+				}
+					string += "</div><span class='o1'></span><span class='o2'></span><span class='o3'></span><span class='o4'></span></div></div>";		
+					$(obj).after(string);
+					$('.key-float').mouseover(
+						function (){
+							$(this).siblings().css({"z-index":0})
+							$(this).css({"z-index":1001});
+						}
+					)
+					$(obj).next().css({ "left": +offset.left-100, "top": +offset.top+$(obj).height()+12});
+				});
+	}
+*/
+
+	function add_favorite(title)
+	{
+		$.getJSON('{APP_PATH}api.php?op=add_favorite&title='+encodeURIComponent(title)+'&url='+encodeURIComponent(location.href)+'&'+Math.random()+'&callback=?', function(data){
+			if(data.status==1)	{
+				$("#favorite").html('收藏成功');
+			} else {
+				alert('请登录');
+			}
+		});
+	}
+</script>
+
+<script language="JavaScript" src="{APP_PATH}api.php?op=count&id={$id}&modelid={$modelid}"></script>
+
+{template 'content', 'footer'}

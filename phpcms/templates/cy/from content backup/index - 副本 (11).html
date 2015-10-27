@@ -1,0 +1,102 @@
+{template 'content', 'header'}
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/commen.css">
+<link type="text/css" href="{WEB_PATH}statics/cy/css/index.css" rel="stylesheet">
+<script type="text/javascript" src="{WEB_PATH}statics/cy/js/jquery.min2.js"></script>
+
+<div id="main" class="com-width mt90 clearfix">
+
+	<div class="index-wrap fl">
+		<div class="index-wrap-hd clearfix">
+			<div class="fr">
+				<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/slide.css">
+
+				{pc:content  action="position" posid="1"  order="listorder DESC" thumb="1" num="5"}
+				<div class="ck-slide">
+				<ul class="ck-slide-wrapper">
+					{loop $data $r}
+							<li class="slider-item" style="float: left;">
+								<a href="{$r['url']}" target="_blank" >
+									<img src="{thumb($r['thumb'],890,350)}" alt="{$r['title']}" title="">
+									<span class="slider-info">{$r['title']}</span>
+								</a>
+							</li>
+					{/loop}				
+				</ul>
+				<a href="javascript:;" class="ctrl-slide ck-prev">上一张</a> <a href="javascript:;" class="ctrl-slide ck-next">下一张</a>
+	<!-- 
+				<div class="ck-slidebox">
+					<div class="slideWrap">
+						<ul class="dot-wrap">
+							<li class="current"><em>1</em></li>
+							<li><em>2</em></li>
+							<li><em>3</em></li>
+							<li><em>4</em></li>
+							<li><em>5</em></li>
+						</ul>
+					</div>
+				</div>
+	 -->			
+				</div>
+				{/pc}
+
+				<script src="{WEB_PATH}statics/cy/js/jquery-1.8.3.min.js"></script>
+				<script src="{WEB_PATH}statics/cy/js/slide.js"></script>
+				<script>
+					$('.ck-slide').ckSlide({
+						autoPlay: true,
+						dir: 'x'
+					});
+				</script>
+			</div>		
+		</div>
+
+
+		<div class="index-wrap-content  mt20 clearfix">
+			<!--首页中间-->
+			<div id="content" class="index-content fr">
+				<div id="content-list" class="cyzone-data">
+					<div class="articles">
+{pc:content  action="position" posid="2" order="listorder DESC" num="5"}
+{loop $data $r}
+						<div class="content-item clearfix" data-articleid="281798">
+							<div class="item-img fl">
+								<a href="{$r[url]}" target="_blank">
+									<img src="{thumb($r[thumb],230,147)}" alt="" title=""></a>
+							</div>
+							<div class="item-info fr">
+								<h3 class="item-tit">
+									<a href="{$r[url]}" target="_blank">{$r[title]}</a>
+								</h3>
+								<p class="item-intro">{str_cut($r[description],300)}</p>
+								<!--
+					<p class="item-other">
+								<span class="author fl">Hepburn</span>
+								<span class="time fr" data-time="1444878676" title="2015/10/15 上午11:11:16">17分钟前</span>
+							</p>
+							-->
+						</div>
+					</div>
+{/loop}
+{/pc}
+				</div>
+			</div>
+
+			<!-- 
+	<div class="ui-more">
+			<a href="javascript:;">
+				<span class="cyzone-more-txt">加载更多</span>
+			</a>
+		</div>
+		-->
+			</div>
+		</div>
+	</div>
+
+<!--首页右侧-->
+	{template 'content', 'rightside'}
+<!--首页右侧-->
+</div>
+
+<!-- <script src="{WEB_PATH}statics/cy/js/sea.js"></script>
+<script type="text/javascript" src="{WEB_PATH}statics/cy/js/sea_config.js"></script> -->
+{template 'content', 'footer'}

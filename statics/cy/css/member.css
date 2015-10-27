@@ -1,12 +1,16 @@
+#member{
+	padding-bottom: 50px;
+}
+
 #member .member-sidebar {
 	width: 180px;
-	background: #e9eaec
+	background: #fff
 }
 
 #member .member-sidebar .member-sidebar-tit {
 	width: 120px;
 	height: 36px;
-	padding: 12px 0;
+	/*padding: 12px 0;*/
 	margin: 0 auto 10px;
 	line-height: 36px;
 	color: #565656;
@@ -43,7 +47,7 @@
 #member .member-content .member-content-hd {
 	height: 36px;
 	line-height: 36px;
-	background: #e9eaec
+	background: #fff
 }
 
 #member .member-content a {

@@ -1,0 +1,194 @@
+{template 'content', 'header'}
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/commen.css">
+<link type="text/css" href="{WEB_PATH}statics/cy/css/index.css" rel="stylesheet">
+<script type="text/javascript" src="{WEB_PATH}statics/cy/js/jquery.min2.js"></script>
+
+<div id="main" class="com-width mt90 clearfix">
+
+	<div class="index-wrap fl">
+		<div class="index-wrap-hd clearfix">
+
+			<div id="index-slider" class="fr">
+				{pc:content  action="position" posid="1"  order="listorder DESC" thumb="1" num="5"}
+				<div class="slider-content has-dots" style="width: 890px; height: 350px; overflow: hidden;">
+					<a href="javascript:;" class="slider-prev" style="opacity: 1;"></a>
+					<a href="javascript:;" class="slider-next" style="opacity: 1;"></a>
+					<ul style="position: relative; left: -200%; width: 600%; height: 350px;">
+						{loop $data $r}
+						<li class="slider-item" style="float: left;">
+							<a href="{$r['url']}" target="_blank" >
+								<img src="{thumb($r['thumb'],890,350)}" alt="{$r['title']}" class="slider-img" title="">
+								<span class="slider-info">{$r['title']}</span>
+							</a>
+						</li>
+						{/loop}
+					</ul>
+				</div>
+				{/pc}
+			</div>
+
+			<!-- 
+				<div class="slide">
+			<div class="FocusPic">
+				{pc:content  action="position" posid="1"  order="listorder DESC" thumb="1" num="5"}
+				<div class="content" id="main-slide">
+					<div class="changeDiv">
+						{loop $data $r}
+						<a href="{$r['url']}" title="{str_cut($r['title'],30)}">
+							<img src="{thumb($r['thumb'],700,260)}" alt="{$r['title']}" width="700" height="260" />
+						</a>
+						{/loop}
+					</div>
+				</div>
+				{/pc}
+			</div>
+			<div class="bk10"></div>
+		</div>
+		-->
+	</div>
+
+	<!-- 
+		<div class="news-hot" style="height:100px;">
+
+	<div >
+		{pc:content  action="position" posid="1" order="listorder DESC" page="$page" num="2"}
+{loop $data $r}
+		<h4 class="blue">
+			<a href="{$r[url]}" title="{$r[title]}">{str_cut($r[title],36,'')}</a>
+		</h4>
+		<p>
+			<img src="{thumb($r[thumb],90,60)}" width="90" height="60"/>
+			{str_cut($r[description],112)}
+		</p>
+		<div class="bk20 hr">
+			<hr/>
+		</div>
+		{/loop}
+{/pc}
+	</div>
+</div>
+-->
+<div class="index-wrap-content  mt20 clearfix">
+	<!--首页中间-->
+	<div id="content" class="index-content fr">
+		<div id="content-list" class="cyzone-data">
+			<div class="articles">
+{pc:content  action="position" posid="1" order="listorder DESC" page="$page" num="2"}
+{loop $data $r}
+				<div class="content-item clearfix" data-articleid="281798">
+					<div class="item-img fl">
+						<a href="{$r[url]}" target="_blank">
+							<img src="{thumb($r[thumb],230,147)}" alt="" title=""></a>
+					</div>
+					<div class="item-info fr">
+						<h3 class="item-tit">
+							<a href="{$r[url]}">{str_cut($r[title],36,'')}</a>
+						</h3>
+						<p class="item-intro">{str_cut($r[description],250)}</p>
+						<!-- 
+																		<p class="item-other">
+						<span class="author fl">Hepburn</span>
+						<span class="time fr" data-time="1444878676" title="2015/10/15 上午11:11:16">17分钟前</span>
+					</p>
+					-->
+				</div>
+			</div>
+{/loop}
+{/pc}
+		</div>
+	</div>
+
+<!-- 
+	<div class="ui-more">
+		<a href="javascript:;">
+			<span class="cyzone-more-txt">加载更多</span>
+		</a>
+	</div>
+ -->	
+ 
+</div>
+</div>
+</div>
+
+<!--首页右侧-->
+<div id="sidebar" class="sidebar fr">
+
+
+<!-- 排行榜 -->
+<link type="text/css" href="{WEB_PATH}statics/cy/css/style(1).css" rel="stylesheet">
+<script type="text/javascript" src="{WEB_PATH}statics/cy/js/jquery.min2.js"></script>
+<script type="text/javascript" src="{WEB_PATH}statics/cy/js/jquery.idTabs.min.js"></script>
+
+<div class="R-mainbox1 mar-b20">
+<h3 class="zlzj-title">
+<span>排行榜</span>
+</h3>
+<div class="top-list">
+<ul class="top-list-ul">
+	<li>
+		<a href="#top-list-1" class="selected">日</a>
+	</li>
+	<li>
+		<a href="#top-list-2">周</a>
+	</li>
+	<li>
+		<a href="#top-list-3">月</a>
+	</li>
+</ul>
+<div id="top-list-1" style="display: block;">
+	<ul class="wpp-list item">
+		{pc:get sql="SELECT h.`dayviews`,n.`title`,n.`url`,n.`style` FROM `v9_hits` AS h,`v9_news` AS n WHERE substring_index(h.`hitsid`, '-', -1)=n.`id` AND n.`status`=99 ORDER BY h.`dayviews` DESC" num="10" cache="3600" day="1"}
+			{loop $data $v}
+				<li class="title-li">
+					{if $n==1 or $n==2 or $n==3}<i class="s-number">{else}<i class="q-number">{/if}{php echo $n}</i>
+					<a href="{$v[url]}" title="{$v[title]}" class="wpp-post-title" target="_blank" >{str_cut($v['title'],60,'...')}</a><br />
+					<!-- <span>点击：{number_format($v['dayviews'])}</span> -->
+				</li>
+			{/loop}
+		{/pc}
+
+	</ul>
+</div>
+<div id="top-list-2" style="display: none;">
+	<ul class="wpp-list item">	
+		{pc:get sql="SELECT h.`weekviews`,n.`title`,n.`url`,n.`style` FROM `v9_hits` AS h,`v9_news` AS n WHERE substring_index(h.`hitsid`, '-', -1)=n.`id` AND n.`status`=99 ORDER BY h.`weekviews` DESC" num="10" cache="3600" day="7"}
+			{loop $data $v}
+			<li class="title-li">
+				{if $n==1 or $n==2 or $n==3}<i class="s-number">{else}<i class="q-number">{/if}{php echo $n}</i>
+				<a href="{$v[url]}" title="{$v[title]}" class="wpp-post-title" target="_blank" >{str_cut($v['title'],60,'...')}</a><br />
+				<!-- <span>点击：{number_format($v['weekviews'])}</span> -->
+			</li>
+			{/loop}
+		{/pc} 
+	</ul>
+</div>
+<div id="top-list-3" style="display: none;">
+	<ul class="wpp-list item">
+		{pc:get sql="SELECT h.`monthviews`,n.`title`,n.`url`,n.`style` FROM `v9_hits` AS h,`v9_news` AS n WHERE substring_index(h.`hitsid`, '-', -1)=n.`id` AND n.`status`=99 ORDER BY h.`monthviews` DESC" num="10" cache="3600" day="30"}
+			{loop $data $v}
+				<li class="title-li">
+					{if $n==1 or $n==2 or $n==3}<i class="s-number">{else}<i class="q-number">{/if}{php echo $n}</i>
+					<a href="{$v[url]}" title="{$v[title]}" class="wpp-post-title" target="_blank" >{str_cut($v['title'],60,'...')}</a><br />
+					<!-- <span>点击：{number_format($v['monthviews'])}</span> -->
+				</li>
+			{/loop}
+		{/pc}		
+	</ul>
+</div>
+</div>
+</div>
+<script>
+      jQuery(document).ready(function($) {
+        $(".top-list ul").idTabs();
+      });
+</script>
+<!-- 排行榜结束 -->
+
+</div>
+</div>
+
+<script src="{WEB_PATH}statics/cy/js/sea.js"></script>
+<!-- <script src="{WEB_PATH}statics/cy/cyimages/seajs-css.js"></script>
+-->
+<script type="text/javascript" src="{WEB_PATH}statics/cy/js/sea_config.js"></script>
+{template 'content', 'footer'}

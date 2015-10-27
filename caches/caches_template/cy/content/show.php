@@ -41,7 +41,7 @@
 					</div>
 
 
-<!-- 文章评论 -->
+<!-- 文章分享 -->
 					<div class="article-share fr" id="article-end-share">						
 
 						<span id='favorite' class="article-pos-collect article-end-collect" data-modelid="9">
@@ -96,7 +96,7 @@
 						<!-- 微信分享结束 -->
 
 					</div>
-<!-- 评论结束 -->
+<!-- 分享结束 -->
 				</div>
 
 
@@ -113,7 +113,7 @@
 <?php $n=1;if(is_array($data)) foreach($data AS $r) { ?>
 							<li>
 								<p>
-									<a href="<?php echo $r['url'];?>" target="_blank" class="related-article-tit fl"><?php echo $r['title'];?></a>									
+									<a href="<?php echo $r['url'];?>" target="_blank" class="related-article-tit fl"><?php echo $r['title'];?></a>
 									<span class="fr related-article-time" data-time="<?php echo $r['inputtime'];?>" title="<?php echo $r['inputtime'];?>">(<?php echo date('Y-m-d',$r[inputtime]);?>)</span>
 								</p>
 								<p></p>
@@ -125,7 +125,27 @@
 <?php } ?>
 <?php if(defined('IN_ADMIN') && !defined('HTML')) {echo '</div>';}?>
 			</div>
-		</div>		
+
+<!-- 文章评论 -->
+	<?php if($allow_comment && module_exists('comment')) { ?>
+      <iframe src="<?php echo APP_PATH;?>index.php?m=comment&c=index&a=init&commentid=<?php echo id_encode("content_$catid",$id,$siteid);?>&iframe=1" width="100%" height="100%" id="comment_iframe" frameborder="0" scrolling="no"></iframe>
+      <div class="box">
+        		<h5>评论排行</h5>
+				 <?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"comment\" data=\"op=comment&tag_md5=3b0aeba1105ec7aa9840a5d146f34036&action=bang&siteid=%24siteid&cache=60\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$tag_cache_name = md5(implode('&',array('siteid'=>$siteid,)).'3b0aeba1105ec7aa9840a5d146f34036');if(!$data = tpl_cache($tag_cache_name,60)){$comment_tag = pc_base::load_app_class("comment_tag", "comment");if (method_exists($comment_tag, 'bang')) {$data = $comment_tag->bang(array('siteid'=>$siteid,'limit'=>'20',));}if(!empty($data)){setcache($tag_cache_name, $data, 'tpl_data');}}?>
+            	<ul class="content list blue f14 row-2">
+				<?php $n=1;if(is_array($data)) foreach($data AS $r) { ?>
+                	<li>·<a href="<?php echo $r['url'];?>" target="_blank"><?php echo str_cut($r[title], 40);?></a>
+                		<span>(<?php echo $r['total'];?>)</span>
+                		<span><?php echo $r['commentid'];?></span>
+                	</li>
+				<?php $n++;}unset($n); ?>
+                </ul>
+				<?php if(defined('IN_ADMIN') && !defined('HTML')) {echo '</div>';}?>
+        </div>
+    <?php } ?>
+<!-- 评论结束 -->
+
+		</div>
 	</div>
 
 
@@ -174,5 +194,7 @@
 		});
 	}
 </script>
+
+<script language="JavaScript" src="<?php echo APP_PATH;?>api.php?op=count&id=<?php echo $id;?>&modelid=<?php echo $modelid;?>"></script>
 
 <?php include template('content', 'footer'); ?>

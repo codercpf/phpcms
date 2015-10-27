@@ -435,7 +435,7 @@ return array (
     'formtype' => 'datetime',
     'setting' => 'array (
   \'fieldtype\' => \'int\',
-  \'format\' => \'Y-m-d H:i:s\',
+  \'format\' => \'Y-m-d H:i\',
   \'defaulttype\' => \'0\',
 )',
     'formattribute' => '',
@@ -453,7 +453,7 @@ return array (
     'disabled' => '0',
     'isomnipotent' => '0',
     'fieldtype' => 'int',
-    'format' => 'Y-m-d H:i:s',
+    'format' => 'Y-m-d H:i',
     'defaulttype' => '0',
   ),
   'posids' => 
