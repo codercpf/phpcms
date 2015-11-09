@@ -18,7 +18,7 @@ for ($j=0;$j<5;$j++) {
 
 <form name="myform" id="myform" action="" method="post" >
 <div class="table-list">
-    <table width="100%">
+    <table width="100%">        
         <thead>
             <tr>
             <th width="60">ID</th>

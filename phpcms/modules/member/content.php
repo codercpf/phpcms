@@ -85,12 +85,7 @@ class content extends foreground {
 					$info[$_k] = new_html_special_chars(trim_script($_v));
 				}
 			}
-/*
-			echo "<pre>";
-			print_r($_POST);
-			echo "<pre>";
-			exit();
-*/
+
 			$_POST['linkurl'] = str_replace(array('"','(',')',",",' ','%'),'',new_html_special_chars(strip_tags($_POST['linkurl'])));
 			$post_fields = array_keys($_POST['info']);
 			$post_fields = array_intersect_assoc($fields,$post_fields);
@@ -107,8 +102,17 @@ class content extends foreground {
 			$info['username'] = $memberinfo['username'];
 			if(isset($info['title'])) $info['title'] = safe_replace($info['title']);
 			$this->content_db->siteid = $siteid;
+/*
+			echo "<pre>";
+			print_r($info);
+			echo "<pre>";
+			exit();
+*/
 
 			$id = $this->content_db->add_content($info);
+
+//			echo $id;exit();
+
 			//检查投稿奖励或扣除积分
 			if ($info['status']==99) {
 				$flag = $catid.'_'.$id;
@@ -535,7 +539,6 @@ class content extends foreground {
 				}
 			}
 			header("Cache-control: private");
-			
 		}
 	}
 	

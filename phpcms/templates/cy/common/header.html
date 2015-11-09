@@ -1,0 +1,29 @@
+<!-- 网站头部 -->
+<div class="header">
+    <!-- 导航栏 -->
+    <div class="navbar">
+        <div>
+            <div class="container">
+                <div class="logo"><a href="#"><img src="" alt="创咖zu"></a></div>
+                <div class="fixed">
+                    <ul class="separate">{pc:content action="category" catid="0" num="25" siteid="$siteid" order="listorder ASC"}
+                        <li class="active"><a href="/">主页</a></li>{loop $data $k $v}
+                        <li{if $v[arrchildid]} class="menu"{/if}>
+                            <a href="{if $v[arrchildid]}#{else}{$v[url]}{/if}">{$v[catname]}</a>{if $v[arrchildid]}
+                            <ul>{pc:content action="category" catid="$k" num="10" siteid="$siteid" order="listorder ASC"}{loop $data $r}
+                                <li><a href="{$r[url]}">{$r[catname]}</a></li>{/loop}{/pc}
+                            </ul>{/if}
+                        </li>{/loop}{/pc}
+                    </ul>
+                    {template "member","mini"}
+                </div>
+            </div>
+        </div>
+        <!--
+        <div id="notice" class="notice">
+            <div class="container">公告提示：某某某某网全线升级，由此给您带来的不便请谅解。如在浏览和操作过程中有任何问题或建议欢迎指出，客服电话：0000-00000000</div>
+            <div class="close"></div>
+        </div>
+        -->
+    </div>
+</div>

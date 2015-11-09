@@ -1,6 +1,5 @@
 <?php defined('IN_PHPCMS') or exit('No permission resources.'); ?><?php include template("content","header"); ?>
     <link rel="stylesheet" href="<?php echo WEB_PATH;?>statics/cy/css/report.css"></head>
-
     <div class="maincontent">
         <div class="clearfix help-main">
             <h2>寻求报道</h2>
@@ -18,14 +17,14 @@
                         </div>
                     </div>
 
-                    <form class="form-horizontal form-model" name="reportForm">
+                    <form action="<?php echo APP_PATH;?>index.php?m=content&c=index&a=report" method="post" class="form-horizontal form-model" name="reportForm">
                         <div class="form-group">
                             <label class="label-control">
                                 <span class="required">*</span>
                                 公司名称
                             </label>
                             <div class="form-controls">
-                                <input type="text" class="form-control" name="companyName" required></div>
+                                <input type="text" class="form-control" name="info[companyName]" required></div>
                         </div>
                         <div class="form-group">
                             <label class="label-control">
@@ -33,7 +32,7 @@
                                 公司地址
                             </label>
                             <div class="form-controls">
-                                <input type="text" class="form-control" name="companyAddr" required></div>
+                                <input type="text" class="form-control" name="info[companyAddr]" required></div>
                         </div>
                         <div class="form-group">
                             <label class="label-control">
@@ -41,7 +40,7 @@
                                 所属行业
                             </label>
                             <div class="form-controls">
-                                <input type="text" class="form-control" name="companyRealm" required></div>
+                                <input type="text" class="form-control" name="info[companyRealm]" required></div>
                         </div>
                         <div class="form-group">
                             <label class="label-control">
@@ -49,7 +48,7 @@
                                 你产品的主要功能或服务是？
                             </label>
                             <div class="form-controls">
-                                <textarea class="form-control" id="" cols="30" rows="5" placeholder="200字以内" name="introduction" maxlength="200" required></textarea>
+                                <textarea class="form-control" id="" cols="30" rows="5" placeholder="200字以内" name="info[introduction]" maxlength="200" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -58,7 +57,7 @@
                                 对行业的看法
                             </label>
                             <div class="form-controls">
-                                <textarea class="form-control" id="" cols="30" rows="5" placeholder="1000字以内" name="industryViewpoint" maxlength="1000" required></textarea>
+                                <textarea class="form-control" id="" cols="30" rows="5" placeholder="1000字以内" name="info[industryViewpoint]" maxlength="1000" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,7 +66,7 @@
                                 创业有趣经历分享
                             </label>
                             <div class="form-controls">
-                                <textarea class="form-control" id="" cols="30" rows="5" placeholder="1000字以内" name="interestingExp" maxlength="1000" required></textarea>
+                                <textarea class="form-control" id="" cols="30" rows="5" placeholder="1000字以内" name="info[interestingExp]" maxlength="1000" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -76,7 +75,7 @@
                                 联系方式（电话、邮箱等）
                             </label>
                             <div class="form-controls">
-                                <textarea class="form-control" cols="30" rows="5" placeholder="100字以内" name="contactInfo" maxlength="100" required></textarea>
+                                <textarea class="form-control" cols="30" rows="5" placeholder="100字以内" name="info[contactInfo]" maxlength="100" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -84,7 +83,7 @@
                                 <span class="required">&nbsp;</span>
                             </label>
                             <div class="form-controls">
-                                <button type="submit" class="btn-normal">提交</button>
+                                <button type="submit" name="dosubmit" class="btn-normal" value="提交">提交</button>
                             </div>
                         </div>
                     </form>

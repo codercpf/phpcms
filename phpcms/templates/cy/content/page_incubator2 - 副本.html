@@ -1,0 +1,294 @@
+
+    <link rel="stylesheet" href="report.css">    
+
+    <meta charset="utf-8"/>    
+    <style type="text/css">
+        span.prompt {display: none;}
+    </style>
+
+    <div class="maincontent">
+        <div class="clearfix help-apply">
+            <h2>入驻申请</h2>
+            <article>
+                <section class="section-submit-report">
+                    <div class="form-group">
+                        <div class="form-controls">
+                            <div class="report-con-tips reportTipsShow">
+                                <ol>
+                                    <li>
+                                        流程：项目及团队介绍材料提交 –> 机构评审、孵化服务中心审核 –> 团队当面交流 –> 通过并签订入驻协议 –> 正式入驻
+                                    </li>
+                                    <li>在以往创业大赛获奖的初创型大学生创业者、团队以及中小企业优先入驻孵化器</li>
+                                    <li>
+                                        入驻创业实体(团队)出现从事违法生产经营活动、严重或屡次违反孵化基地有关管理规定、入驻后三个月未能正常从事生产经营活动、入驻创业实体(团队)转让致使创业主体不符合入驻条件等情形之一的，园区责令其限期(最长不超过30日)退出孵化基地
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form action="{APP_PATH}index.php?m=content&c=index&a=receiveapply" method="post" class="form-horizontal form-model" name="applyForm">
+
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                公司名称
+                            </label>
+                            <div class="form-controls">
+                                <input type="text" class="form-control" name="apply[companyName]" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                联系人
+                            </label>
+                            <div class="form-controls">
+                                <input type="text" class="form-control" name="apply[contactPerson]" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                联系人职务
+                            </label>
+                            <div class="form-controls">
+                                <input type="text" class="form-control" name="apply[contactPost]" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                联系电话
+                            </label>
+                            <div class="form-controls">
+                                <input type="text" class="form-control" name="apply[contactTel]" onblur="checkPhone(this.value)" required>
+                                <font color="#999999">                                    
+                                    <span class="prompt" id="mistakePhone">
+                                        <em></em>
+                                        &nbsp;
+                                        <font color='#FF0000'>请输入正确的电话号码</font>
+                                    </span>
+                                </font>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                E-Mail
+                            </label>
+                            <div class="form-controls">
+                                <input type="text" class="form-control" name="apply[contactEmail]" onblur="checkMail(this.value)" required>
+                                <font color="#999999">
+                                    <span class="prompt" id="mistakeMail"> <em></em>
+                                        &nbsp; <font color='#FF0000'>请输入正确的Email</font>
+                                    </span>
+                                </font>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                通讯地址
+                            </label>
+                            <div class="form-controls">
+                                <input type="text" class="form-control" name="apply[contactAddr]" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                企业官网
+                            </label>
+                            <div class="form-controls">
+                                <input type="url" class="form-control" name="apply[companyWeb]" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                项目类型
+                            </label>
+                            <div class="form-controls" style="display: block">
+                                <input type="radio" name="apply[itemType]"  class="radio" value="电子商务" required>    
+                                电子商务&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="radio" value="SNS社交网络">    
+                                SNS社交网络&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="radio" value="广告营销">    
+                                广告营销&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="radio" value="游戏动漫">    
+                                游戏动漫
+                                <br/>    
+                                <input type="radio" name="apply[itemType]"  class="radio" value="电子硬件">    
+                                电子硬件&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="radio" value="消费生活">    
+                                消费生活&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="radio" value="医疗健康 ">    
+                                医疗健康 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="radio" value="金融服务">    
+                                金融服务
+                                <br/>    
+                                <input type="radio" name="apply[itemType]"  class="radio" value="教育培训">    
+                                教育培训&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="radio" value="旅游户外">    
+                                旅游户外&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="radio" value="多媒体娱乐">    
+                                多媒体娱乐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="radio" value="汽车交通">    
+                                汽车交通
+                                <br/>    
+                                <input type="radio" name="apply[itemType]"  class="radio" value="企业服务">    
+                                企业服务&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemType]"  class="checkbox ot" value="其他">其他                                    
+                                <div>
+                                    <font color="#999999">
+                                    <span class="prompt" id="typeRadio"><em></em>
+                                        &nbsp; <font color='#FF0000'>请选择项目类型</font>
+                                    </span>
+                                    </font>
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                团队人数
+                            </label>
+                            <div class="form-controls">
+                                <input type="number" min="0" class="form-control" name="apply[teamNum]" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                项目现状
+                            </label>
+                            <div class="form-controls">
+                                <input type="radio" name="apply[itemStatus]" class="radio" value="创意阶段">    
+                                创意阶段&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemStatus]" class="radio" value="创业计划">    
+                                创业计划&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemStatus]" class="radio" value="已经启动">    
+                                已经启动&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="apply[itemStatus]" class="radio" value="已经运营">
+                                已经运营&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <font color="#999999">
+                                    <span class="prompt" id="statusRadio"><em></em>
+                                        &nbsp; <font color='#FF0000'>请选择项目现状</font>
+                                    </span>
+                                </font>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="label-control">
+                                <span class="required">*</span>
+                                上传附件
+                            </label>
+                            <div class="form-controls">
+                                <?php echo form::upfiles('apply[attachment]', 'attachment', '', 'content','','','form-control','','pdf|doc|docx|xls|xlsx|ppt|pptx')?>    
+                                <br/>    
+                            </div>
+                        </div>
+
+<!--                        
+                    <div class="form-group">    
+                        <label class="label-control">
+                            <span class="required">*</span>
+                            验证码
+                        </label>
+                        <div class="form-controls">
+                            <?php //echo form::checkcode(); ?>    
+                            <br/>    
+                        </div>
+                    </div>
+-->
+                    <div class="form-group">
+                        <label class="label-control">
+                            <span class="required">&nbsp;</span>
+                        </label>
+                        <div class="form-controls">
+                            <button type="button" name="dosubmit" class="btn-normal" value="提交">提交</button>
+                        </div>
+                        <div class="form-controls">
+                            <button type="button" onclick="typeRadio()" class="btn-normal" value="">类型</button>
+                            <button type="button" onclick="statusRadio()" class="btn-normal" value="提交2">现状</button>
+                        </div>
+                    </div>                    
+
+                </form>
+            </section>
+        </article>
+    </div>
+    </div>
+
+<script>
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var reg0 = /^0?(13[0-9]|15[012356789]|18[02356789]|14[57])[0-9]{8}$/;
+    var reg2 = /^\d{3,4}-\d{6,8}(-\d{1,5})?$/;
+    var reg3 = /^[0-9]*$/;
+    //var reg4 = /^[0-9]*[%]$/;
+    var reg4=/^(100|[1-9]?\d(\.\d\d?)?)%$/;
+
+    var re = true;
+/*
+     $(function(){
+        //提交表单
+        $('input[name="dosubmit"]').click(function(){
+            alert(11);
+            if(re==false)
+        });
+
+    });
+
+*/
+    function checkMail(inputString){
+        var misMail = document.getElementById("mistakeMail");
+        if(filter.test(inputString)==false)
+        {            
+            misMail.setAttribute("class","");
+        }else{
+            misMail.setAttribute("class","prompt");
+        }
+    }
+    function checkPhone(inputString){
+        var misPhone = document.getElementById("mistakePhone");
+        if (reg0.test(inputString)==false && reg2.test(inputString)==false) {
+            misPhone.setAttribute("class","");            
+        }else{
+            misPhone.setAttribute("class","prompt");            
+        }
+    }
+    function typeRadio(){
+        // alert("here");
+        var typeResult = false;
+        var itemType=document.getElementsByName('apply[itemType]');
+        var itemTypeRadio=document.getElementById('typeRadio');
+        // alert(itemType.length);
+        for(var i=0;i<itemType.length;i++){
+            if(itemType[i].checked){
+                typeResult=true;
+            }
+        }
+        if (!typeResult) {
+            itemTypeRadio.setAttribute("class","");            
+        }else{
+            itemTypeRadio.setAttribute("class","prompt");
+        };
+    }
+    function statusRadio(){
+        // alert("here");
+        var statusResult = false;
+        var itemStatus = document.getElementsByName('apply[itemStatus]');
+        var itemStatusRadio = document.getElementById('statusRadio');
+        // alert(itemType.length);
+        for(var i=0;i<itemStatus.length;i++){
+            if(itemStatus[i].checked){
+                statusResult=true;
+            }
+        }
+        if (!statusResult) {
+            itemStatusRadio.setAttribute("class","");
+            re = false;
+        }else{
+            itemStatusRadio.setAttribute("class","prompt");
+            re = true;
+        };
+    }
+
+</script>

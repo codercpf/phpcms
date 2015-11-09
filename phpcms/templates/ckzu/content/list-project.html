@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+{template "common","meta"}
+<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+{template "common","style"}
+{template "common","javascript"}
+<style type="text/css">
+/* 分类导航 */
+.sort > ul > li{overflow:hidden; line-height:2em; padding: 0.5em; border-top: 0.1em dashed rgb(220,220,220);}
+.sort > ul > li:first-child{border-top: 0;}
+.sort > ul > li > h6,.sort > ul > li > ul >li{float: left;}
+.sort > ul > li > ul{overflow:hidden;}
+.sort li li{margin-left: 1em;}
+.sort li.selected > a{color: rgb(255,0,0); font-weight: bold;}
+/* 项目列表 */
+.project > div.table > div.tbody div.td{vertical-align:middle;}
+.project > div.table > div.tbody div.image{width:5em; height: 5em; position: absolute; top:0.5em; left:0.5em;}
+.project > div.table > div.tbody div.image > a,.project > div.table > div.tbody div.image img{display: block; width: 100%; height: 100%;}
+.project > div.table > div.tbody div.info{height: 5em; margin-left:5.5em; overflow: hidden;}
+.project > div.table > div.tbody div.title{line-height: 2em; font-weight: bold;}
+.project > div.table > div.tbody div.company,.project > div.table > div.tbody div.brief{line-height:1.5em;}
+.project > div.table > div.tbody div.brief{text-indent:0; color:rgb(128,128,128); overflow:hidden; text-overflow:ellipsis;}
+</style>
+</head>
+<body>
+<div class="site">
+{template "common","header"}
+<?php $typeid = intval($_GET['typeid']);?>
+<?php $state = $_GET['state'];?>
+<div class="content">
+    <div class="container hidden margin-bottom" >
+        <div class="nav margin-top">
+            <div class="sort bg border">
+                <ul>
+                    <li>
+                        <h6>行业</h6>
+                        <?php $TYPE = getcache('type_content_'.$siteid,'commons'); ?>
+                        <?php $arrtype = explode(',',$usable_type); ?>
+                        <ul>
+                            <li{if empty($typeid)||$typeid==0} class="selected"{/if}><a href="index.php?m=content&c=index&a=lists&catid={$catid}&state={$state}">全部</a></li>
+                            {loop $arrtype $t}
+                            {if !empty($t)}
+                            <li{if $typeid==$t} class="selected"{/if}><a href="index.php?m=content&c=index&a=lists&catid={$catid}&typeid={$t}&state={$state}">{$TYPE[$t][name]}</a></li>
+                            {/if}
+                            {/loop}
+                        </ul>
+                    </li>
+                    <li>
+                        <h6>状态</h6>
+                        <ul>{loop filters('state',12) $r}
+                            <li{if $state==$r['value']} class="selected"{/if}><a href="index.php?m=content&c=index&a=lists&catid={$catid}&typeid={$typeid}&state={$r[value]}">{$r[name]}</a></li>{/loop}
+                        </ul>
+                    </li>
+                    <li>
+                        <h6>排序</h6>
+                        <ul>
+                            <li class="selected"><a href="#">综合推荐</a></li>
+                            <li><a href="#">最新上线</a></li>
+                            <li><a href="#">热投项目</a></li>
+                            <li><a href="#">冷门项目</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main margin-top project">
+            <div class="table border">
+                <div class="colgroup">
+                    <div class="col"></div>
+                    <div class="col" style="width: 7em;"></div>
+                    <div class="col" style="width: 6em;"></div>
+                    <div class="col" style="width: 8em;"></div>
+                    <div class="col" style="width: 7em;"></div>
+                </div>
+                <div class="thead">
+                    <div class="tr">
+                        <div class="th">项目</div>
+                        <div class="th">类型</div>
+                        <div class="th">状态</div>
+                        <div class="th">融资金额</div>
+                        <div class="th">时间</div>
+                    </div>
+                </div>
+                <div class="tbody">
+                    <?php
+                    if(empty($typeid)){
+                        $where = '';
+                    }else{
+                        $where = 'typeid='.$typeid;
+                    }
+                    if(!empty($state)){
+                        if(empty($where)){
+                            $where .= 'state="'.$state.'"';
+                        }else{
+                            $where .= ' and state="'.$state.'"';
+                        }
+                    }
+                    ?>
+                    {pc:content  action="lists" catid="$catid" where="$where" order="listorder DESC" num="15" page="$page"}
+                    {loop $data $r}
+                    <div class="tr">
+                        <div class="td">
+                            <div class="image"><a href="{$r['url']}" target="_blank"><img src="{$r['thumb']}"></a></div>
+                            <div class="info">
+                                <div class="title"><a href="{$r['url']}" target="_blank">{$r['title']}</a></div>
+                                <div class="company"><a href="#" target="_blank">{$r['username']}</a></div>
+                                <div class="brief">{$r['description']}</div>
+                            </div>
+                        </div>
+                        <div class="td text-center"><a href="index.php?m=content&c=index&a=lists&catid={$catid}&typeid={$r['typeid']}" target="_blank">{$TYPE[$r['typeid']]['name']}</a></div>
+                        <div class="td text-center"><a href="#" target="_blank">{$r['state']}</a></div>
+                        <div class="td">￥{number_format($r[financing])}</div>
+                        <div class="td">{date('Y-m-d',$r[expiration])}</div>
+                    </div>
+                    {/loop}
+                    {/pc}
+                </div>
+            </div>
+            {$pages}
+        </div>
+        {template "content","sidebar"}
+    </div>
+</div>
+{template "common","footer"}
+</div>
+</body>
+</html>

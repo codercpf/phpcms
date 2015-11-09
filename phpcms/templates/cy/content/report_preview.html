@@ -1,0 +1,62 @@
+{template "content","header"}
+
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/reportview.css"></head>
+
+<div class="body-page ">
+	<div class="container activity-index">
+		<div class="inner">
+			<ul>
+				<li>
+					<h3 class="line-tit">公司名称</h3>
+					<div class="answer-con">
+						<p>{$companyName}</p>
+					</div>
+				</li>
+
+				<li>
+					<h3 class="line-tit">公司地址</h3>
+					<div class="answer-con">
+						<p>{$companyAddr}</p>
+					</div>
+				</li>
+
+				<li>
+					<h3 class="line-tit">所属行业</h3>
+					<div class="answer-con">
+						<p>{$companyRealm}</p>
+					</div>
+				</li>
+
+				<li>
+					<h3 class="line-tit">产品功能及服务简介</h3>
+					<div class="answer-con">
+						<p>{$introduction}</p>
+					</div>
+				</li>
+
+				<li>
+					<h3 class="line-tit">对行业的看法</h3>
+					<div class="answer-con">
+						<p>{$industryViewpoint}</p>
+					</div>
+				</li>
+
+				<li>
+					<h3 class="line-tit">创业有趣经历</h3>
+					<div class="answer-con">
+						<p>{$interestingexp}</p>
+					</div>
+				</li>
+
+				<li>
+					<h3 class="line-tit">联系方式</h3>
+					<div class="answer-con">
+						<p>{$contactinfo}</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+{template 'content', 'footer'}

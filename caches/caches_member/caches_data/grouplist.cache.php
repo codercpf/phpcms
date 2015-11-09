@@ -40,7 +40,7 @@ return array (
     'allowupgrade' => '0',
     'allowsendmessage' => '0',
     'allowpostnum' => '0',
-    'allowattachment' => '0',
+    'allowattachment' => '1',
     'price_y' => '50.00',
     'price_m' => '10.00',
     'price_d' => '1.00',

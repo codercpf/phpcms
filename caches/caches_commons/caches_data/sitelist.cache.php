@@ -13,9 +13,9 @@ return array (
     'default_style' => 'cy',
     'template' => 'cy',
     'setting' => 'array (
-  \'upload_maxsize\' => \'2048\',
+  \'upload_maxsize\' => \'4096\',
   \'upload_allowext\' => \'jpg|jpeg|gif|bmp|png|doc|docx|xls|xlsx|ppt|pptx|pdf|txt|rar|zip|swf\',
-  \'watermark_enable\' => \'1\',
+  \'watermark_enable\' => \'0\',
   \'watermark_minwidth\' => \'300\',
   \'watermark_minheight\' => \'300\',
   \'watermark_img\' => \'statics/images/water//mark.png\',

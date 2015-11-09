@@ -1,12 +1,11 @@
 {template 'content', 'header'}
-
 <script type="text/javascript">
 <!--
 	var charset = '{CHARSET}';
 	var uploadurl = '{php echo pc_base::load_config('system','upload_url')}';
 //-->
 </script>
-<!-- <link href="{CSS_PATH}dialog.css" rel="stylesheet" type="text/css" /> -->
+<link href="{CSS_PATH}dialog.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript" src="{JS_PATH}dialog.js"></script>
 <script language="javascript" type="text/javascript" src="{JS_PATH}content_addtop.js"></script>
 
@@ -61,9 +60,11 @@
 					</tr>
 				</table>
 			</form>		
-		</div>	
-
-<div class="clear"></div>
+		</div>
+		<div class="clear"></div>	
+	</div>
+	</div>
+</div>
 <script type="text/javascript"> 
 <!--
 //只能放到最下面
@@ -78,10 +79,6 @@ $(function(){
 })
 //-->
 </script>
-
-	</div>
-	</div>
-</div>
 
 
 {template 'content', 'footer'}

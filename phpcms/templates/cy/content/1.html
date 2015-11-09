@@ -1,0 +1,1050 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>阿里云-项目申请表</title>
+
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        color: #494949;
+        font-size: 12px;
+        /*font-family: Arial, Helvetica, sans-serif;*/
+        background: #fbfaf8;
+    }
+    div, li, img, ul, dl, dd, dt, h3 {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+    ul, dl, h3, li {
+        list-style-type: none;
+        vertical-align: top;
+    }
+    img {
+        vertical-align: top;
+    }
+    a:link, a:visited {
+        color: #6d6d6d;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #fc6993;
+        text-decoration: underline;
+    }
+    a.white:link, a.white:visited, a.white:hover {
+        color: #FFF;
+        text-decoration: none;
+    }
+    a.gray:link, a.gray:visited {
+        color: #939393;
+    }
+    a.gray:hover {
+        color: #fc6993;
+    }
+    a.pink:link, a.pink:visited {
+        color: #e57716;
+    }
+    a.pink:hover {
+        color: #fc7198;
+    }
+    .f14px {
+        padding-right: 15px;
+        width: 198px;
+        line-height: 60px;
+        color: #666;
+        font-size: 14px;
+        text-align:right;
+    }
+    .main {
+        margin: auto;
+        height: auto;
+        overflow: hidden;
+    }
+    .fwr {
+        font-family: "微软雅黑"
+    }
+    .gray {
+        line-height:17px;
+    }
+    /*主体表单*/
+    .whitefb {
+        margin-top: 25px;
+        padding: 24px 38px;
+        width: 1140px;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+    }
+    .m-l {
+        width: 100%;
+    }
+    .title {
+        margin-bottom: 30px;
+        height: 40px;
+        line-height: 26px;
+        border-bottom: solid 1px #eaeaea;
+        font-family: "Microsoft Yahei";
+        color: #333;
+        font-size: 24px;
+    }
+    .main table {
+        padding-left: 115px;
+    }
+    .ipt {
+        margin-right:5px;
+        padding-left: 5px;
+        width: 345px;
+        height: 35px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: url(http://gtms02.alicdn.com/tps/i2/TB1ScnEGpXXXXcfaXXXNpN_JFXX-1-2.gif) repeat-x top;
+        line-height: 35px\9;
+    }
+    .ipt2 {
+        margin-right:5px;
+        padding-left: 5px;
+        width: 345px;
+        height: 35px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: url(http://gtms02.alicdn.com/tps/i2/TB1ScnEGpXXXXcfaXXXNpN_JFXX-1-2.gif) repeat-x top;
+        line-height: 35px\9;
+    }
+    .other{ width:140px; height:25px; line-height:28px; background: url(http://gtms02.alicdn.com/tps/i2/TB1ScnEGpXXXXcfaXXXNpN_JFXX-1-2.gif) repeat-x top; }
+    .red {
+        color: #ff0000;
+        margin-right: 5px;
+    }
+    .gray span.prompt {
+        display: none;
+    }
+
+    .checkbox{ margin:0; margin-right:3px; vertical-align:middle; }
+
+    .upload_btn{ width:100px; height:24px; line-height:21px; border:solid 1px #00a2c9; border-radius:5px; text-align:center; font-family:"Microsoft Yahei"; font-size:12px; color:#00a2c9; background:#fff; }
+
+
+    .textarea{ padding:10px; width:330px; height:75px; line-height:18px; color:#ccc; }
+
+
+    /*弹窗*/
+    .mask {
+        position: fixed;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        background: #000;
+        width: 100%;
+        height: 100%;
+    }
+    .close {
+        position: absolute;
+        right: 13px;
+        top: 13px;
+        z-index: 8;
+        width: 15px;
+        height: 15px;
+        color: #000;
+        font-family: "Microsoft Yahei";
+        background: url(http://gtms04.alicdn.com/tps/i4/TB1y8pcGpXXXXcYaXXXwv5wFXXX-15-15.jpg) no-repeat;
+        cursor: pointer;
+    }
+    .popup_info {
+        position: fixed;
+        display: block;
+        z-index: 100;
+        left: 50%;
+        top: 50%;
+        padding: 20px;
+        width: 434px;
+        height: 217px;
+        min-height: 225px;
+        border: solid 3px #5baabb;
+        font-family: "Microsoft Yahei";
+        color: #000;
+        margin-top: -154px;
+        margin-left: -246px;
+        background: #fff;
+    }
+    .popup_info .pop_tit {
+        margin-left: 40px;
+        margin-top: 36px;
+        padding-bottom: 6px;
+        padding-left: 55px;
+        line-height: 33px;
+        font-family: "Microsoft Yahei";
+        font-size: 16px;
+        color: #000;
+        background: url(http://gtms01.alicdn.com/tps/i1/TB1IQteGpXXXXaBXVXXOtUrGXXX-34-34.jpg) no-repeat;
+    }
+    .popup_info .pop_info {
+        padding-left: 96px;
+        padding-bottom: 50px;
+        width: 308px;
+        font-size: 12px;
+        line-height: 18px;
+        color: #666;
+        font-family: "Microsoft Yahei";
+        border-bottom: solid 1px #f1f1f1;
+        margin-bottom: 18px;
+    }
+    .popup_info .pop_info a {
+        font-size: 12px;
+        color: #0099cc;
+    }
+    .popup_info .pop_btn {
+        position:absolute;
+        bottom:22px;
+        left:170px;
+        display: block;
+        margin: 0 auto;
+        width: 100px;
+        height: 25px;
+        line-height: 23px;
+        border: 0;
+        border-radius: 5px;
+        font-size: 12px;
+        font-family: "Microsoft Yahei";
+        color: #fff;
+        background: #00a2ca;
+        cursor:pointer;
+    }
+
+    /*上传文件*/
+    .file{ margin:0; padding-top:22px; }
+    .f13px {
+        padding-right: 15px;
+        width: 198px;
+        line-height: 60px;
+        text-align:right;
+        color: #666;
+        font-size: 14px;
+        vertical-align:top;
+    }
+    .y-form-tip{ padding-left:20px; }
+    .financing_project_img{
+        border: solid 1px rgb(204, 204, 204);
+        border-image-outset: 0px;
+        border-image-repeat: stretch;
+        border-image-slice: 100%;
+        border-image-source: none;
+        border-image-width: 1;
+
+        color: rgb(102, 102, 102);
+        display: inline;
+        margin-top: 16px;
+        margin-left: 64px;
+        padding: 3px;
+        clear: both;
+        width:81px;
+        height:101px;
+        max-width: 585px;
+        max-height: 185px;
+        height: auto;
+        zoom:1;
+        display:none;
+    }
+    .y-btn-white {
+      border: 1px solid #33b5d4;
+      border-radius:5px;
+      text-align:center;
+      cursor:pointer;
+      background-color: #fff;
+      color: #00a2c9; }
+    .y-btn-white:active {
+      background-color: #5acbeb;
+      color: #fff; }
+
+    .submit{ width:141px; height:37px; text-align:center; font-size:14px; color:#fff; background:#00a2c9; border:0; border-radius:5px; }
+    /*立即上传按钮*/
+    .div1{
+    position:relative;
+    float: left;
+    width: 100px;
+    height: 24px;
+    border:solid 1px #00a2c8;
+    border-radius:5px;
+    background: #fff;
+    cursor:pointer;
+    }
+
+    .div2{
+    height:24px;
+    line-height:24px;
+    text-align:center;
+    font-size:15px;
+    color:#00a2c8;
+    }
+
+    .inputstyle{
+
+    width: 100px;
+
+    height: 24px;
+
+    cursor: pointer;
+
+    font-size: 30px;
+
+    outline: medium none;
+
+    position: absolute;
+
+    filter:alpha(opacity=0);
+
+    -moz-opacity:0;
+
+    opacity:0;
+
+    left:0px;
+
+    top: 0px;
+
+    }
+    .hidden{ display:none;}
+
+    .gary1 .right{ position:absolute; left:-257px; top:25px; }
+    .gary2 .right{ position:absolute; left:-194px; top:24px; }
+    .gary3 .right{ position:absolute; left:-300px; top:17px; }
+    .gary4 .right{ position:absolute; left:-300px; top:17px; }
+
+    .right{
+        width:20px;
+        height:25px;
+        display:block;
+        color: #13A821;
+    background: url(http://oss.aliyuncs.com/aliyun_portal_storage/1367811170_41_787.gif) no-repeat 0 -27px!important;
+    background-position: 0 5px!important;}
+    .gray span.prompt em{ width:20px; height:25px; display:block; float:left; background:url(http://gtms01.alicdn.com/tps/i1/T14JK8FcxfXXcu5FDa-17-17.png) no-repeat;}
+
+  </style>
+</head>
+<body>
+
+    <!--topbar Start-->
+
+    <!-- search -->
+    <div class="search item pull-right" id="J_common_header_search_wrap">
+
+        <div class="main ml whitefb fwr">
+
+            <!--弹出层-表单提交成功 Start-->
+            <!--div class="mask"> </div -->
+        <!--div class="popup_info">
+        <div class="pop_tit">提交成功</div>
+        <div class="pop_info">申请结果将于7个工作日内以邮件方式，发送至您的邮箱中，请注意查收。</div>
+        <input type="button" value="确定" id="pop_btn" class="pop_btn">
+        <div class="close" id="b1"></div>
+    </div -->
+    <!--弹出层-表单提交成功 End-->
+
+    <div class="l m-l main">
+        <div class="title">项目申请表</div>
+        <form id="applyForm" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="key" value="FinancingApply"/>
+            <input type="hidden" name="action" value="SubmitAction"/>
+            <input type="hidden" name="event_submit_do_submit" value="submit"/>
+            <input name='_csrf_token' type='hidden' value='SOx0oYoNhctrlIZ73aJEw5'>
+            <table width="1134" border="0" cellspacing="0" cellpadding="0"class="tab">
+                <tbody>
+                    <tr>
+                        <td height="50" align="right" class="f14px">
+                            <span class="red">*</span>
+                            项目名称：
+                        </td>
+                        <td>
+                            <input name="txtProject" id="txtProject" type="text" class="ipt" maxlength1="50" onfocus="this.style.background= '#ffffe0'; " onblur="this.style.background= ''"></td>
+                        <td class="gray"> <font color="#999999"><span class="prompt"> <em></em>
+                                    &nbsp; <font color='#FF0000'>请填写项目名称</font>
+                                </span></font> 
+                        </td>
+                    </tr>
+                    <tr class="gary1">
+                        <td height="50" align="right" class="f14px">
+                            <span class="red">*</span>
+                            项目标签：
+                        </td>
+                        <td colspan="2" style=" padding-top:25px; line-height:28px; font-size:14px; color:#333; ">
+                            <input name="txtProjectLabel" type="radio" name="txtProjectLabel"  class="checkbox" value="电子商务">
+                            电子商务&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="txtProjectLabel"  class="checkbox" value="SNS社交网络">
+                            SNS社交网络&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio"  name="txtProjectLabel"  class="checkbox" value="广告营销">
+                            广告营销&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio"  name="txtProjectLabel"  class="checkbox" value="游戏动漫">
+                            游戏动漫&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="txtProjectLabel"  class="checkbox" value="电子硬件">电子硬件</br>
+                        <input type="radio" name="txtProjectLabel"  class="checkbox" value="消费生活">
+                        消费生活&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="txtProjectLabel"  class="checkbox" value="医疗健康 ">
+                        医疗健康 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="txtProjectLabel"  class="checkbox" value="金融服务">
+                        金融服务&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="txtProjectLabel"  class="checkbox" value="教育培训">
+                        教育培训&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="txtProjectLabel"  class="checkbox" value="旅游户外">旅游户外</br>
+                    <input type="radio" name="txtProjectLabel"  class="checkbox" value="多媒体娱乐">
+                    多媒体娱乐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="txtProjectLabel"  class="checkbox" value="汽车交通">
+                    汽车交通&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="txtProjectLabel"  class="checkbox" value="企业服务">
+                    企业服务&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="txtProjectLabel"  class="checkbox ot" value="其他">
+                    其他&nbsp;&nbsp;
+                    <input  name="txtProjectLabel1" class="ipt hidden" type="text" size="5">
+                    <input name="other" id="other" class="other otherInput hidden" type="text" size="5"></td>
+                <td class="gray" style="position:relative;">
+                        <font color="#999999" style="position:absolute; left:-228px; top:85px;">
+                            <span class="prompt"> <em></em>
+                            &nbsp;<font color='#FF0000'>请填写项目标签</font>
+                            </span>
+                        </font> 
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    项目负责人：
+                </td>
+                <td>
+                    <input name="txtProjectLeader" id="txtProjectLeader" type="text" class="ipt" maxlength1="50" onfocus="this.style.background= '#ffffe0'; " onblur="this.style.background= ''"></td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写项目负责人</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    联系电话：
+                </td>
+                <td>
+                    <input name="txtPhone" id="txtPhone" type="text" maxlength1="20" class="ipt txtPhone" onfocus="this.style.background= '#ffffe0'" onblur="this.style.background= ''"></td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写联系电话</font>
+                        </span>
+                        <span class="prompt" style="float:left;">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请输入正确的电话号码</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td width="213" height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    E-mail：
+                </td>
+                <td width="363">
+                    <input name="txteMail" id="txteMail" type="text" class="ipt txteMail" maxlength1="50" onfocus="this.style.background= '#ffffe0'; " onblur="this.style.background= ''"></td>
+                <td width="558" class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写Email</font>
+                        </span>
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请输入正确的Email</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    通讯地址：
+                </td>
+                <td>
+                    <input name="txtAddress" id="txtAddress" type="text" class="ipt" maxlength1="100" onfocus="this.style.background= '#ffffe0' " onblur="this.style.background= ''"></td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写通讯地址</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    目的：
+                </td>
+                <td>
+                    <input name="txtTarget" id="txtTarget" type="text" class="ipt" maxlength1="60" onfocus="this.style.background= '#ffffe0'; " onblur="this.style.background= ''"></td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>用一句话描述项目</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px" style=" padding-top:30px; padding-bottom:30px;">
+                    <span class="red">*</span>
+                    问题：
+                </td>
+                <td>
+                    <textarea name="txtQuertion" id="txtQuertion" class="ipt textarea textarea1"maxlength1="600" value="✓描述客户的“切肤之痛”✓ 简介目前客户是如何应对这些问题的"
+                onfocus="if(this.value=='✓描述客户的“切肤之痛”✓ 简介目前客户是如何应对这些问题的'){this.value=''; this.style.color='#333'; } this.style.background= '#ffffe0'"
+                onblur="if(this.value==''){this.value='✓描述客户的“切肤之痛”✓ 简介目前客户是如何应对这些问题的'; this.style.color='#ccc'; }this.style.background='#ffffff'">✓描述客户的“切肤之痛”✓ 简介目前客户是如何应对这些问题的</textarea >
+                </td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写问题</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px" style=" padding-top:30px; padding-bottom:30px;">
+                    <span class="red">*</span>
+                    解决方案：
+                </td>
+                <td>
+                    <textarea name="txtSolution" id="txtSolution" class="ipt textarea textarea1"maxlength1="600" value="✓阐述公司的产品/服务的价值定位如何解决客户的难题 ✓说明公司的产品/服务具体在何处得到实现 ✓提供一些产品/服务使用的具体例子 "
+                onfocus="if(this.value=='✓阐述公司的产品/服务的价值定位如何解决客户的难题 ✓说明公司的产品/服务具体在何处得到实现 ✓提供一些产品/服务使用的具体例子 '){this.value=''; this.style.color='#333'; } this.style.background= '#ffffe0'"
+                onblur="if(this.value==''){this.value='✓阐述公司的产品/服务的价值定位如何解决客户的难题 ✓说明公司的产品/服务具体在何处得到实现 ✓提供一些产品/服务使用的具体例子 '; this.style.color='#ccc'; }this.style.background='#ffffff'">
+                        ✓阐述公司的产品/服务的价值定位如何解决客户的难题 ✓说明公司的产品/服务具体在何处得到实现 ✓提供一些产品/服务使用的具体例子
+                    </textarea >
+                </td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写解决方案</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px" style="padding-top:30px; padding-bottom:30px;">
+                    <span class="red">*</span>
+                    时机：
+                </td>
+                <td>
+                    <textarea name="txtOpportunity" id="txtOpportunity" class="ipt textarea textarea1" maxlength1="600" value="✓为何是现在？ ✓回顾公司产品/服务所应用的领域的历史演变  ✓说明哪些近期的趋势使得公司的产品/服务之优越性得到可能 "
+                onfocus="if(this.value=='✓为何是现在？ ✓回顾公司产品/服务所应用的领域的历史演变  ✓说明哪些近期的趋势使得公司的产品/服务之优越性得到可能 '){this.value=''; this.style.color='#333'; } this.style.background= '#ffffe0'"
+                onblur="if(this.value==''){this.value='✓为何是现在？ ✓回顾公司产品/服务所应用的领域的历史演变  ✓说明哪些近期的趋势使得公司的产品/服务之优越性得到可能 '; this.style.color='#ccc'; }this.style.background='#ffffff'">✓为何是现在？ ✓回顾公司产品/服务所应用的领域的历史演变  ✓说明哪些近期的趋势使得公司的产品/服务之优越性得到可能</textarea >
+                </td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写时机</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    市场规模：
+                </td>
+                <td>
+                    <input name="txtMarket" id="txtMarket" type="text" class="ipt" maxlength1="100" onfocus="this.style.background= '#ffffe0'; " onblur="this.style.background= ''"></td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>✓定义你的目标客户并描绘他们的特性                      ✓测算市场规模</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    竞争格局：
+                </td>
+                <td>
+                    <input name="txtRival" id="txtRival" type="text" class="ipt" maxlength1="100" onfocus="this.style.background= '#ffffe0'; " onblur="this.style.background= ''"></td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>✓列出现有的和潜在的竞争对手</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px" style=" padding-top:30px; padding-bottom:30px;">
+                    <span class="red">*</span>
+                    产品/服务：
+                </td>
+                <td>
+                    <textarea name="txtProductService" id="txtProductService" class="ipt textarea textarea1"maxlength1="600" value="✓产品/服务描述：外形，功能，性能，结构，知识产权等等 ✓产品/服务的开发计划 "
+                onfocus="if(this.value=='✓产品/服务描述：外形，功能，性能，结构，知识产权等等 ✓产品/服务的开发计划 '){this.value=''; this.style.color='#333'; } this.style.background= '#ffffe0'"
+                onblur="if(this.value==''){this.value='✓产品/服务描述：外形，功能，性能，结构，知识产权等等 ✓产品/服务的开发计划 '; this.style.color='#ccc'; }this.style.background='#ffffff'">✓产品/服务描述：外形，功能，性能，结构，知识产权等等 ✓产品/服务的开发计划</textarea >
+                </td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写产品/服务</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px" style=" padding-top:30px; padding-bottom:30px;">
+                    <span class="red">*</span>
+                    商业模式：
+                </td>
+                <td>
+                    <textarea name="txtBusiness " id="txtBusiness" class="ipt textarea textarea1"maxlength1="600" value="✓收入模式 ✓定价 ✓从每个客户上可获得的平均收入或其终身价值 ✓销售和渠道 ✓现有客户和正在开发的主要客户（3家） "
+                onfocus="if(this.value=='✓收入模式 ✓定价 ✓从每个客户上可获得的平均收入或其终身价值 ✓销售和渠道 ✓现有客户和正在开发的主要客户（3家） '){this.value=''; this.style.color='#333'; } this.style.background= '#ffffe0'"
+                onblur="if(this.value==''){this.value='✓收入模式 ✓定价 ✓从每个客户上可获得的平均收入或其终身价值 ✓销售和渠道 ✓现有客户和正在开发的主要客户（3家） '; this.style.color='#ccc'; }this.style.background='#ffffff'">✓收入模式 ✓定价 ✓从每个客户上可获得的平均收入或其终身价值 ✓销售和渠道 ✓现有客户和正在开发的主要客户（3家）</textarea >
+                </td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写商业模式</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    团队描述：
+                </td>
+                <td>
+                    <input name="txtTeam" id="txtTeam" type="text" class="ipt" maxlength1="100" onfocus="this.style.background= '#ffffe0'; " onblur="this.style.background= ''"></td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>✓创始人和核心管理层</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    融资额度：
+                </td>
+                <td>
+                    <input name="txtAmount " id="txtAmount" type="text" class="ipt" maxlength1="15" onfocus="this.style.background= '#ffffe0'; " onblur="this.style.background= '' "></td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写融资额度</font>
+                        </span>
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写正确融资额度</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    转让股份比例：
+                </td>
+                <td>
+                    <input name="txtShares" id="txtShares" type="text" class="ipt percent" maxlength1="10" onfocus="this.style.background= '#ffffe0'; " onblur="this.style.background= '' "></td>
+                <td class="gray">
+                    <font color="#999999">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请填写让股份比例，如20%</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr class="gary4">
+                <td height="50" align="right" class="f13px">
+                    <span class="red">*</span>
+                    上传商业计划书：
+                </td>
+                <td colspan="2">
+                    <div class="div1">
+                        <div class="div2">立即上传</div>
+                        <input type="file" name="txtProjectFile" id="inputf1" class="inputstyle ipt2" onchange="setImagePreview(this);"></div>
+                    <div class="imageName" style=" float:left; padding-left:20px; height:24px; line-height:24px; color:#999;">限上传5M以内</div>
+                </td>
+                <td class="gray" style="position:relative;">
+                    <font color="#999999" style="position:absolute; left:-462px; top:21px;">
+                        <span class="prompt">
+                            <em></em>
+                            &nbsp;
+                            <font color='#FF0000'>请上传</font>
+                        </span>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td height="50" align="right" class="f14px">
+                    <span class="red">*</span>
+                    选择投递创投机构：
+                </td>
+                <td colspan="2" style=" padding-top:25px; line-height:28px; font-size:14px; color:#333; ">
+                    <input type="checkbox" name="txtDepetment" class="checkbox" value="真格基金">
+                    真格基金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="纽信资本">
+                    纽信资本&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="众海投资">
+                    众海投资&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="达晨创投">
+                    达晨创投&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="浙江省科技风险投资">
+                    浙江省科技风险投资
+                    <br/>
+                    <input type="checkbox" class="checkbox" name="txtDepetment"  value="龙渊资本">
+                    龙渊资本&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="CA创投">
+                    CA创投&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="力合清源">
+                    力合清源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="银杏谷资本">
+                    银杏谷资本&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="赛伯乐">
+                    赛伯乐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="阿里战略投资部">
+                    阿里战略投资部
+                    <br/>
+                    <input type="checkbox" class="checkbox" name="txtDepetment"  value="丰厚资本">
+                    丰厚资本&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="天使湾">
+                    天使湾&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="厚德创新谷">
+                    厚德创新谷&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="同威创业投资">
+                    同威创业投资&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="戈壁">
+                    戈壁&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="PreAngel">
+                    PreAngel
+                    <br/>
+                    <input type="checkbox" class="checkbox" name="txtDepetment"  value="深创投">
+                    深创投&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="险峰华兴">
+                    险峰华兴&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="沙丘资本">
+                    沙丘资本&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="IDG">
+                    IDG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="掌趣-创享基金">
+                    掌趣-创享基金&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="txtDepetment"  class="checkbox" value="伯乐遇马">伯乐遇马</br>
+                <input type="checkbox" name="txtDepetment"  class="checkbox" value="志成资本">
+                志成资本&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="txtDepetment"  class="checkbox" value="天使谷">
+                天使谷&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="txtDepetment"  class="checkbox" value="湖畔山南">
+                湖畔山南&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="txtDepetment"  class="checkbox" value="华睿资本 ">
+                华睿资本 &nbsp;
+                <input  name="txtDepetment1"  class="ipt hidden" type="text" size="5"></td>
+
+            <td class="gray gary2" style="position:relative;">
+                <font color="#999999" style="position:absolute; left:-210px; top:31px;">
+                    <span class="prompt">
+                        <em></em>
+                        &nbsp;
+                        <font color='#FF0000'>请填写选择投递创投机构</font>
+                    </span>
+                </font>
+            </td>
+        </tr>
+        <tr>
+            <td height="80"></td>
+            <td colspan="2" valign="bottom">
+                <input type="submit" name="ButtonOK" id="ButtonOK" class="submit" value="提交申请表"/>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</form>
+</div>
+</div>
+
+<script>
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var reg0 = /^0?(13[0-9]|15[012356789]|18[02356789]|14[57])[0-9]{8}$/;
+    var reg2 = /^\d{3,4}-\d{6,8}(-\d{1,5})?$/;
+    var reg3 = /^[0-9]*$/;
+    //var reg4 = /^[0-9]*[%]$/;
+    var reg4=/^(100|[1-9]?\d(\.\d\d?)?)%$/;
+    var T={
+        init:function(){
+
+            $(".tab").addClass("tab1");
+            var empty = true;
+            $(".ipt").focus(function() {
+                $(this).parents("tr").find(".prompt").hide();
+            });
+            $(".ipt").blur(function() {
+                T.checkInput(this);
+            });
+            $(".ipt").change(function() {
+                T.checkInput(this);
+            });
+             $(".ipt2").change(function() {
+                T.checkInput(this);
+            });
+            $(".other").blur(function() {
+                T.setCheck(this);
+            });
+             $(".ot").click(function() {
+                 if($(this).parent().find(".otherInput").hasClass("cur")){
+                     $(this).parent().find(".otherInput").removeClass("cur").hide();
+                     }else{
+                  $(this).parent().find(".otherInput").addClass("cur").show();}
+                 });
+            $("#ButtonOK").click(function() {
+                empty = true;
+                $(".ipt").each(function(n, o) {
+                   T.checkInput(o);
+                });
+                $(".ipt").each(function() {
+                    if ($(this).hasClass("mistake")) {
+                        empty = false;
+                    }
+                });
+                if (empty) {
+                    if($('.ot')[0].checked){$('.ot')[0].value=$('#other').val();}
+                } else {
+                    //弹出错误
+                    return false;
+                }
+                if (!$(".tab").hasClass("tab1")) {}
+
+            });
+
+            //$(".close,.pop_btn").click(function() {
+            //    $(".mask,.popup_info").hide();
+            //});
+            T.CheckRadio();
+
+        },
+        checkInput:function(o){
+
+                $(".tab").removeClass("tab1");
+                $(o).removeClass("mistake");
+                //alert($(o).parents("tr").find(".right").length);
+                var obj=$(o).parents("tr").find(".right").remove();
+
+                var pan = T.judgeEmpty($(o));
+                var re=true;
+                if (pan && $(o).hasClass("txtPhone")) {
+                    var _mobile = $(o).val().replace(/\s/g, "");
+                    if (_mobile != "" && reg0.test(_mobile) == false && reg2.test(_mobile) == false) {
+                        $(o).addClass("mistake").parents("tr").find(".prompt").eq(1).show();
+                        re=false;
+                    }
+                }
+                if (pan && $(o).hasClass("txteMail")) {
+                    var _mail = $(o).val();
+                    if (_mail != "" && filter.test(_mail) == false) {
+                        $(o).addClass("mistake").parents("tr").find(".prompt").eq(1).show();
+                        re=false
+                    }
+                }
+                if (pan && $(o).hasClass("mistakes")) {
+                        $(o).addClass("mistake").parents("tr").find(".prompt").eq(0).show();
+                        re=false
+                }
+                if (pan && $(o).hasClass("txteNum")) {
+                    var _cont = $(o).val().replace(/\s/g, "");
+                    if (_cont != "" && reg3.test(_cont) == false) {
+                        $(o).addClass("mistake").parents("tr").find(".prompt").eq(1).show();
+                        re=false
+                    }
+                }
+                if (pan && $(o).hasClass("textarea1")) {
+                    var _cont = $(o).val().replace(/\s/g, "");
+                    if (_cont == "产品或服务内容、用户群描述、满足何种用户需求、产品盈利模式等介绍") {
+                        $(o).addClass("mistake").parents("tr").find(".prompt").eq(0).show();
+                        re=false
+                    }
+                }
+                if (pan && $(o).hasClass("textarea2")) {
+                    var _cont = $(o).val().replace(/\s/g, "");
+                    if (_cont == "核心成员的工作、学习经历，曾担任的角色以及取得的成绩、经验等") {
+                        $(o).addClass("mistake").parents("tr").find(".prompt").eq(0).show();
+                        re=false
+                    }
+                }
+                    if (pan && $(o).hasClass("percent")) {
+                    var _cont = $(o).val().replace(/\s/g, "");
+                    if (_cont != "" && reg4.test(_cont) == false) {
+                        $(o).addClass("mistake").parents("tr").find(".prompt").eq(0).show();
+                        re=false
+                    }
+                }
+                if(T.checkLeng(o)){
+                    return false;
+                }
+                if(!$(o).hasClass("mistake")){
+                    $(o).parents("tr").find(".gray").append("<span class='right'></span>").find(".prompt").eq(0).hide();
+                }
+        },
+        checkLeng:function(o){
+            if($(o).attr("maxlength1")){
+                //alert($(o).attr("maxlength1"));
+                var getlen=$(o).attr("maxlength1");
+                var len = $(o).val();
+                var len = len.replace(/[\u4E00-\u9FA5]/g,'aa').length;
+                $(o).parents("tr").find(".gray").find(".maxleng").remove();
+                if(len>getlen*2){
+                $(o).addClass("mistake").parents("tr").find(".gray").append("<span class='maxleng' style='color:#f00;'>不得超过"+getlen+"个字（中文占2个字符）</span>").find(".prompt").eq(0).hide();
+                return true;
+                }
+                }
+        },
+        judgeEmpty:function ($ff) {
+                if ($ff.val() == "") {
+                    $ff.addClass("mistake").parents("tr").find(".prompt").eq(0).show();
+                    return false;
+                }
+                return true;
+            },
+        CheckRadio:function(){
+
+            $("input.radio").each( function(n,o) {
+              $(o).click(function() {
+                var _partent=$(o).parent();
+                $(_partent).find(".ipt:text").val($(o).val());
+              })
+            });
+            $("input.checkbox").each( function(n,o) {
+
+              $(o).click(function() {
+                    T.setCheck(o);  T.checkInput($(o).parents("tr").find(".ipt"));
+                               if($(o).hasClass("ot")){
+                    $(o).parents("tr").find(".otherInput").removeClass("hidden").blur(function(){
+                           T.checkInput($(o).parents("tr").find(".ipt"));
+                        });
+
+                    }
+              });
+
+
+
+            });
+
+
+
+        },
+        setCheck:function(o){
+                var _partent=$(o).parent();
+                if($(o).hasClass("cur")&&!$(o).hasClass("other")){$(o).removeClass("cur")}
+                else {$(o).addClass("cur")}
+                 var n=0,str="";
+                 $(_partent).find("input.checkbox,.otherInput").each(function(i,o) {
+                    if($(o).hasClass("cur")&&!$(o).hasClass("ot")){
+                      n++;
+                      var v=$(o).val();
+                      if(n>1){str=str+","+v}
+                      else{ str=str+v}
+                    }
+                });
+                $(_partent).find(".ipt:text").val(str);
+
+        },
+        getInfo:function(o){
+              var cs="";
+              $(o).each(function(n,o) {
+                  var v=$(o).val();
+                  cs+="&"+$(o).attr("name")+"="+v;
+              });
+              return cs;
+         }
+
+    }
+    T.init();
+    function setImagePreview(o){
+        $(o).parents("td").find(".imageName").html($(o).val());
+        $(o).siblings('.div2').text('立即更新');
+
+    }
+
+  </script>
+<script>
+    $(document).ready(function(){
+            var tijiao=false;
+        var tijiao1=false;
+    $("#inputf1").change(function(){
+                var file = $('#inputf1').get(0).files[0];
+                if (file) {
+                   var fileSize = 0;
+                    if (file.size > 1024 * 1024){
+                          fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100);
+                          if(5<fileSize){
+                              $(this).addClass("mistakes").parents("td").find(".imageName").css("color","#f00").html("你上传的文件过大，最大为 5M");
+                              $(this).parents("tr").find(".gray").find(".prompt").eq(0).hide();
+                              $(this).parents("tr").find(".gray").find(".right").remove();
+                              tijiao=false;
+                              }
+                              else{
+                                  tijiao=true;
+                                  $(this).removeClass("mistakes");
+                                  }
+                        }
+
+                    else{ fileSize = (Math.round(file.size * 100 / 1024) / 100);
+                    if(5*1024<fileSize){
+                         $(this).addClass("mistakes").parents("td").find(".imageName").css("color","#f00").html("你上传的文件过大，最大为 5M");
+                         $(this).parents("tr").find(".gray").find(".prompt").eq(0).hide();
+                         $(this).parents("tr").find(".gray").find(".right").remove();
+                            tijiao=false;
+                            }else{
+                                tijiao=true; $(this).removeClass("mistakes");}
+                            }
+               }
+            });
+         
+        $("#ButtonOK").click(function(){
+
+                $("#inputf1").trigger("change");
+
+                 if(tijiao){}else { return false; }
+            });
+         });
+
+  </script></div>
+
+</body>
+</html>

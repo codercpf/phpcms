@@ -33,6 +33,100 @@ class index {
 		$CATEGORYS = getcache('category_content_'.$siteid,'commons');
 		include template('content','index',$default_style);
 	}
+//提交的寻求报道
+	public function report()
+	{
+		/*
+		echo "<pre>";
+		print_r($_POST);
+		echo "<pre>";
+		exit();
+		*/
+
+		$this->db2 = pc_base::load_model('report_model');
+		$_userid = $this->_userid;
+		$_username = $this->_username;
+
+		if(isset($_POST['dosubmit'])) {	
+			if($_userid){
+				$info = array();
+				foreach($_POST['info'] as $_k=>$_v) {				
+					$info[$_k] = new_html_special_chars(trim_script($_v));				
+				}
+				$info['username'] = $_username;
+				$info['status'] = 99;
+				$info['inputtime'] = SYS_TIME;
+				$info['updatetime'] = SYS_TIME;
+
+				$id = $this->db2->insert($info,true);
+				showmessage("提交成功，我们审核后会尽快与你联系",HTTP_REFERER,3000);
+			}else{
+				$forward = urlencode(get_url());
+				showmessage("寻求报道前请先登录",APP_PATH.'index.php?m=member&c=index&a=login&forward='.$forward);
+			}
+		}
+	}
+//提交的入驻孵化器
+	public function receiveapply()
+	{
+		$this->db3 = pc_base::load_model('incubator_model');
+		$_userid = $this->_userid;
+		$_username = $this->_username;
+
+		if(isset($_POST['dosubmit'])) {
+			if($_userid){
+				$apply = array();
+				foreach($_POST['apply'] as $_k=>$_v) {
+					$apply[$_k] = new_html_special_chars(trim_script($_v));
+				}
+
+				$apply['status'] = 0;
+				$apply['inputtime'] = SYS_TIME;
+				$apply['updatetime'] = 0;
+				$apply['settletime'] = 0;
+				$apply['username'] = $_username;
+/*
+				echo "<pre>";
+				print_r($apply);
+				echo "<pre>";
+				exit();
+*/
+				$id = $this->db3->insert($apply,true);
+				showmessage("提交成功，通过审核后会我们尽快与你联系",HTTP_REFERER,3000);
+			}else{
+				$forward = urlencode(get_url());
+				showmessage("寻求报道前请先登录",APP_PATH.'index.php?m=member&c=index&a=login&forward='.$forward);
+			}
+		}
+	}
+//提交的申请融资
+	public function receivefinance(){
+		$this->db4 = pc_base::load_model('finance_model');
+		$_userid = $this->_userid;
+		$_username = $this->_username;
+
+		if(isset($_POST['dosubmit'])) {
+			if($_userid){
+				$apply = array();
+				foreach($_POST['finance'] as $_k=>$_v) {
+					$finance[$_k] = new_html_special_chars(trim_script($_v));
+				}
+
+				$finance['status'] = 0;
+				$finance['inputtime'] = SYS_TIME;
+				$finance['updatetime'] = 0;
+				$finance['username'] = $_username;
+
+				$id = $this->db4->insert($finance,true);
+				showmessage("提交成功，通过审核后会我们尽快与你联系",HTTP_REFERER,3000);
+			}else{
+				$forward = urlencode(get_url());
+				showmessage("寻求报道前请先登录",APP_PATH.'index.php?m=member&c=index&a=login&forward='.$forward);
+			}
+		}
+	}
+
+
 	//内容页
 	public function show() {
 

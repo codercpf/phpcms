@@ -17,6 +17,11 @@ class content extends admin {
 	public function __construct() {
 		parent::__construct();
 		$this->db = pc_base::load_model('content_model');
+
+		$this->db2 = pc_base::load_model('report_model');
+		$this->db3 = pc_base::load_model('incubator_model');
+		$this->db4 = pc_base::load_model('finance_model');
+
 		$this->siteid = $this->get_siteid();
 		$this->categorys = getcache('category_content_'.$this->siteid,'commons');
 		//权限判断
@@ -118,6 +123,416 @@ class content extends admin {
 			include $this->admin_tpl('content_quick');
 		}
 	}
+
+/*寻求报道新增*/
+	public function reportadmin(){
+	 	$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$datas = array();
+		$pagesize = 10;
+		$sql = '';		
+		$admin_username = param::get_cookie('admin_username');
+
+		$datas = $this->db2->listinfo($sql,'inputtime', $page, $pagesize);
+		$pages = $this->db2->pages;
+	 	include $this->admin_tpl('report_checkall');
+	}
+
+	public function remaincheck()
+	{
+		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$datas = array();
+		$pagesize = 10;
+		$sql = "status=1";
+		$admin_username = param::get_cookie('admin_username');
+
+		$datas = $this->db2->listinfo($sql,'inputtime', $page, $pagesize);
+		$pages = $this->db2->pages;
+	 	include $this->admin_tpl('report_checkall');
+	}
+
+	public function passcheck()
+	{
+		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$datas = array();
+		$pagesize = 10;
+		$sql = "status=99";		
+		$admin_username = param::get_cookie('admin_username');
+
+		$datas = $this->db2->listinfo($sql,'updatetime', $page, $pagesize);
+		$pages = $this->db2->pages;
+	 	include $this->admin_tpl('report_pass');
+	}
+	
+	//寻求报道审核
+	public function report_preview() {
+
+		$touxiang = param::get_cookie('_touxiang');
+		
+		$id = intval($_GET['reportid']);
+		define('HTML', true);
+
+		$datas = $this->db2->select("id=$id");
+/*
+		echo "<pre>";
+		print_r($datas[0]);
+		echo "<pre>";
+		exit();
+*/
+		extract($datas[0]);
+
+		// echo $interestingexp;exit();
+/*
+		echo "<pre>";
+		print_r($datas);
+		echo "<pre>";
+		exit();
+*/
+		include template('content','report_preview');
+		$pc_hash = $_SESSION['pc_hash'];
+
+		echo "
+		<link href=\"".CSS_PATH."dialog_simp.css\" rel=\"stylesheet\" type=\"text/css\" />
+		<script language=\"javascript\" type=\"text/javascript\" src=\"".JS_PATH."dialog.js\"></script>
+		<script type=\"text/javascript\">art.dialog({lock:false,title:'".L('operations_manage')."',mouse:true, id:'content_m', content:'<span id=cloading ><a href=\'javascript:ajax_manage(1)\'>".L('passed_checked')."</a> |　<a href=\'javascript:ajax_manage(3)\'>".L('delete')."</a></span>',left:'100%',top:'100%',width:200,height:50,drag:true, fixed:true});
+		function ajax_manage(type) {
+			if(type==1) {
+				$.get('?m=content&c=content&a=report_pass&ajax_preview=1&id=".$id."&pc_hash=".$pc_hash."');
+			} else if(type==3) {
+				$.get('?m=content&c=content&a=report_delete&ajax_preview=1&dosubmit=1&id=".$id."&pc_hash=".$pc_hash."');
+			}
+			$('#cloading').html('<font color=red>".L('operation_success')."<span id=\"secondid\">2</span>".L('after_a_few_seconds_left')."</font>');
+			setInterval('set_time()', 1000);
+			setInterval('window.close()', 2000);
+		}
+		function set_time() {
+			$('#secondid').html(1);
+		}
+		</script>";
+	}
+	//通过审核的报道
+	public function report_detail() {
+
+		$touxiang = param::get_cookie('_touxiang');
+		
+		$id = intval($_GET['reportid']);
+		define('HTML', true);
+		$datas = $this->db2->select("id=$id");
+		extract($datas[0]);
+
+		include template('content','report_preview');
+		$pc_hash = $_SESSION['pc_hash'];		
+	}
+
+	public function report_pass() {
+		$admin_username = param::get_cookie('admin_username');
+		$status = 99;
+		$updatetime = SYS_TIME;
+
+		if(isset($_GET['ajax_preview'])) {
+			
+			$_POST['ids'] = intval($_GET['id']);
+		}
+		$result = $this->db2->update("status=$status,updatetime=$updatetime",$where = "id=$_POST[ids]");
+		if($result){
+			showmessage(L('operation_success'),HTTP_REFERER);
+		}
+	}
+
+	public function report_delete() {
+		if(isset($_GET['dosubmit'])) {
+
+			if(isset($_GET['ajax_preview'])) {
+				$_POST['ids'] = intval($_GET['id']);
+			}
+			if(empty($_POST['ids'])) showmessage(L('you_do_not_check'));						
+
+			//更新栏目统计
+			$result = $this->db2->delete("id=$_POST[ids]");
+			if($result){
+				showmessage(L('operation_success'),HTTP_REFERER);
+			}			
+		} else {
+			showmessage('操作失败，参数错误！');
+		}
+	}
+/*寻求报道部分结束*/
+
+/*入驻孵化器管理*/
+	//所有待审核的入驻申请
+	public function applyadmin(){
+		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$datas = array();
+		$pagesize = 10;
+		$sql = 'status=0';
+		$admin_username = param::get_cookie('admin_username');
+
+		$infos = $this->db3->listinfo($sql,'inputtime', $page, $pagesize);
+
+/*
+		echo "<pre>";
+		print_r($infos);
+		echo "<pre>";
+		exit();
+*/
+		$pages = $this->db3->pages;
+		include $this->admin_tpl('incubator_checkall');
+	}
+	//所有通过审核的入住申请
+	public function applypassed(){
+		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$datas = array();
+		$pagesize = 10;
+		$sql = 'status=1';
+		$admin_username = param::get_cookie('admin_username');
+
+		$infos = $this->db3->listinfo($sql,'updatetime', $page, $pagesize);
+
+		/*
+                echo "<pre>";
+                print_r($infos);
+                echo "<pre>";
+                exit();
+        */
+		$pages = $this->db3->pages;
+		include $this->admin_tpl('incubator_passed');
+
+	}
+	//	所有已经入住的申请
+	public function applysettled(){
+		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$datas = array();
+		$pagesize = 10;
+		$sql = 'status=2';
+		$admin_username = param::get_cookie('admin_username');
+
+		$infos = $this->db3->listinfo($sql,'settletime', $page, $pagesize);
+
+		/*
+                echo "<pre>";
+                print_r($infos);
+                echo "<pre>";
+                exit();
+        */
+		$pages = $this->db3->pages;
+		include $this->admin_tpl('incubator_settled');
+
+	}
+
+	//查看并审核入驻申请
+	public function applypreview() {
+		if(isset($_POST['dosubmit'])){
+/*
+			echo "<pre>";
+			print_r($_POST);
+			echo "<pre>";
+			exit();
+*/
+			$id = intval($_GET['id']);
+			if(isset($_POST['applypassed']) && ($_POST['applypassed']=='是')){
+				$updatetime = SYS_TIME;
+				$status = 1;
+				$result = $this->db3->update("status=$status,updatetime=$updatetime",$where = "id=$id");
+			}
+
+			showmessage(L('operation_success'),'?m=content&c=content&a=applypreview','', 'edit');
+
+		}else{
+			$show_validator = $show_scroll = $show_header = true;
+			pc_base::load_sys_class('form', '', 0);
+
+			//解出链接内容
+			$info = $this->db3->get_one(array('id'=>$_GET['id']));
+//			if(!$info) showmessage(L('link_exit'));
+			extract($info);
+/*
+                        echo "<pre>";
+                        print_r($info);
+                        echo "<pre>";
+                        exit();
+*/
+			include $this->admin_tpl('incubator_detail');
+		}
+	}
+	//查看并审核是否入驻
+	public function passedpreview() {
+		if(isset($_POST['dosubmit'])){
+			/*
+                        echo "<pre>";
+                        print_r($_POST);
+                        echo "<pre>";
+                        exit();
+            */
+			$id = intval($_GET['id']);
+			if(isset($_POST['applysettled']) && ($_POST['applysettled']=='是')){
+				$settletime = SYS_TIME;
+				$status = 2;
+				$result = $this->db3->update("status=$status,settletime=$settletime",$where = "id=$id");
+			}
+
+			showmessage(L('operation_success'),'?m=content&c=content&a=passedpreview','', 'edit');
+
+		}else{
+			/*
+			$show_validator = $show_scroll = $show_header = true;
+			pc_base::load_sys_class('form', '', 0);
+			*/
+
+			//解出链接内容
+			$info = $this->db3->get_one(array('id'=>$_GET['id']));
+//			if(!$info) showmessage(L('link_exit'));
+			extract($info);
+			/*
+                                    echo "<pre>";
+                                    print_r($info);
+                                    echo "<pre>";
+                                    exit();
+            */
+			include $this->admin_tpl('incubator_passeddetail');
+		}
+	}
+	//查看入驻详情
+	public function settledpreview() {
+		if(isset($_POST['dosubmit'])){
+			/*
+                        echo "<pre>";
+                        print_r($_POST);
+                        echo "<pre>";
+                        exit();
+            */
+			showmessage(L('operation_success'),'?m=content&c=content&a=settledpreview','', 'edit');
+		}else{
+			/*
+			$show_validator = $show_scroll = $show_header = true;
+			pc_base::load_sys_class('form', '', 0);
+			*/
+
+			//解出链接内容
+			$info = $this->db3->get_one(array('id'=>$_GET['id']));
+//			if(!$info) showmessage(L('link_exit'));
+			extract($info);
+			/*
+                                    echo "<pre>";
+                                    print_r($info);
+                                    echo "<pre>";
+                                    exit();
+            */
+			include $this->admin_tpl('incubator_settledetail');
+		}
+	}
+
+	//删除功能
+	public function apply_delete(){
+		$_POST['ids'] = intval($_GET['id']);
+		if(empty($_POST['ids'])) showmessage(L('you_do_not_check'));
+
+		$result = $this->db3->delete("id=$_POST[ids]");
+		if($result){
+			showmessage(L('operation_success'),HTTP_REFERER);
+		}else{
+			showmessage('删除失败',HTTP_REFERER);
+		}
+	}
+/*孵化器部分结束*/
+
+/*申请融资相关*/
+	//所有待审核的融资申请
+	public function financeadmin(){
+		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$infos = array();
+		$pagesize = 10;
+		$sql = 'status=0';
+		$admin_username = param::get_cookie('admin_username');
+
+		$infos = $this->db4->listinfo($sql,'inputtime', $page, $pagesize);
+/*
+		echo "<pre>";
+		print_r($infos);
+		echo "<pre>";
+		exit();
+*/
+		$pages = $this->db4->pages;
+		include $this->admin_tpl('finance_checkall');
+	}
+	//所有通过审核的融资申请
+	public function financepassed(){
+		$page = isset($_GET['page']) && intval($_GET['page']) ? intval($_GET['page']) : 1;
+		$datas = array();
+		$pagesize = 10;
+		$sql = 'status=1';
+		$admin_username = param::get_cookie('admin_username');
+
+		$infos = $this->db4->listinfo($sql,'updatetime', $page, $pagesize);
+		/*
+                echo "<pre>";
+                print_r($infos);
+                echo "<pre>";
+                exit();
+        */
+		$pages = $this->db4->pages;
+		include $this->admin_tpl('finance_passed');
+
+	}
+	/*查看并审核融资申请*/
+	public function financepreview() {
+		if(isset($_POST['dosubmit'])){
+/*
+                        echo "<pre>";
+                        print_r($_POST);
+                        echo "<pre>";
+                        exit();
+*/
+			$id = intval($_GET['id']);
+			if(isset($_POST['financepassed']) && ($_POST['financepassed']=='是')){
+				$updatetime = SYS_TIME;
+				$status = 1;
+				$result = $this->db4->update("status=$status,updatetime=$updatetime",$where = "id=$id");
+			}
+
+			showmessage(L('operation_success'),'?m=content&c=content&a=financepreview','', 'edit');
+
+		}else{
+			$show_validator = $show_scroll = $show_header = true;
+			pc_base::load_sys_class('form', '', 0);
+			//解出链接内容
+			$info = $this->db4->get_one(array('id'=>$_GET['id']));
+			extract($info);
+			/*
+                                    echo "<pre>";
+                                    print_r($info);
+                                    echo "<pre>";
+                                    exit();
+            */
+			include $this->admin_tpl('finance_detail');
+		}
+	}
+	/*查看通过审核的详情*/
+	public function fpassedpre() {
+		if(isset($_POST['dosubmit'])){
+			/*
+                                    echo "<pre>";
+                                    print_r($_POST);
+                                    echo "<pre>";
+                                    exit();
+            */
+			showmessage(L('operation_success'),'?m=content&c=content&a=fpassedpre','', 'edit');
+		}else{
+			$show_validator = $show_scroll = $show_header = true;
+			pc_base::load_sys_class('form', '', 0);
+			//解出链接内容
+			$info = $this->db4->get_one(array('id'=>$_GET['id']));
+			extract($info);
+			/*
+                                    echo "<pre>";
+                                    print_r($info);
+                                    echo "<pre>";
+                                    exit();
+            */
+			include $this->admin_tpl('finance_passeddetail');
+		}
+	}
+
+/*融资申请结束*/
+
 	public function add() {
 		if(isset($_POST['dosubmit']) || isset($_POST['dosubmit_continue'])) {
 			define('INDEX_HTML',true);
@@ -652,6 +1067,134 @@ class content extends admin {
 
 	//文章预览
 	public function public_preview() {
+
+		$touxiang = param::get_cookie('_touxiang');
+
+		$catid = intval($_GET['catid']);
+		$id = intval($_GET['id']);
+		
+		if(!$catid || !$id) showmessage(L('missing_part_parameters'),'blank');
+		$page = intval($_GET['page']);
+		$page = max($page,1);
+		$CATEGORYS = getcache('category_content_'.$this->get_siteid(),'commons');
+		
+		if(!isset($CATEGORYS[$catid]) || $CATEGORYS[$catid]['type']!=0) showmessage(L('missing_part_parameters'),'blank');
+		define('HTML', true);
+		$CAT = $CATEGORYS[$catid];
+		
+		$siteid = $CAT['siteid'];
+		$MODEL = getcache('model','commons');
+		$modelid = $CAT['modelid'];
+
+		$this->db->table_name = $this->db->db_tablepre.$MODEL[$modelid]['tablename'];
+		$r = $this->db->get_one(array('id'=>$id));
+		if(!$r) showmessage(L('information_does_not_exist'));
+		$this->db->table_name = $this->db->table_name.'_data';
+		$r2 = $this->db->get_one(array('id'=>$id));
+		$rs = $r2 ? array_merge($r,$r2) : $r;
+
+		//再次重新赋值，以数据库为准
+		$catid = $CATEGORYS[$r['catid']]['catid'];
+		$modelid = $CATEGORYS[$catid]['modelid'];
+		
+		require_once CACHE_MODEL_PATH.'content_output.class.php';
+		$content_output = new content_output($modelid,$catid,$CATEGORYS);
+		$data = $content_output->get($rs);
+		extract($data);
+		$CAT['setting'] = string2array($CAT['setting']);
+		$template = $template ? $template : $CAT['setting']['show_template'];
+		$allow_visitor = 1;
+		//SEO
+		$SEO = seo($siteid, $catid, $title, $description);
+		
+		define('STYLE',$CAT['setting']['template_list']);
+		if(isset($rs['paginationtype'])) {
+			$paginationtype = $rs['paginationtype'];
+			$maxcharperpage = $rs['maxcharperpage'];
+		}
+		$pages = $titles = '';
+		if($rs['paginationtype']==1) {
+			//自动分页
+			if($maxcharperpage < 10) $maxcharperpage = 500;
+			$contentpage = pc_base::load_app_class('contentpage');
+			$content = $contentpage->get_data($content,$maxcharperpage);
+		}
+		if($rs['paginationtype']!=0) {
+			//手动分页
+			$CONTENT_POS = strpos($content, '[page]');
+			if($CONTENT_POS !== false) {
+				$this->url = pc_base::load_app_class('url', 'content');
+				$contents = array_filter(explode('[page]', $content));
+				$pagenumber = count($contents);
+				if (strpos($content, '[/page]')!==false && ($CONTENT_POS<7)) {
+					$pagenumber--;
+				}
+				for($i=1; $i<=$pagenumber; $i++) {
+					$pageurls[$i][0] = 'index.php?m=content&c=content&a=public_preview&steps='.intval($_GET['steps']).'&catid='.$catid.'&id='.$id.'&page='.$i;
+				}
+				$END_POS = strpos($content, '[/page]');
+				if($END_POS !== false) {
+					if($CONTENT_POS>7) {
+						$content = '[page]'.$title.'[/page]'.$content;
+					}
+					if(preg_match_all("|\[page\](.*)\[/page\]|U", $content, $m, PREG_PATTERN_ORDER)) {
+						foreach($m[1] as $k=>$v) {
+							$p = $k+1;
+							$titles[$p]['title'] = strip_tags($v);
+							$titles[$p]['url'] = $pageurls[$p][0];
+						}
+					}
+				}
+				//当不存在 [/page]时，则使用下面分页
+				$pages = content_pages($pagenumber,$page, $pageurls);
+				//判断[page]出现的位置是否在第一位 
+				if($CONTENT_POS<7) {
+					$content = $contents[$page];
+				} else {
+					if ($page==1 && !empty($titles)) {
+						$content = $title.'[/page]'.$contents[$page-1];
+					} else {
+						$content = $contents[$page-1];
+					}
+				}
+				if($titles) {
+					list($title, $content) = explode('[/page]', $content);
+					$content = trim($content);
+					if(strpos($content,'</p>')===0) {
+						$content = '<p>'.$content;
+					}
+					if(stripos($content,'<p>')===0) {
+						$content = $content.'</p>';
+					}
+				}
+			}
+		}
+		include template('content',$template);
+		$pc_hash = $_SESSION['pc_hash'];
+		$steps = intval($_GET['steps']);
+		echo "
+		<link href=\"".CSS_PATH."dialog_simp.css\" rel=\"stylesheet\" type=\"text/css\" />
+		<script language=\"javascript\" type=\"text/javascript\" src=\"".JS_PATH."dialog.js\"></script>
+		<script type=\"text/javascript\">art.dialog({lock:false,title:'".L('operations_manage')."',mouse:true, id:'content_m', content:'<span id=cloading ><a href=\'javascript:ajax_manage(1)\'>".L('passed_checked')."</a> | <a href=\'javascript:ajax_manage(2)\'>".L('reject')."</a> |　<a href=\'javascript:ajax_manage(3)\'>".L('delete')."</a></span>',left:'100%',top:'100%',width:200,height:50,drag:true, fixed:true});
+		function ajax_manage(type) {
+			if(type==1) {
+				$.get('?m=content&c=content&a=pass&ajax_preview=1&catid=".$catid."&steps=".$steps."&id=".$id."&pc_hash=".$pc_hash."');
+			} else if(type==2) {
+				$.get('?m=content&c=content&a=pass&ajax_preview=1&reject=1&catid=".$catid."&steps=".$steps."&id=".$id."&pc_hash=".$pc_hash."');
+			} else if(type==3) {
+				$.get('?m=content&c=content&a=delete&ajax_preview=1&dosubmit=1&catid=".$catid."&steps=".$steps."&id=".$id."&pc_hash=".$pc_hash."');
+			}
+			$('#cloading').html('<font color=red>".L('operation_success')."<span id=\"secondid\">2</span>".L('after_a_few_seconds_left')."</font>');
+			setInterval('set_time()', 1000);
+			setInterval('window.close()', 2000);
+		}
+		function set_time() {
+			$('#secondid').html(1);
+		}
+		</script>";
+	}
+
+	public function public_preview02() {
 
 		$touxiang = param::get_cookie('_touxiang');
 

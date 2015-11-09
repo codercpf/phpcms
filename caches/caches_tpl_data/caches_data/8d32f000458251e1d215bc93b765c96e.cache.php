@@ -18,14 +18,5 @@ return array (
     'url' => 'http://phpcms/index.php?m=content&c=index&a=show&catid=16&id=773',
     'total' => '2',
   ),
-  2 => 
-  array (
-    'id' => '771',
-    'title' => '实习生的残酷世界',
-    'thumb' => 'http://phpcms/uploadfile/2015/1020/20151020115421794.jpg',
-    'username' => 'phpcms',
-    'url' => 'http://phpcms/index.php?m=content&c=index&a=show&catid=12&id=771',
-    'total' => '1',
-  ),
 );
 ?>

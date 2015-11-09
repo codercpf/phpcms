@@ -454,4 +454,16 @@ $LANG['complete_info'] = '填写资料';
 $LANG['clear_data'] = '一键清理';
 $LANG['player_manage'] = '播放器管理';
 $LANG['video_upload'] = '视频上传'; 
+$LANG['seekreport'] = '寻求报道管理';
+$LANG['remaincheck'] = '待审核内容';
+$LANG['passcheck'] = '通过审核内容';
+$LANG['remaincheck'] = '待审核内容';
+$LANG['passedcheck'] = '通过审核内容';
+$LANG['incubator'] = '入驻孵化器管理';
+$LANG['applyremain'] = '待审核内容';
+$LANG['applychecked'] = '通过审核内容';
+$LANG['applysettled'] = '已入驻内容';
+$LANG['finance'] = '申请融资管理';
+$LANG['financecheck'] = '待审核的融资申请';
+$LANG['financepassed'] = '通过审核的融资申请';
 ?>

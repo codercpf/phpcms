@@ -19,9 +19,20 @@ class index extends foreground {
 
 	public function init() {
 		$memberinfo = $this->memberinfo;
-		
+
 		//初始化phpsso
 		$phpsso_api_url = $this->_init_phpsso();
+//		echo $phpsso_api_url."<br/>";
+
+		$ps_auth_key = pc_base::load_config('system', 'phpsso_auth_key');
+//		echo $ps_auth_key."<br/>";
+
+		$auth_data = $this->client->auth_data(array('uid'=>$this->memberinfo['phpssouid'],'sys_auth_time'=>microtime(true)), '', $ps_auth_key);
+//		echo $auth_data."<br/>";
+
+		$upurl = base64_encode($phpsso_api_url.'/index.php?m=phpsso&c=index&a=uploadavatar&auth_data='.$auth_data);
+//		echo $upurl;
+
 		//获取头像数组
 		$avatar = $this->client->ps_getavatar($this->memberinfo['phpssouid']);
 
@@ -41,6 +52,8 @@ class index extends foreground {
 
 		$grouplist = getcache('grouplist');
 		$memberinfo['groupname'] = $grouplist[$memberinfo[groupid]]['name'];
+
+
 		include template('member', 'account_manage');
 	}
 	
@@ -514,7 +527,6 @@ class index extends foreground {
 			}
 		}
 	}
- 	
 	
 	/*
 	 * 测试邮件配置
@@ -564,24 +576,98 @@ class index extends foreground {
 		}
 		echo $return;
    	}
-	
-	public function account_manage() {
-		$memberinfo = $this->memberinfo;
+
+	public function checkpwd_ajax() {
 /*
-		//输出当前用户的全部信息
-		echo "<pre>";
-		var_dump($memberinfo);
-		echo "<pre>";
-		exit();
+		$a =$_POST['param'];
+		echo $a;
+
+		$myfile = fopen("testfile.txt", "w");
+		fwrite($myfile,$this->memberinfo['password']);
+		fclose($myfile);
+		echo $this->memberinfo['password'];exit();
 */
+
+
+        if($this->memberinfo['password'] != password($_POST['param'], $this->memberinfo['encrypt'])) {
+			echo "原密码错误";exit;
+        }else{
+			echo "y";
+		}
+	}
+
+/*注册、登录验证*/
+	public function public_regEmail_ajax(){
+		$this->_init_phpsso();
+//		echo "aaa";exit();
+
+		$email = $_POST['param'];
+//		echo $email;exit();
+
+		$status = $this->client->ps_checkemail($email);
+
+		if($status == -1){
+			echo "该邮箱已经被注册";
+		}elseif($status== 1){
+			echo "y";
+		}
+	}
+
+	public function public_loginEmail_ajax(){
+		$this->_init_phpsso();
+		$email = $_POST['param'];
+		$status = $this->client->ps_checkemail($email);
+
+		if($status == 1){
+			echo "该邮箱未注册";
+		}elseif($status == -1){
+			echo "y";
+		}
+	}
+
+	public function public_forgetEmail_ajax(){
+		$this->_init_phpsso();
+		$email = $_POST['param'];
+		$status = $this->client->ps_checkemail($email);
+
+		if($status == 1){
+			echo "该邮箱未注册";
+		}elseif($status == -1){
+			echo "y";
+		}
+	}
+/*验证结束*/
+
+	public function account_manage() {
+
 		$_username=param::get_cookie('_username');
 		$touxiang = param::get_cookie('_touxiang');
 
+		$memberinfo = $this->memberinfo;
+/*
+		echo "<pre>";
+		print_r($memberinfo);
+		echo "<pre>";
+		exit();
+*/
+
 		//初始化phpsso
 		$phpsso_api_url = $this->_init_phpsso();
+
+//		echo $phpsso_api_url."<br/>";exit();
+
 		$ps_auth_key = pc_base::load_config('system', 'phpsso_auth_key');
+
+//		echo $ps_auth_key."<br/>";
+
 		$auth_data = $this->client->auth_data(array('uid'=>$this->memberinfo['phpssouid'],'sys_auth_time'=>microtime(true)), '', $ps_auth_key);
+
+//		echo $auth_data."<br/>";
+
 		$upurl = base64_encode($phpsso_api_url.'/index.php?m=phpsso&c=index&a=uploadavatar&auth_data='.$auth_data);
+
+//		echo $upurl;exit();
+
 		//获取头像数组
 		$avatar = $this->client->ps_getavatar($this->memberinfo['phpssouid']);
 
@@ -659,6 +745,7 @@ class index extends foreground {
 
 	public function account_manage_avatar() {
 		$memberinfo = $this->memberinfo;
+
 		//初始化phpsso
 		$phpsso_api_url = $this->_init_phpsso();
 		$ps_auth_key = pc_base::load_config('system', 'phpsso_auth_key');
@@ -732,7 +819,6 @@ class index extends foreground {
 //				showmessage(L('operation_success'), HTTP_REFERER);
 //			}
 		} elseif(isset($_POST['dosubmit02'])) {
-
 
 			$password=isset($_POST['password']) ? trim($_POST['password']):'';
 			$newpassword01=isset($_POST['newpassword']) ? trim($_POST['newpassword']):'';
@@ -1152,7 +1238,13 @@ class index extends foreground {
 			param::set_cookie('_nickname', $nickname, $cookietime);
 			//param::set_cookie('cookietime', $_cookietime, $cookietime);
 			$forward = isset($_POST['forward']) && !empty($_POST['forward']) ? urldecode($_POST['forward']) : 'index.php?m=member&c=index';
+/*
+			echo $_GET['forward'];exit();		//没有获取到forward,_GET和——POST
+			$forward = isset($_GET['forward']) && !empty($_GET['forward']) ? urldecode($_GET['forward']) : 'index.php?m=member&c=index';
+*/
 			showmessage(L('login_success').$synloginstr, $forward);
+
+//			showmessage(L('login_success').$synloginstr, HTTP_REFERER);
 		} else {
 			$setting = pc_base::load_config('system');
 			$forward = isset($_GET['forward']) && trim($_GET['forward']) ? urlencode($_GET['forward']) : '';
@@ -1644,8 +1736,9 @@ class index extends foreground {
 	 */
 	public function public_checkemail_ajax() {
 		$this->_init_phpsso();
+//		echo "aaa";exit();
 		$email = isset($_GET['email']) && trim($_GET['email']) ? trim($_GET['email']) : exit(0);
-		
+
 		$status = $this->client->ps_checkemail($email);
 		if($status == -5) {	//禁止注册
 			exit('0');
@@ -2193,7 +2286,6 @@ class index extends foreground {
 		}
 	}
 
-
 	public function public_forget_password () {
 
 		$email_config = getcache('common', 'commons');
@@ -2319,7 +2411,6 @@ class index extends foreground {
 			include template('member', 'forget_password');
 		}
 	}
-
 
 	public function public_forget_password02 () {
 
