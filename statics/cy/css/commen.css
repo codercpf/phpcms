@@ -71,6 +71,14 @@
 	border-radius: 5px
 }
 
+#description:focus{
+	border-color: #EF8D2C;
+	box-shadow: 0 0 15px #EF8D2C;
+	-webkit-box-shadow: 0 0 15px #EF8D2C;
+	-moz-box-shadow: 0 0 15px #EF8D2C
+}
+
+
 /* 
 #thumb {
 	width: 40%;
@@ -508,7 +516,8 @@ input.Validform_error {
 }
 
 .Validform_right {
-	color: green
+	/*color: green*/
+	display: none
 }
 
 .page-box {

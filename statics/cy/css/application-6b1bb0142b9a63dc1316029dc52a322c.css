@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+.Validform_wrong{	
+    line-height: 32px;
+    color: red;
+    text-align: left;
+    margin-left: 20px
+}
+.Validform_right{
+	display: none;
+}
+
 *, *:before, *:after {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -368,9 +378,10 @@ input:focus, textarea:focus, select:focus {
 }
 .wrapper {
 	width: 380px;
-	height: 480px;
+	/*height: 480px;*/
+	height: 100%;
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	margin: -240px 0 0 -190px;
 	text-align: center;
@@ -390,7 +401,7 @@ input:focus, textarea:focus, select:focus {
 	border-radius: 3px;
 	position: absolute;
 	width: 100%;
-	height: 100%
+	height: auto
 }
 .front {
 	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
@@ -589,14 +600,15 @@ input[type="text"], input[type="email"], input[type="password"] {
 	display: inline-block;
 	border-radius: 3px;
 	border: 1px solid #DFE1E8;
-	padding: 15px;
-	margin-bottom: 10px;
+	padding: 0 15px;
+	margin-top: 10px;
 	color: #747f8c
 }
 .input-submit {
 	background-color: #2376BC;
 	font-weight: bold;
-	color: #fff
+	color: #fff;
+	margin-top: 15px
 }
 .input-submit:hover {
 	background: #1f69a7
@@ -628,11 +640,12 @@ input[type="text"], input[type="email"], input[type="password"] {
 	margin-left: -120px
 }
 .third-part-login {
-	position: absolute;
+	/*position: absolute;*/
+	position: relative;
 	bottom: 0;
 	width: 100%;
 	left: 0;
-	padding: 20px
+	/*padding: 20px*/
 }
 .third-part-login .login-way a {
 	margin-right: 10px

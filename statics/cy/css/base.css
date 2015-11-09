@@ -1,0 +1,245 @@
+body {
+    margin: 0
+}
+
+html * {
+    -webkit-font-smoothing: antialiased;
+    font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif
+}
+
+body {
+    font-family: "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #32353d;
+    margin: 0;
+    background: #ececec
+}
+
+* {
+    box-sizing: border-box
+}
+
+*:before, *:after {
+    box-sizing: border-box;
+}
+
+.main-content-wrap {
+    min-height: 500px
+}
+
+
+.container {
+    width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+.investor-co .title.investor {
+    padding: 0;
+    margin: 40px 1px 0;
+    border-bottom: 1px solid #ddd
+}
+
+.title {
+    margin-bottom: 20px;
+    border-bottom: 1px solid transparent
+}
+
+.title.line {
+    border-color: #f2f2f2;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 0 20px
+}
+
+.title:after {
+    clear: both;
+}
+
+.title:before, .title:after {
+    display: table;
+    content: " ";
+    display: table;
+}
+
+.title h3 {
+    font-size: 16px;
+    float: left;
+    margin: 0;
+    position: relative;
+    top: 1px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #5e75db;
+    font-weight: 700
+}
+
+.investor-co .waitingVal.apply-syndicate {
+    height: auto;
+    font-size: 13px;
+    padding: 0 0 40px
+}
+
+.investor-co .waitingVal.apply-syndicate .apply-content:before {
+    content: " ";
+    display: table;
+}
+
+.investor-co .waitingVal.apply-syndicate .apply-content:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+.investor-co .waitingVal {
+    width: 100%;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: #000;
+    padding-top: 130px;
+    font-size: 15px;
+    margin: 30px 0 100px
+}
+
+.investor-co .waitingVal.apply-syndicate .apply-title {
+    width: 100%;
+    height: 73px;
+    background-color: #f9f9f9;
+    text-align: center;
+    line-height: 73px;
+    color: #000;
+    font-weight: 600
+}
+
+.investor-co .waitingVal.apply-syndicate .apply-content {
+    width: 100%;
+    background-color: #fff;
+    padding: 35px 0 35px 200px;
+    border-bottom: 1px solid #F8F8F8
+}
+
+.investor-co .waitingVal .complete-info {
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    text-align: center;
+    background-color: #008df2;
+    margin-top: 30px;
+    padding: 0 20px;
+    border-radius: 3px
+}
+
+.investor-co .waitingVal.apply-syndicate .mt-15 {
+    margin-top: 15px
+}
+
+.investor-co .waitingVal.apply-syndicate .apply-content section {
+    float: left;
+    text-align: left;
+    width: 33%
+}
+
+p {
+    margin: 0 0 9px
+}
+
+.investor-co .waitingVal.apply-syndicate .apply-content section h3 {
+    color: #c5c5c5;
+    margin-bottom: 20px
+}
+
+.investor-co h3 {
+    padding: 10px 15px;
+    border-color: #78bcec
+}
+
+h3,
+.h3 {
+    font-size: 23px
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+    margin-top: 18px;
+    margin-bottom: 9px
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit
+}
+
+user agent stylesheeth3 {
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold
+}
+
+.investor-co .waitingVal.apply-syndicate .apply-content section {
+    float: left;
+    text-align: left;
+    width: 33%
+}
+
+.investor-co .waitingVal.apply-syndicate .apply-content section .required {
+    color: red
+}
+
+.clearfix:before,
+.clearfix:after,
+.dl-horizontal dd:before,
+.dl-horizontal dd:after,
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after,
+.row:before,
+.row:after,
+.form-horizontal .form-group:before,
+.form-horizontal .form-group:after,
+.btn-toolbar:before,
+.btn-toolbar:after,
+.btn-group-vertical>.btn-group:before,
+.btn-group-vertical>.btn-group:after,
+.nav:before,
+.nav:after,
+.navbar:before,
+.navbar:after,
+.navbar-header:before,
+.navbar-header:after,
+.navbar-collapse:before,
+.navbar-collapse:after,
+.panel-body:before,
+.panel-body:after,
+.modal-footer:before,
+.modal-footer:after {
+    content: " ";
+    display: table
+}

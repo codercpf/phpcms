@@ -1,0 +1,9 @@
+<input type="button" class="button upload" onclick="javascript:flashupload('attachment_files', '附件上传','attachment',submit_attachment,'1,pdf|doc|docx|xls|xlsx|ppt|pptx|zip|rar|jpg|gif|png|jpeg|txt,0,,,,,1','content','679','0cbd4a3f415d622957ad47acf93f9238')" value="">
+
+<input class="button" onclick="flashupload('thumb_images', '附件上传','thumb',submit_images,'1,jpg|jpeg|gif|png|bmp,1,,,0','content','6','ffa4b7de650e5ee86e5d0eab79ccf0ff')" value="上传图片" type="button">
+
+		      onclick='flashupload("flashupload", "附件上传","content","","10,,1","content","6","f72e516b3fb651227c3051b72fb354c9");;return false;
+
+		      onclick='flashupload("flashupload", "附件上传","content","","10,,1","content","6","f72e516b3fb651227c3051b72fb354c9");;return false;'
+
+<script language='javascript' src='{APP_PATH}index.php?m=formguide&c=index&a=show&formid=12&action=js&siteid=1'></script>

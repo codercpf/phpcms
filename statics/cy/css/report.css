@@ -17,6 +17,36 @@ body {
     font-weight: 400;
     padding: 30px 30px 22px;
 }
+.help-main{
+	padding: 10px;
+}
+
+.help-apply{
+	padding: 10px;
+}
+
+.help-apply .form-control{
+	width: 450px !important;
+}
+
+#attachment{
+	width: 400px !important;
+	margin-right: 20px;
+}
+#busiplan{
+	width: 400px !important;
+	margin-right: 20px;
+}
+.Validform_wrong{
+	color: red;
+	margin-left: 20px;
+}
+.Validform_right{
+	display: none;
+}
+#Validform_msg{
+	display: none;
+}
 
 article,
 aside,
