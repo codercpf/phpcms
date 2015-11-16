@@ -414,7 +414,7 @@ input:focus, textarea:focus, select:focus {
 .header--logo__36kr {
 	width: 55px;
 	height: 30px;
-	background: url(https://passport.36kr.com/assets/logo-99a26e53bdd20539e0ff1d94c32f202c.svg) no-repeat;
+	background: url(../images/header.png) no-repeat;
 	text-indent: -9999em;
 	display: inline-block;
 	margin-bottom: 10px

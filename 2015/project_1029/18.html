@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="keywords" content="新生活">
+<meta name="description" content="幸福美好新生活！"><title>美好新生活 - 项目库 - PHPCMS演示站</title>
+<link href="http://phpcms/statics/css/base.css" rel="stylesheet" type="text/css" />
+<link href="http://phpcms/statics/css/UI.css" rel="stylesheet" type="text/css" />
+<link href="http://phpcms/statics/css/private.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="http://phpcms/statics/js/jquery.min.js" async="true"></script>
+<script type="text/javascript" src="http://phpcms/statics/js/jquery.sgallery.js" async="true"></script>
+<script type="text/javascript" src="http://phpcms/statics/js/search_common.js" async="true"></script><style type="text/css">
+/* 项目内容 */
+.project{overflow: hidden;}
+.project > div{ float: left;}
+.project > div.image{width:260px; height: 260px;}
+.project > div.image > img{display: block; width: 100%; height: 100%;}
+@media screen and (max-width: 1600px) {.project > div.content{position: absolute; right: 10px; left: 280px;}}
+.project > div.content{min-width: 260px;}
+.project > div.content > .title{line-height:32px;}
+.project > div.content > div.status{width:6em; line-height:32px; text-align:center; border-radius:16px; background-color: rgb(255,0,0); color: rgb(255,255,255);}
+.project > div.content > div.raising{padding-top:24px; line-height: 24px}
+.project > div.content > div.raising > strong{font-size:2em;}
+.project > div.content > div.hint{line-height:24px;}
+.project > div.content > div.hint > strong{color:rgb(225,65,65);}
+.project > div.content > div.schedule{line-height:24px;}
+.project > div.content > div.schedule > span{margin-left:2em;}
+.project > div.content > div.schedule > span:first-child{margin-left:0;}
+.project > div.content > div.influence{float: right; line-height: 24px; padding-right:10px; margin-top:8px;}
+.project > div.content > div.influence > a{margin-right: 1em; margin-left: 2em;}
+.project > div.content > div.influence > a:first-child{margin-left:0;}
+
+/* 项目相关 */
+.wrapper > div.content{min-height:10em;}
+.wrapper .title.bg{background-color: rgb(65,105,225); color: rgb(255,255,255);}
+.team > div.content > ul > li{float:left; width: 50%;}
+.team > div.content > ul > li > a,.wrapper > div.content > ul > li > a > img{display:block;}
+.team > div.content > ul > li > a{overflow: hidden; padding-top:0.5em; padding-bottom:0.5em; position: relative;}
+.team > div.content > ul > li:nth-child(odd) > a{padding-right:0.5em;}
+.team > div.content > ul > li:nth-child(even) > a{padding-left: 0.5em;}
+.team > div.content > ul > li > a > img{width: 10em; height: 10em; border-radius: 50%; position: absolute; top:0.5em; left:0;}
+.team > div.content > ul > li > a > div.info{height:10em; margin-left: 11em;}
+.team > div.content > ul > li > a > div.info > h6{line-height:1em;}
+.team > div.content > ul > li > a > div.info > div.level{color:rgb(64,64,64); line-height: 2em;}
+.team > div.content > ul > li > a > div.info > div.brief{line-height:1em; height:7em; overflow: hidden;}
+.schedule > div.content > ul > li > div.time{margin-left:1em; line-height: 2em;}
+.schedule > div.content > ul > li > div.time:after{width:0.5em; height:0.5em; background-color: rgb(255,0,0); border-radius: 50%; content:""; position: absolute; left:-1.2em; top:0.65em;}
+.schedule > div.content > ul > li > div.time:before{width:1.0em; height:1.0em; border:0.2em solid rgb(255,0,0); border-radius: 50%; content:""; position: absolute; left:-1.65em; top:0.25em;}
+.discuss > div.content > form{display: block; overflow: hidden;}
+.discuss > div.content > form > textarea{width:100%; height:10em; box-sizing: border-box; display: block;}
+.discuss > div.content > form > button{display: block;}
+</style>
+</head>
+<body>
+<div class="site">
+    <!-- 网站头部 -->
+<div class="header">
+    <!-- 导航栏 -->
+    <div class="navbar">
+        <div>
+            <div class="container">
+                <div class="logo"><a href="#"><img src="" alt="创咖zu"></a></div>
+                <div class="fixed">
+                    <ul class="separate">                        <li class="active"><a href="/">主页</a></li>                        <li class="menu">
+                            <a href="#">资讯</a>                            <ul>                            </ul>                        </li>                        <li class="menu">
+                            <a href="#">创业者</a>                            <ul>                            </ul>                        </li>                        <li class="menu">
+                            <a href="#">发现</a>                            <ul>                                <li><a href="http://phpcms/faxian/project/">项目库</a></li>                            </ul>                        </li>                    </ul>
+                    <style>
+body,html{background:none; padding:0; margin:0}
+.log{line-height:24px;*line-height:27px; height:24px;float:right; font-size:12px}
+.log span{color:#ced9e7}
+.log a{color:#049;text-decoration: none;}
+.log a:hover{text-decoration: underline;}
+.log .snda{ position:relative; bottom:-3px}
+.log .upv_btn{height: 24px; padding-left: 14px; position: relative; background:url(http://phpcms/statics/images/up_btn.gif) no-repeat 0px 0px; margin-left:0px; margin-right:10px; *background-position:0px 5px;}
+.log .r{float:right;}
+.log .w27{* width:320px;}
+</style>
+<body style="background-color:transparent">
+<div class="log w27"> <span class="r"><a href="http://phpcms/index.php?m=member&c=index&a=register&siteid=1" target="_blank">register</a> <span>|</span> <a href="http://phpcms/index.php?m=member&c=index&a=login&forward=&siteid=1" target="_top">login</a>&nbsp;&nbsp;<a href="http://phpcms/index.php?m=member&c=content&a=upload_video" target="_top" class="upv_btn">上传视频</a></span>
+</div>
+</body>                </div>
+            </div>
+        </div>
+        <!--
+        <div id="notice" class="notice">
+            <div class="container">公告提示：某某某某网全线升级，由此给您带来的不便请谅解。如在浏览和操作过程中有任何问题或建议欢迎指出，客服电话：0000-00000000</div>
+            <div class="close"></div>
+        </div>
+        -->
+    </div>
+</div>    <div class="content">
+        <div class="container hidden margin-bottom">
+            <div class="nav margin-top">
+                <div class="project bg border padding">
+                    <div class="image"><img src="http://phpcms/uploadfile/2015/1029/20151029110451944.jpg"></div>
+                    <div class="content bg">
+                        <h4 class="title">美好新生活</h4>
+                        <div class="status">并购</div>
+                        <div class="raising">已筹集：<strong>￥0</strong></div>
+                        <div class="hint dark">此项目需筹集 <strong>￥1,446,087,843</strong> 资金</div>
+                        <div class="meter border hidden"><span style="width: 0%"></span></div>
+                        <div class="schedule margin-top"><span>进度：0%</span></div>
+                        <div><span>剩余时间：364天23小时59分59秒</span></div>
+                        <div class="influence"><a class="dark" href="#">支持</a><span class="dark">9999</span><a class="dark" href="#">关注</a><span class="dark">99999</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="main margin-top">
+                <div class="wrapper border explain">
+                    <div class="title bg padding">
+                        <h5>项目介绍</h5>
+                    </div>
+                    <div class="content bg padding">幸福美好新生活！</div>
+                </div>
+                <div class="wrapper border margin-top team">
+                    <div class="title bg padding">
+                        <h5>团队成员</h5>
+                    </div>
+                    <div class="content bg padding hidden">
+                        <ul>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <img src="">
+                                    <div class="info">
+                                        <h5>某某某</h5>
+                                        <div class="level">CEO</div>
+                                        <div class="brief dark">这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <img src="">
+                                    <div class="info">
+                                        <h5>某某某</h5>
+                                        <div class="level">CEO</div>
+                                        <div class="brief dark">这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <img src="">
+                                    <div class="info">
+                                        <h5>某某某</h5>
+                                        <div class="level">CEO</div>
+                                        <div class="brief dark">这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！这是一段个人描述内容！</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="wrapper border margin-top schedule">
+                    <div class="title bg padding">
+                        <h5>项目进度</h5>
+                    </div>
+                    <div class="content bg padding">
+                        <ul class="padding">
+                            <li>
+                                <div class="time dark">2015-10-21</div>
+                                <div class="border-left">
+                                    <div class="contene margin-left">这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="time dark">2015-10-20</div>
+                                <div class="border-left">
+                                    <div class="contene margin-left">这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="time dark">2015-10-11</div>
+                                <div class="border-left">
+                                    <div class="contene margin-left">这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="time dark">2015-10-09</div>
+                                <div class="border-left">
+                                    <div class="contene margin-left">这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="time dark">2015-10-01</div>
+                                <div class="border-left">
+                                    <div class="contene margin-left">这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！这是一段项目进度内容！</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="wrapper border margin-top discuss">
+                    <div class="title bg padding">
+                        <h5>话题讨论</h5>
+                    </div>
+                    <div class="content bg padding hidden">
+                        <form>
+                            <textarea class="margin-bottom"></textarea>
+                            <button class="right">发布</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar margin-top">
+      <div class="reference border bg">
+            <div class="title border-bottom">
+                  <div class="bg">最新资讯</div>
+                  <a class="right" href="#" target="_blank">更多</a>
+            </div>
+            <div class="content">
+                  <ul>
+                        <li><a href="#" target="_blank">这是一条测试用的资讯标题，仅仅为了看看效果而已！</a></li>
+                        <li><a href="#" target="_blank">这是一条测试用的资讯标题，仅仅为了看看效果而已！</a></li>
+                        <li><a href="#" target="_blank">这是一条测试用的资讯标题，仅仅为了看看效果而已！</a></li>
+                        <li><a href="#" target="_blank">这是一条测试用的资讯标题，仅仅为了看看效果而已！</a></li>
+                        <li><a href="#" target="_blank">这是一条测试用的资讯标题，仅仅为了看看效果而已！</a></li>
+                  </ul>
+            </div>
+      </div>
+      <div class="reference border bg margin-top">
+            <div class="title border-bottom">
+                  <div class="bg">创业者</div>
+                  <a class="right" href="#" target="_blank">更多</a>
+            </div>
+            <div class="content">
+                  <ul>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                  </ul>
+            </div>
+      </div>
+      <div class="reference border bg margin-top">
+            <div class="title border-bottom">
+                  <div class="bg">投资人</div>
+                  <a class="right" href="#" target="_blank">更多</a>
+            </div>
+            <div class="content">
+                  <ul>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                        <li>
+                              <div class="picture"><a href="#" target="_blank"><img src=""></a></div>
+                              <div class="info">
+                                    <h6><a href="#" target="_blank">公司名称</a></h6>
+                                    <div>随便写点公司简介信息，用来测试UI样式。最多显示两行超出部分会隐藏！</div>
+                              </div>
+                        </li>
+                  </ul>
+            </div>
+      </div>
+      <div class="reference border bg margin-top">
+            <div class="title border-bottom">
+                  <div class="bg">近期活动</div>
+                  <a class="right" href="#" target="_blank">更多</a>
+            </div>
+            <div class="content">
+                  <ul>
+                        <li>
+                              <div class="item">
+                                    <a href="#" target="_blank">
+                                          <img src="">
+                                          <h6>这是一条测试用的活动标题，鼠标停留才会显示！</h6>
+                                    </a>
+                              </div>
+                        </li>
+                        <li>
+                              <div class="item">
+                                    <a href="#" target="_blank">
+                                          <img src="">
+                                          <h6>这是一条测试用的活动标题，鼠标停留才会显示！</h6>
+                                    </a>
+                              </div>
+                        </li>
+                  </ul>
+            </div>
+      </div>
+</div>        </div>
+    </div>
+    <div class="footer">
+    <div class="sections"></div>
+    <div class="link">
+        <div class="container">
+            <a href="#">关于我们</a> | <a href="#">广告服务</a> | <a href="#">友情合作</a> | <a href="#">版权声明</a> | <a href="#">诚聘英才</a> | <a href="#">杂志订阅</a> | <a href="#">网站地图</a> | <a href="#">所有标签</a> | <a href="#">意见反馈</a>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="container">
+            <p>Copyright 2013-2015 xxxx.com All rights reserved 豫ICP备00000000号</p>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

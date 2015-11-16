@@ -1,0 +1,49 @@
+{template "content","header"}
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/commen.css">
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/search2.css">
+<!--main-->
+<div id="main" class="com-width mt90 clearfix">
+    <div class="list-wrap fl">
+        <div class="search-page-content com-width clearfix" style="margin-top:0">
+            <div style="float: left;">
+                <div class="search-left">
+                    <div class="search-page-number">
+                        <h1 class="keyword">{$tag}</h1>
+                    </div>                    
+                    <div class="search-data-list">
+                    {loop $datas $r}
+                        <div class="content-item clearfix">
+                            <div class="item-img fl">
+                                <a href="{$r[url]}" target="_blank">
+                                    <img src="{thumb($r[thumb],186,118,0)}" alt="" title=""></a>
+                            </div>
+                            <div class="item-info fl">
+                                <h2 class="item-tit">
+                                    <a href="{$r[url]}" target="_blank">{$r[title]}</a>
+                                </h2>
+                                <p class="item-intro">{str_cut($r[description],300)}</p>
+                                
+                                <p class="item-other">
+                                    <!-- <span class="author fl">陈畅</span> -->
+                                    <span class="time fl">{date('Y-m-d',$r[inputtime])}</span>                                    
+                                    <span class="tag fr">
+                                        标签：
+                                        {loop $r[keywords] $keyword}
+                                        <a href="{APP_PATH}index.php?m=content&c=tag&a=lists&tag={urlencode($keyword)}" target="_blank">{$keyword}</a>
+                                        {/loop}
+                                    </span>
+                                </p>                                 
+                            </div>
+                        </div>
+                    {/loop}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--首页右侧-->
+    {template 'content', 'rightside'}
+    <!--首页右侧-->
+</div>
+
+{template "content","footer"}

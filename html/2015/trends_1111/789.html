@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+	<title>Google与卡片式设计 - 业界动态 - PHPCMS演示站</title>
+	<meta name="keywords" content="卡片式,Google">
+	<meta name="description" content="Google产品越来越漂亮了，几乎越来越有一种朴素感的优雅。">
+
+	<link href="/statics/cy/css/application-25c061b6812a335274613e0652c8ed2f.css" media="all" rel="stylesheet">
+	<!-- <script src="/statics/cy/js/jweixin-1.0.0.js"></script> -->
+	<script src="/statics/cy/js/application-b9bf4d65691ee1d3061d9563a2e7af31.js"></script>
+	<!--[if lt IE 9]>
+	<script src="https://kryptoners.b0.upaiyun.com/vender/html5shiv/dist/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body style="padding-top: 0px;">
+	<link rel="stylesheet" type="text/css" href="/statics/cy/css/header.css">
+	<link rel="stylesheet" type="text/css" href="/statics/cy/css/animate.min.css">
+
+	<header class="common-header J_commonHeaderWrapper animated fadeInDown" data-stat-module="dingbudaohang" style="position: relative;">
+		<div class="container">
+			<a class="logo" href="http://phpcms/">
+				<img src="/statics/cy/images/logo.png" alt="">
+			</a>
+			<nav>
+				<ul class="J_navList">							
+					<li name="news" class="active" style="padding-right: 40px">
+						<a href="http://phpcms/">首页</a>
+					</li>
+					
+					<li>
+						<!-- <a href="http://phpcms/html/news/" >资讯<i class="headericon-arrow-drop-down"></i></a> -->
+						<a>资讯<i class="headericon-arrow-drop-down"></i></a>
+						<div class="service-wrap pop-up" >
+
+							<div class="menu">
+															<a href="http://phpcms/html/news/trends/">业界动态</a>
+															<a href="http://phpcms/html/news/imbark/">创业学院</a>
+															<a href="http://phpcms/html/news/employer/">企业服务</a>
+														</div>
+						</div>
+					</li>
+					<li>
+						<!-- <a href="http://phpcms/html/entrepreneurs/" >创业者<i class="headericon-arrow-drop-down"></i></a> -->
+						<a>创业者<i class="headericon-arrow-drop-down"></i></a>
+						<div class="service-wrap pop-up" >
+
+							<div class="menu">
+															<a href="http://phpcms/html/entrepreneurs/finance/">我要融资</a>
+															<a href="http://phpcms/html/entrepreneurs/businessplan/">商业计划书</a>
+															<a href="http://phpcms/html/entrepreneurs/report/">寻求报道</a>
+															<a href="http://phpcms/html/entrepreneurs/apply/">孵化器入驻</a>
+														</div>
+						</div>
+					</li>
+					<li>
+						<!-- <a href="http://phpcms/faxian/" >发现<i class="headericon-arrow-drop-down"></i></a> -->
+						<a>发现<i class="headericon-arrow-drop-down"></i></a>
+						<div class="service-wrap pop-up" >
+
+							<div class="menu">
+															<a href="http://phpcms/index.php?m=content&c=index&a=lists&catid=19">创业公司</a>
+															<a href="http://phpcms/faxian/project/">项目库</a>
+															<a href="http://phpcms/index.php?m=content&c=index&a=lists&catid=21">近期活动</a>
+														</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="right-col J_rightNavWrapper">
+				<ul class="sub-nav">
+					<li class="search-item" style="padding-right: 40px;">
+						<a href="javascript:void(0)"data-stat-hover="sousuo">
+							<i class="headericon-header-search"></i>
+							搜索
+						</a>
+						<div class="search-wrap pop-up">
+							<div class="searchbar">
+
+								<form action="http://phpcms/index.php" class="J_searchForm" method="get" target="_blank">
+									<input type="hidden" name="m" value="search"/>
+									<input type="hidden" name="c" value="index"/>
+									<input type="hidden" name="a" value="init"/>
+									<input type="hidden" name="typeid" value="1" id="typeid"/>
+									<input type="hidden" name="siteid" value="1" id="siteid"/>
+					                <input type="text" class="text" name="q" id="q" placeholder="搜索" required/>
+					                <button class="headericon-header-search search-icon" type="submit"></button>
+					            </form>				            
+							</div>
+						</div>
+					</li>						
+
+<!-- 未登录 -->
+					<li class="login-actions">
+						<a href="http://phpcms/index.php?m=member&c=index&a=login" target="_blank" class="login-link J_login" >
+							<i class="headericon-header-user"></i>
+							登录
+						</a>
+					</li>
+
+<!-- 用户中心结束 -->
+
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<link rel="stylesheet" href="/statics/cy/css/commen.css">
+	<link type="text/css" href="/statics/cy/css/article.css" rel="stylesheet">
+	<!-- <link type="text/css"  href="/statics/cy/css/index.css" rel="stylesheet"> -->
+	<script type="text/javascript" src="/statics/cy/js/jquery.min2.js"></script>
+
+		<div id="main" class="com-width mt90 clearfix">
+
+		<div class="list-wrap fl" style="width: 890px;/* margin-right:55px; */">
+
+			<div id="article">
+				<!--文章标题/摘要/作者/来源-->
+				<div id="article-hd" class="clearfix">
+					<h1 class="article-tit">Google与卡片式设计</h1>
+
+					<div class="article-copyform clearfix">
+
+						<div class="article-type fl"></div>
+						<div class="article-author fl"></div>
+						<div class="article-time fl" data-time="" title="">2015-11-11 17:41</div>
+						
+					</div>
+					<p class="article-introduction">Google产品越来越漂亮了，几乎越来越有一种朴素感的优雅。</p>
+				</div>
+
+
+				<!--文章主体内容-->
+				<div id="article-content">
+					<div style="text-align: center;"><img alt="\" src="http://phpcms/uploadfile/2015/1111/20151111054050669.jpg" style="width: 900px; height: 506px;" /></div>
+你可能也注意到，Google产品越来越漂亮了，几乎越来越有一种朴素感的优雅。在设计上，Google有一段不堪回首的岁月，曾经居然把设计的重心放在研究&ldquo;网站链接41种不同蓝色阴影效果&rdquo;这种细枝末节上，而现在，Google学会了用整洁的风格进行设计，设置清爽易读的字体，在页面中留下充足的留白空间以便聚焦用户注意力。在一次又一次的优秀设计中，Google逐渐形成了自己的设计风格和设计模式，最近，他们重新开发了一种理念：卡片式设计<br />
+跟昔日的索引卡和名片一样，Google的卡片式设计风格是平化的，不加点缀，最多也就一幅图像。但这里有一个问题，从外观上看，卡片式设计似乎是最近流行的扁平化设计的一种缩影，但是卡片式设计模仿的对象又是卡片，这又是拟物设计的特征。我猜在Google内部也曾对这个问题进行过讨论。无论如何，这种设计方式是一种彻底性的革命，Google对深度信息进行了简化，换言之，就是以最小巧的包装呈递最大量的信息<br />
+我们首先在Google knowledge Graph(知识图谱）上看到卡片式设计牛刀小试，在这款产品中，Google从维基百科中借鉴了大量有益的特质并加以凝练。随着经验的不断累积，终于将卡片式设计的种种归于一身，形成了Google Now这款产品，Google Now使用卡片式风格，智能化的提供更深度的搜索，提供超前的搜索（比方说你搜索一个商店，Google Now会顺便提供该区域天气状况、路况、注意事项等信息）。而Google+和Google Map上，也出现了卡片式设计。<br />
+Google正在卡片化他的产品线。<br />
+卡片式设计是优秀的设计，还是一种老套的把戏？<br />
+&ldquo;其实无需设计新的方法，也能实现信息组织的有序化。&rdquo;Matias Duarte,Android的用户体验主监如是说&ldquo;我们在一种古老的图像与信息设计产品&mdash;&mdash;卡片上找到了突破口，名片、电话卡、贺年卡、扑克牌，林林总总，但是他们和Google的卡片一样，都是为了解决同一类设计问题，也就是信息组织的有序化问题。&rdquo;<br />
+在进行Google Now的研发时，Google在寻找一种能够将数据条理化、小型化的用户界面，这时设计师们意识到他们需要一种&ldquo;有形的实体容器&rdquo;，需要一种可堆叠的、便于操作的区块，并且这种区块能够灵活的容纳内容：既可以单张使用，来呈递一些短小的信息。也可以组成序列，呈递一系列、大量的信息。因此卡片式设计被发掘出来，这种古老的设计有一种出乎人意料的优点：它非常易于叠加。<br />
+但是卡片自身有一定的局限性，由于空间问题，一般来说，一张卡片上只能放置一张图像。&ldquo;在Google Now的设计上，这种限制反而有所帮助&rdquo;Duarte说&ldquo;这种限制迫使我们要做到&lsquo;专注&rsquo;，要特别注意界面的视觉凝聚力，迫使我们在一张卡片上只放置一张图像，这样整个布局就会显得很整洁。&rdquo;<br />
+卡片式设计像病毒一样传播于Google<br />
+Google的卡片式设计具有很多优点：首先，构建了更具视觉凝聚力的信息呈递模式，其次，它简化了操作，减少了对链接的依赖。卡片能够在有限的空间中，以短平快的方式提供用户所需要的书籍，同时筛除不相关的数据冗余。而且对于任何屏幕，卡片具有同样的适用性，无论是9英寸的平板，还是Google Glass。<br />
+越仔细注意Google的产品，就越能发现卡片式设计在信息处理上的增益效果。颇有些&ldquo;以巧破力&rdquo;的味道，处理UX问题时，卡片式设计能够将复杂问题简单化。卡片式设计像根状网络一样，蔓延在Google帝国中：逐渐的被Google一支又一支团队的采用。不过我敢肯定，Google内部并没有统一口径说一定要用卡片式设计。应该是他们自发的，因为卡片式设计优点实在太多。<br />
+Google+目前有超过30种的卡片式设计。<br />
+&ldquo;卡片式设计让内容更加直观，更具有视觉凝聚力，是一种极简主义设计。&rdquo;Google+的设计主创Fred Gilbert如是说，而且Gooogle+中已经有30多种卡片式设计。Gilbert指出了这些设计的差异之处，要不是他指出来，我还真看不出来这些细微的差别。<br />
+但是这些细节有其存在的必要，要不然，&ldquo;聚会邀请类&rdquo;的信息会与&ldquo;度假照片类&rdquo;的信息有所冲突。将不同类的内容进行区分，却依然能保持和谐的共存。而且卡片式设计的弹性极佳，在笔记本上可以是三栏，而在手机上可以是一栏。而且内容都是相同的，保持了体验的一致性<br />
+这几乎是一种&ldquo;后拟物时代&rdquo;的设计<br />
+经常会有人注意到卡片式设计在视觉上的出众体验，而忽略了其在交互设计上的作用，卡片式设计让信息的&ldquo;感觉&rdquo;更好。不知各位有没有发现，有一个名词在本次访谈中经常出现：实体感。&ldquo;我们试图赋予卡片式设计一种轻盈的实体感&rdquo;Durate说&ldquo;想像一下，生活中的卡片非常的轻薄，因此在设计时就一定要设计的简单一点，毕竟卡片不是一种厚重的东西，而且，轻归轻，要设计的有实体感&rdquo;<br />
+尽管Google的卡片式设计只不过是数字屏幕后的一种幻象式欺骗，但Google的设计师们依然参照生活中的对照物进行模仿、构建，这样就能有一种隐喻，有一种来自现实逻辑的操作暗示：我们可以去摸、去翻动、去旋转这些&ldquo;卡片&rdquo;。<br />
+GoogleMaps中就通过卡片式设计来显示餐馆地址、方位，用户点评以及Zagat网站点评。可扩展折叠的卡片可以更方便的展示信息，卡片解决了一个交互问题：原来用列表来展示信息的方式容易挡住地图。卡片让信息具有更大的可塑性。<br />
+卡片式处于极简主义设计和拟物设计的中间，是一种微妙的平衡。<br />
+JohnahJones,Google Maps的交互设计师，他说&ldquo;但又出现了一个问题，因为人们对于卡片的概念根深蒂固，认为卡片就是一张固定的卡片，当卡片折叠的时候，用户会认为无法再扩展开，当卡片扩展开时，用户会认为卡片无法折叠&rdquo;<br />
+因为卡片式设计的实体感，使之处于极简主义（也就是今天我们推崇的扁平化设计）和拟物设计的中间。Google Maps的团队发现，卡片可以在Google Map中很自然的堆叠，就像现实生活中一样，如果设计团队对卡片的顺序稍加排列，那么用户就能非常自然的使用卡片读取信息，而且更棒的是，卡片式设计节省了珍贵的空间。<br />
+卡片式设计是Google的万金油<br />
+在日常生活中，白色矩形的、有点像便条的卡片毫不起眼，可以非常容易的装进口袋中。但是现在，卡片式设计已经出现在Google的大部分产品中，已经成为Google展现数据与信息的新模式。卡片式设计通过实体感来引导用户，并带给用户一种熟悉的操作体验，而且极具弹性，适用于多种界面、多种设备。<br />
+卡片式设计的作用名副其实，确实是一种跨平台的万金油。Google与我们的生活联系非常紧密，我们生活的各个方面都离不开它所提供的信息。而卡片式设计无疑是数据与用户之间重要的缓冲器，它帮助用户更直接的获取信息。					<p style="text-align: right;">（编辑：Zoey)</p>
+				</div>
+
+
+				<!--文章标签-->
+				<div id="article-tag" class="clearfix">
+					<div class="article-tag-box fl">
+						<span>标签:</span>
+												<a href="http://phpcms/index.php?m=content&c=tag&a=lists&tag=%E5%8D%A1%E7%89%87%E5%BC%8F" class="blue">卡片式</a>
+												<a href="http://phpcms/index.php?m=content&c=tag&a=lists&tag=Google" class="blue">Google</a>
+						<!-- 
+						<a href="#">通用</a>
+						<a href="#">自动驾驶汽车</a>
+ -->
+					</div>
+
+
+<!-- 文章分享 -->
+					<div class="article-share fr" id="article-end-share">						
+
+						<span id='favorite' class="article-pos-collect article-end-collect" data-modelid="9">
+							<a href="javascript:;" onclick="add_favorite('Google与卡片式设计');" class="t6">
+								<i class="share-collect"></i><em>收藏</em>
+							</a>
+						</span>
+
+						<span class="ly_share">
+							<a class="lingying" onclick="postToWb();" ><em>腾讯微博</em></a>
+							<script type="text/javascript">
+								function postToWb(){
+										var _t = encodeURI(document.title);
+										var _url = encodeURIComponent(document.location);
+										var _appkey = encodeURI("cba3558104094dbaa4148d8caa436a0b");
+										var _pic = encodeURI('http://phpcms/uploadfile/2015/1111/20151111054050669.jpg');
+										var _site = '';
+										var _u = 'http://v.t.qq.com/share/share.php?url='+_url+'&appkey='+_appkey+'&site='+_site+'&pic='+_pic+'&title='+_t;
+										window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
+								}
+							</script>
+						</span>
+
+						<span class="article-pos-weibo article-end-weibo">
+							<a class="share-weibo" onclick="postToSina();"><i class="share-weibo"></i><em>新浪微博</em></a>
+							<script type="text/javascript">
+								function postToSina(){
+									var _t = encodeURI(document.title);
+									var _url = encodeURIComponent(document.location);
+									// var _appkey = encodeURI("cba3558104094dbaa4148d8caa436a0b");
+									var _appkey = '3172366919';
+
+									var _pic = encodeURI('http://phpcms/uploadfile/2015/1111/20151111054050669.jpg');
+									var _site = '';
+
+									var _u = 'http://v.t.sina.com.cn/share/share.php?url='+_url+'&appkey='+_appkey+'&title='+encodeURIComponent('Google与卡片式设计');
+									window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
+								}
+							</script>							
+						</span>
+
+						<!-- 分享到微信 -->
+<!-- 
+						<span class="article-pos-weixin article-end-weixin" data-url="http://kuailiyu.cyzone.cn/article/15166.html">
+							<i class="share-weixin"></i>
+							<em>微信</em>
+							<div class="share-weixin-dropdown" style="display: none;">
+								<img class="QrCodeImg" alt="" src="./includefiles/qrcode.php">
+							</div>
+						</span>
+-->						
+						<!-- 微信分享结束 -->
+
+					</div>
+<!-- 分享结束 -->
+				</div>
+
+
+
+				<!--相关文章 相关产品-->
+			</div>
+
+<!-- 文章评论 -->
+	      <iframe src="http://phpcms/index.php?m=comment&c=index&a=init&commentid=content_23-789-1&iframe=1" width="100%" height="100%" id="comment_iframe" frameborder="0" scrolling="no"></iframe>
+		<!-- 底部评论排行 -->
+      	<!-- <div class="box">
+      	        		<h5>评论排行</h5>
+      					       	            	<ul class="content list blue f14 row-2">
+      					      	                	<li>·<a href="http://phpcms/index.php?m=content&c=index&a=show&catid=16&id=772" target="_blank">Google欲打开中国市场，...</a>
+      	                		<span>(4)</span>
+      	                		<span>content_16-772-1</span>
+      	                	</li>
+      					      	                	<li>·<a href="http://phpcms/index.php?m=content&c=index&a=show&catid=16&id=773" target="_blank">电信设备行业诺基亚+阿朗...</a>
+      	                		<span>(2)</span>
+      	                		<span>content_16-773-1</span>
+      	                	</li>
+      					      	                	<li>·<a href="http://phpcms/index.php?m=content&c=index&a=show&catid=12&id=654" target="_blank">少将：中国影响南海航行...</a>
+      	                		<span>(1)</span>
+      	                		<span>content_12-654-1</span>
+      	                	</li>
+      					      	                	<li>·<a href="http://phpcms/index.php?m=content&c=index&a=show&catid=12&id=771" target="_blank">实习生的残酷世界</a>
+      	                		<span>(1)</span>
+      	                		<span>content_12-771-1</span>
+      	                	</li>
+      					      	                </ul>
+      					      	        </div> -->
+		<!-- 底部评论排行结束 -->
+    <!-- 评论结束 -->
+
+		</div>
+
+<!-- 侧边栏 -->
+<div class="right">
+	
+<!-- 点击排行榜 -->
+<link type="text/css" href="/statics/cy/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="/statics/cy/js/jquery.min2.js"></script>
+<script type="text/javascript" src="/statics/cy/js/jquery.idTabs.min.js"></script>
+
+<div id="right-1" class="R-mainbox1 mar-b20">
+	<h3 class="zlzj-title">
+		<span>排行榜</span>
+	</h3>
+	<div class="top-list">
+		<ul class="top-list-ul">
+			<li>
+				<a href="#top-list-1" class="selected">日</a>
+			</li>
+			<li>
+				<a href="#top-list-2">周</a>
+			</li>
+			<li>
+				<a href="#top-list-3">月</a>
+			</li>
+		</ul>
+		<div id="top-list-1" style="display: block;">
+			<ul class="wpp-list item">
+												<li class="title-li">
+					 <i class="s-number">1</i>
+					<a href="http://phpcms/html/2015/trends_1026/777.html" title="手游生态 巨头称霸下迎来创业者破局" class="wpp-post-title" target="_blank" >手游生态 巨头称霸下迎来创业者破局</a>						
+				</li>
+								<li class="title-li">
+					 <i class="s-number">2</i>
+					<a href="http://phpcms/html/2015/trends_1107/779.html" title="我是如何从程序员一步一步走向产品经理" class="wpp-post-title" target="_blank" >我是如何从程序员一步一步走向产品经理</a>						
+				</li>
+								<li class="title-li">
+					 <i class="s-number">3</i>
+					<a href="http://phpcms/html/2015/trends_1024/774.html" title="社交电商，微信还有很长的路要走" class="wpp-post-title" target="_blank" >社交电商，微信还有很长的路要走</a>						
+				</li>
+								<li class="title-li">
+					 <i class="q-number">4</i>
+					<a href="http://phpcms/html/2015/trends_1024/775.html" title="降息来临，互联网金融从高收益大战转向安全大战" class="wpp-post-title" target="_blank" >降息来临，互联网金融从高收益大战转向...</a>						
+				</li>
+								<li class="title-li">
+					 <i class="q-number">5</i>
+					<a href="http://phpcms/html/2015/trends_1024/776.html" title="O2O方程式解密：看懂它，就知道谁会死" class="wpp-post-title" target="_blank" >O2O方程式解密：看懂它，就知道谁会死</a>						
+				</li>
+								<li class="title-li">
+					 <i class="q-number">6</i>
+					<a href="http://phpcms/html/2015/trends_1111/789.html" title="Google与卡片式设计" class="wpp-post-title" target="_blank" >Google与卡片式设计</a>						
+				</li>
+								<li class="title-li">
+					 <i class="q-number">7</i>
+					<a href="http://phpcms/html/2015/employer_1021/772.html" title="Google欲打开中国市场，用出门问问作敲门砖？" class="wpp-post-title" target="_blank" >Google欲打开中国市场，用出门问问作敲门砖？</a>						
+				</li>
+								<li class="title-li">
+					 <i class="q-number">8</i>
+					<a href="http://phpcms/html/2015/employer_1021/773.html" title="电信设备行业诺基亚+阿朗，合并后将形成巨大专利优势" class="wpp-post-title" target="_blank" >电信设备行业诺基亚+阿朗，合并后将形成...</a>						
+				</li>
+				 
+							</ul>
+		</div>
+		<div id="top-list-2" style="display: none;">
+			<ul class="wpp-list item">
+												<li class="title-li">
+										<i class="s-number">1</i>
+					<a href="http://phpcms/html/2015/employer_1021/772.html" title="Google欲打开中国市场，用出门问问作敲门砖？" class="wpp-post-title" target="_blank" >Google欲打开中国市场，用出门问问作敲门砖？</a>						
+				</li>
+								<li class="title-li">
+										<i class="s-number">2</i>
+					<a href="http://phpcms/html/2015/trends_1026/777.html" title="手游生态 巨头称霸下迎来创业者破局" class="wpp-post-title" target="_blank" >手游生态 巨头称霸下迎来创业者破局</a>						
+				</li>
+								<li class="title-li">
+										<i class="s-number">3</i>
+					<a href="http://phpcms/html/2015/trends_1111/789.html" title="Google与卡片式设计" class="wpp-post-title" target="_blank" >Google与卡片式设计</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">4</i>
+					<a href="http://phpcms/html/2015/trends_1024/774.html" title="社交电商，微信还有很长的路要走" class="wpp-post-title" target="_blank" >社交电商，微信还有很长的路要走</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">5</i>
+					<a href="http://phpcms/html/2015/trends_1024/775.html" title="降息来临，互联网金融从高收益大战转向安全大战" class="wpp-post-title" target="_blank" >降息来临，互联网金融从高收益大战转向...</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">6</i>
+					<a href="http://phpcms/html/2015/trends_1107/779.html" title="我是如何从程序员一步一步走向产品经理" class="wpp-post-title" target="_blank" >我是如何从程序员一步一步走向产品经理</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">7</i>
+					<a href="http://phpcms/html/2015/trends_1024/776.html" title="O2O方程式解密：看懂它，就知道谁会死" class="wpp-post-title" target="_blank" >O2O方程式解密：看懂它，就知道谁会死</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">8</i>
+					<a href="http://phpcms/html/2015/employer_1021/773.html" title="电信设备行业诺基亚+阿朗，合并后将形成巨大专利优势" class="wpp-post-title" target="_blank" >电信设备行业诺基亚+阿朗，合并后将形成...</a>						
+				</li>
+				 
+							</ul>
+		</div>
+		<div id="top-list-3" style="display: none;">
+			<ul class="wpp-list item">
+												<li class="title-li">
+					<i class="s-number">1</i>
+					<a href="http://phpcms/html/2015/employer_1021/772.html" title="Google欲打开中国市场，用出门问问作敲门砖？" class="wpp-post-title" target="_blank" >Google欲打开中国市场，用出门问问作敲门砖？</a>						
+				</li>
+								<li class="title-li">
+					<i class="s-number">2</i>
+					<a href="http://phpcms/html/2015/trends_1026/777.html" title="手游生态 巨头称霸下迎来创业者破局" class="wpp-post-title" target="_blank" >手游生态 巨头称霸下迎来创业者破局</a>						
+				</li>
+								<li class="title-li">
+					<i class="s-number">3</i>
+					<a href="http://phpcms/html/2015/trends_1111/789.html" title="Google与卡片式设计" class="wpp-post-title" target="_blank" >Google与卡片式设计</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">4</i>
+					<a href="http://phpcms/html/2015/trends_1024/774.html" title="社交电商，微信还有很长的路要走" class="wpp-post-title" target="_blank" >社交电商，微信还有很长的路要走</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">5</i>
+					<a href="http://phpcms/html/2015/trends_1024/775.html" title="降息来临，互联网金融从高收益大战转向安全大战" class="wpp-post-title" target="_blank" >降息来临，互联网金融从高收益大战转向...</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">6</i>
+					<a href="http://phpcms/html/2015/trends_1024/776.html" title="O2O方程式解密：看懂它，就知道谁会死" class="wpp-post-title" target="_blank" >O2O方程式解密：看懂它，就知道谁会死</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">7</i>
+					<a href="http://phpcms/html/2015/trends_1107/779.html" title="我是如何从程序员一步一步走向产品经理" class="wpp-post-title" target="_blank" >我是如何从程序员一步一步走向产品经理</a>						
+				</li>
+								<li class="title-li">
+					<i class="q-number">8</i>
+					<a href="http://phpcms/html/2015/employer_1021/773.html" title="电信设备行业诺基亚+阿朗，合并后将形成巨大专利优势" class="wpp-post-title" target="_blank" >电信设备行业诺基亚+阿朗，合并后将形成...</a>						
+				</li>
+				 
+							</ul>
+		</div>
+	</div>
+</div>
+<script>
+      jQuery(document).ready(function($) {
+        $(".top-list ul").idTabs();
+      });
+</script>
+<!-- 点击排行榜结束 -->
+
+
+<!-- 右侧广告 -->
+<div id="right-ad01" class="R-mainbox1 mar-b20">
+	<div style="text-align: center;"><a href="http://www.baidu.com"><img alt="" src="http://phpcms/uploadfile/2015/1110/20151110044742955.gif" style="width: 280px; height: 208px;" /></a></div></div>
+<!-- 右侧广告结束 -->
+
+
+<!-- 评论排行榜 -->
+<div id="right-2" class="R-mainbox1 mar-b20 popular-posts">
+	<h3 class="zlzj-title">
+		<span>热评文章</span>
+	</h3>
+	<div class="widget-content">
+		<ul class="wpp-list item">
+
+ 													<li class="thumb-li">
+						<a class="post-thumb" href="http://phpcms/index.php?m=content&c=index&a=show&catid=16&id=772" title="Google欲打开中国市场，用出门问问作敲门砖？" target="_blank">
+							<img width="202" height="150" src="http://phpcms/uploadfile/2015/1021/thumb_90_66_20151021111012530.png" class="wpp-thumbnail wpp_featured_stock wp-post-image" alt="Google欲打开中国市场，用出门问问作敲门砖？" style="display: block;">
+							<noscript>
+								&lt;img width="202" height="150" src="http://phpcms/uploadfile/2015/1021/thumb_90_66_20151021111012530.png" class="wpp-thumbnail wpp_featured_stock wp-post-image" alt="6" /&gt;
+							</noscript>
+						</a>
+						<a href="http://phpcms/index.php?m=content&c=index&a=show&catid=16&id=772" title="Google欲打开中国市场，用出门问问作敲门砖？" class="wpp-post-title thumb-a" target="_blank">Google欲打开中国市场，用出门问问作敲门砖？</a>
+						<span class="post-stats">
+							<span class="wpp-author">
+								<a href="#">phpcms</a>
+							</span>
+						</span>
+					</li>	
+									<li class="thumb-li">
+						<a class="post-thumb" href="http://phpcms/index.php?m=content&c=index&a=show&catid=16&id=773" title="电信设备行业诺基亚+阿朗，合并后将形成巨大专利优势" target="_blank">
+							<img width="202" height="150" src="http://phpcms/uploadfile/2015/1021/thumb_90_66_20151021111204938.png" class="wpp-thumbnail wpp_featured_stock wp-post-image" alt="电信设备行业诺基亚+阿朗，合并后将形成巨大专利优势" style="display: block;">
+							<noscript>
+								&lt;img width="202" height="150" src="http://phpcms/uploadfile/2015/1021/thumb_90_66_20151021111204938.png" class="wpp-thumbnail wpp_featured_stock wp-post-image" alt="6" /&gt;
+							</noscript>
+						</a>
+						<a href="http://phpcms/index.php?m=content&c=index&a=show&catid=16&id=773" title="电信设备行业诺基亚+阿朗，合并后将形成巨大专利优势" class="wpp-post-title thumb-a" target="_blank">电信设备行业诺基亚+阿朗，合并后将形成巨大专...</a>
+						<span class="post-stats">
+							<span class="wpp-author">
+								<a href="#">phpcms</a>
+							</span>
+						</span>
+					</li>	
+								
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<div id="right-ad02" class="R-mainbox1 mar-b20">
+	<div style="text-align: center;"><a href="http://www.ifeng.com" target="_blank"><img alt="" src="http://phpcms/uploadfile/2015/1110/20151110045612596.jpg" style="width: 280px; height: 208px;" /></a></div></div>
+
+
+
+
+
+<!-- 评论排行榜结束 -->
+</div>
+<!-- 侧边栏结束 -->
+
+</div>
+
+
+<script type="text/javascript">
+/*
+	function show_ajax(obj) {
+		var keywords = $(obj).text();
+		var offset = $(obj).offset();
+		var jsonitem = '';
+		$.getJSON("http://phpcms/index.php?m=content&c=index&a=json_list&type=keyword&modelid=1&id=789&keywords="+encodeURIComponent(keywords),
+				function(data){
+				var j = 1;
+				var string = "<div class='point key-float'><div style='position:relative'><div class='arro'></div>";
+				string += "<a href='JavaScript:;' onclick='$(this).parent().parent().remove();' hidefocus='true' class='close'><span>关闭</span></a><div class='contents f12'>";
+				if(data!=0) {
+				  $.each(data, function(i,item){
+					j = i+1;
+					jsonitem += "<a href='"+item.url+"' target='_blank'>"+j+"、"+item.title+"</a><BR>";
+					
+				  });
+					string += jsonitem;
+				} else {
+					string += '没有找到相关的信息！';
+				}
+					string += "</div><span class='o1'></span><span class='o2'></span><span class='o3'></span><span class='o4'></span></div></div>";		
+					$(obj).after(string);
+					$('.key-float').mouseover(
+						function (){
+							$(this).siblings().css({"z-index":0})
+							$(this).css({"z-index":1001});
+						}
+					)
+					$(obj).next().css({ "left": +offset.left-100, "top": +offset.top+$(obj).height()+12});
+				});
+	}
+*/
+
+	function add_favorite(title)
+	{
+		$.getJSON('http://phpcms/api.php?op=add_favorite&title='+encodeURIComponent(title)+'&url='+encodeURIComponent(location.href)+'&'+Math.random()+'&callback=?', function(data){
+			if(data.status==1)	{
+				$("#favorite").html('收藏成功');
+			} else {
+				alert('请登录');
+			}
+		});
+	}
+</script>
+
+<script language="JavaScript" src="http://phpcms/api.php?op=count&id=789&modelid=1"></script>
+
+	<footer class="common-footer">
+		<div class="sections" data-stat-module="dibu">
+			<section class="link-section">
+				<h3>36氪 让创业更简单</h3>
+
+				<div class="links">
+					<a href="http://36kr.com/about" >关于36氪</a>
+					|
+					<a href="http://space.36kr.com/" >氪空间</a>
+					|
+					<a href="http://36kr.com/hire" >加入我们</a>
+					|
+					<a href="http://report.36kr.com/" >寻求报道</a>
+				</div>
+
+				<div class="feedback">
+					反馈建议：
+					<a ref="nofollow" href="mailto:service@36kr.com" >service@36kr.com</a>
+				</div>
+				<div class="contact">
+					客服电话：
+					<a href="tel:010-59974050">010-59974050</a>
+				</div>
+			</section>
+			<section class="partner-section">
+				<h3>合作伙伴</h3>
+
+				<ul class="footer-partner">
+					<li>
+						<a ref="nofollow" href="http://www.aliyun.com/?from=36kr" class="external" target="_blank">
+							<img src="/statics/cy/images/aly.png" height="16px"></a>
+					</li>
+					<li>
+						<a ref="nofollow" href="http://qcloud.com/?from=36kr" class="external" target="_blank">
+							<img src="/statics/cy/images/txy.png" alt="" height="21px" style="margin-top:-8px"></a>
+					</li>
+					<li>
+						<a ref="nofollow" href="http://qingcloud.com/?from=36kr" class="external" target="_blank">
+							<img src="/statics/cy/images/qy.png" alt="" height="21px" style="margin-top:-8px"></a>
+					</li>
+					<li>
+						<a ref="nofollow" href="https://www.yunpian.com/?ref=36krx2015" class="external" target="_blank">
+							<img src="/statics/cy/images/yp.png" alt="" height="17px"></a>
+					</li>
+					<li>
+						<a ref="nofollow" href="http://upyun.com/?from=36kr" class="external" target="_blank">
+							<img src="/statics/cy/images/upy.png" alt="" height="11px"></a>
+					</li>
+					<li>
+						<a ref="nofollow" href="http://qiniu.com/?from=36kr" class="external" target="_blank">
+							<img src="/statics/cy/images/qny.png" alt="" height="17px"></a>
+					</li>
+					<li>
+						<a ref="nofollow" href="http://dnspod.cn/?from=36kr" class="external" target="_blank">
+							<img src="/statics/cy/images/dp.png" alt="" height="10px"></a>
+					</li>
+					<li>
+						<a ref="nofollow" href="http://getui.com/?from=36kr" class="external" target="_blank">
+							<img src="/statics/cy/images/getui.png" height="22px" style="margin-top:-8px"></a>
+					</li>
+				</ul>
+			</section>
+			<section class="qr-section">
+				<img class="qr" src="/statics/cy/images/qr.png" alt="">
+				<div>扫码关注微信公众平台</div>
+			</section>
+		</div>
+		<div class="bottom">
+			<div class="container">
+				<div class="copyright">
+					<span class="mobile-hide">
+						本站由
+						<a href="http://qingcloud.com/">QingCloud</a>
+						提供云计算服务
+					</span>
+					<span class="law">
+						© 2011-2015 36氪  |  京ICP备12031756号
+						<span class="mobile-hide">|  京ICP证150143号</span>
+						<span class="mobile-hide">|  京公网安备11010802012285号</span>
+					</span>
+				</div>
+				<div class="share">
+					<a ref="nofollow" class="icon-weibo" href="http://weibo.com/wow36kr"></a>
+					<a ref="nofollow" class="icon-twitter" href="https://twitter.com/36kr"></a>
+					<a ref="nofollow" class="icon-facebook" href="http://www.facebook.com/X36Kr"></a>
+					<a ref="nofollow" class="icon-rss" href="http://36kr.com/feed"></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="fixed-tools J_fixedTools" >
+		<a class="icon-qr J_qrEnter" data-stat-hover="erweima.hover" href="javascript:void(0)"></a>
+		<div class="qr J_qrWrapper">
+			<div class="qr-min active">
+				<img alt="" src="/statics/cy/images/qr.png">
+				<a class="btn" href="javascript:void(0)">更多公众账号</a>
+			</div>
+			<div class="qr-group">
+				<div class="tabs">
+					<a class="tab active" href="javascript:void(0)">36氪</a>
+					<a class="tab" href="javascript:void(0)">36氪股权投资</a>
+					<a class="tab" href="javascript:void(0)">36氪融资</a>
+					<a class="tab" href="javascript:void(0)">氪空间</a>
+				</div>
+				<div class="panels">
+					<div class="panel active">
+						<div class="img">
+							<img alt="" src="/statics/cy/images/qr.png">
+							<span class="id">36氪</span>
+						</div>
+						<div class="desc">
+							<p>为你推送和解读最前沿、最有料的科技创投资讯</p>
+						</div>
+					</div>
+					<div class="panel">
+						<div class="img">
+							<img alt="" src="/statics/cy/images/qr-zhong.jpg">
+							<span class="id">36Kr股权投资</span>
+						</div>
+						<div class="desc">
+							<p>汇集行业内最优质创业项目的股权投资平台</p>
+						</div>
+					</div>
+					<div class="panel">
+						<div class="img">
+							<img alt="" src="/statics/cy/images/qr-rong.jpg">
+							<span class="id">36kr融资</span>
+						</div>
+						<div class="desc">
+							<p>聚集15家顶级投资机构的专业互联网融资平台</p>
+						</div>
+					</div>
+					<div class="panel">
+						<div class="img">
+							<img alt="" src="/statics/cy/images/qr_krspace.jpg">
+							<span class="id">氪空间</span>
+						</div>
+						<div class="desc">
+							<p>聚集全球最优秀的创业者，项目融资率接近97%，领跑行业</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="icon-arrow-up J_up" data-stat-click="up.click" href="javascript:void(0)"></a>
+	</div>
+<script type="text/javascript">
+	$(function(){
+		var height = $(window).height()-288;
+		$('.main').css('min-height',height);
+	});	
+</script>
+</body>
+</html>

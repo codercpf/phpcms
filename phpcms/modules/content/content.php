@@ -14,6 +14,7 @@ pc_base::load_sys_class('format','',0);
 class content extends admin {
 	private $db,$priv_db;
 	public $siteid,$categorys;
+
 	public function __construct() {
 		parent::__construct();
 		$this->db = pc_base::load_model('content_model');
@@ -317,7 +318,6 @@ class content extends admin {
 		include $this->admin_tpl('incubator_settled');
 
 	}
-
 	//查看并审核入驻申请
 	public function applypreview() {
 		if(isset($_POST['dosubmit'])){
@@ -419,7 +419,6 @@ class content extends admin {
 			include $this->admin_tpl('incubator_settledetail');
 		}
 	}
-
 	//删除功能
 	public function apply_delete(){
 		$_POST['ids'] = intval($_GET['id']);
@@ -530,7 +529,6 @@ class content extends admin {
 			include $this->admin_tpl('finance_passeddetail');
 		}
 	}
-
 /*融资申请结束*/
 
 	public function add() {

@@ -145,5 +145,11 @@
 		</div>
 		<a class="icon-arrow-up J_up" data-stat-click="up.click" href="javascript:void(0)"></a>
 	</div>
+<script type="text/javascript">
+	$(function(){
+		var height = $(window).height()-288;
+		$('.main').css('min-height',height);
+	});	
+</script>
 </body>
 </html>

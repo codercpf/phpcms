@@ -33,7 +33,6 @@ class tag {
 		$r = $this->keyword_db->get_one(array('keyword'=>$tag, 'siteid'=>$this->siteid), 'id');
 		if (!$r['id']) showmessage('不存在此关键字！');
 		$tagid = intval($r['id']);
-
 		$page = max($_GET['page'], 1);
 		$pagesize = 20;
 		$where = '`tagid`=\''.$tagid.'\' AND `siteid`='.$this->siteid;
@@ -41,15 +40,21 @@ class tag {
 		$pages = $keyword_data_db->pages;
 		$total = $keyword_data_db->number;
 		if (is_array($infos)) {
-			$datas = array();
+			$firstdatas = array();
 			foreach ($infos as $info) {
 				list($contentid, $modelid) = explode('-', $info['contentid']);
 				$this->db->set_model($modelid);
-				$res = $this->db->get_one(array('id'=>$contentid), 'title, description, url, inputtime, style');
+				$res = $this->db->get_one(array('id'=>$contentid), 'title, thumb, keywords ,description, url, inputtime, style');
 				$res['title'] = str_replace($tag, '<font color="#f00">'.$tag.'</font>', $res['title']);
 				$res['description'] = str_replace($tag, '<font color="#f00">'.$tag.'</font>', $res['description']);
-				$datas[] = $res;
+				$firstdatas[] = $res;
 			}
+		}
+		$datas=array();
+		foreach($firstdatas as $k=>$value)
+		{
+			$value[keywords] = explode(" ",$value[keywords]);
+			$datas[$k]=$value;
 		}
 
 		$SEO = seo($siteid, '', $tag);

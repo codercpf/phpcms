@@ -5,12 +5,14 @@ pc_base::load_sys_class('format','',0);
 class index {
 	function __construct() {
 		$this->db = pc_base::load_model('search_model');
+
 		$this->content_db = pc_base::load_model('content_model');
 	}
 	
 	/**
 	 * 关键词搜索
 	 */
+//修改过无注释
 	public function init() {
 		//获取siteid
 		$siteid = isset($_REQUEST['siteid']) && trim($_REQUEST['siteid']) ? intval($_REQUEST['siteid']) : 1;
@@ -27,7 +29,7 @@ class index {
 			if(trim($_GET['q'])=='') {
 				header('Location: '.APP_PATH.'index.php?m=search');exit;
 			}
-			$typeid = empty($_GET['typeid']) ? 48 : intval($_GET['typeid']);
+			$typeid = empty($_GET['typeid']) ? 1: intval($_GET['typeid']);
 			$time = empty($_GET['time']) || !in_array($_GET['time'],array('all','day','month','year','week')) ? 'all' : trim($_GET['time']);
 			$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 			$pagesize = 10;
@@ -53,12 +55,18 @@ class index {
 				$search_time = 0;
 				$sql_time = '';
 			}
+
 			if($page==1 && !$setting['sphinxenable']) {
 				//精确搜索
 				$commend = $this->db->get_one("`typeid` = '$typeid' $sql_time AND `data` like '%$q%'");
+				// echo "commend中的内容<br/>";
+				// echo "<pre>";
+				// print_r($commend);
+				// echo "<pre>";
 			} else {
 				$commend = '';
 			}
+
 			//如果开启sphinx
 			if($setting['sphinxenable']) {
 				$sphinx = pc_base::load_app_class('search_interface', '', 0);
@@ -76,15 +84,42 @@ class index {
 				$segment = new segment();
 				//分词结果
 				$segment_q = $segment->get_keyword($segment->split_result($q));
+/*
 				//如果分词结果为空
 				if(!empty($segment_q)) {
 					$sql = "`siteid`= '$siteid' AND `typeid` = '$typeid' $sql_time AND MATCH (`data`) AGAINST ('$segment_q' IN BOOLEAN MODE)";
+
+					echo "分词不为空<br/>";
+					echo $sql."<br/>";
 				} else {
 					$sql = "`siteid`= '$siteid' AND `typeid` = '$typeid' $sql_time AND `data` like '%$q%'";
-				}
 
+					echo "分词为空<br/>";
+					echo $sql."<br/>";
+				}
+*/
+//				 方法二
+				$sql = "`siteid`= '$siteid' AND `typeid` = '$typeid' $sql_time AND `data` like '%$q%'";
+
+
+//				方法三
+/*
+				//如果分词结果为空
+				if(!empty($segment_q)) {
+					$length = strlen($segment_q);
+					$q_key = "'".$segment_q."'";
+					if($length>=6){
+						$sql = "`siteid`= '1' AND `typeid` = '$typeid' AND (SELECT (LENGTH(`data`)-LENGTH(REPLACE(`data`,$q_key,'')))) >17";						
+					}else{
+						$sql = "`siteid`= '1' AND `typeid` = '$typeid' AND (SELECT (LENGTH(`data`)-LENGTH(REPLACE(`data`,$q_key,'')))) >11";
+					}
+				} else {
+					$sql = "`siteid`= '$siteid' AND `typeid` = '$typeid' AND `data` like '%$q%'";
+				}
+*/
 				$result = $this->db->listinfo($sql, 'searchid DESC', $page, 10);
 			}
+
 
 			//如果开启相关搜索功能
 			if($setting['relationenble']) {
@@ -127,13 +162,12 @@ class index {
 						$sids[] = $_v['id'];
 					}
 				}
-
 				if(!empty($commend['id'])) {
 					$sids[] = $commend['id'];
 				}
 				$sids = array_unique($sids);
-
 				$where = to_sqls($sids, '', 'id');
+
 				//获取模型id
 				$model_type_cache = getcache('type_model_'.$siteid,'search');
 				$model_type_cache = array_flip($model_type_cache);
@@ -142,23 +176,26 @@ class index {
 				//是否读取其他模块接口
 				if($modelid) {
 					$this->content_db->set_model($modelid);
-					
+
+					// $tablename=$this->content_db->model_tablename;
+
 					/**
 					 * 如果表名为空，则为黄页模型
 					 */
 					if(empty($this->content_db->model_tablename)) {
 						$this->content_db = pc_base::load_model('yp_content_model');
 						$this->content_db->set_model($modelid);
-
 					}
 
 					if($setting['sphinxenable']) {
 						$data = $this->content_db->listinfo($where, 'id DESC', 1, $pagesize);
 						$pages = pages($totalnums, $page, $pagesize);
 					} else {
-						$data = $this->content_db->select($where, '*');
+						$data = $this->content_db->select($where, '*');	
 						$pages = $this->db->pages;
 						$totalnums = $this->db->number;
+
+						// echo $totalnums;exit();
 					}
 				
 					//如果分词结果为空
@@ -188,8 +225,8 @@ class index {
 			$pages = isset($pages) ? $pages : '';
 			$totalnums = isset($totalnums) ? $totalnums : 0;
 			$data = isset($data) ? $data : '';
-			
-			include	template('search','list');
+
+			include	template('search','searchlist');
 		} else {
 			include	template('search','index');
 		}

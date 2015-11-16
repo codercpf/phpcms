@@ -161,7 +161,12 @@ class index {
 		$this->db->table_name = $tablename.'_data';
 		$r2 = $this->db->get_one(array('id'=>$id));
 		$rs = $r2 ? array_merge($r,$r2) : $r;
-
+/*
+		echo "<pre>";
+		print_r($rs);
+		echo "<pre>";
+		exit();
+*/
 		//再次重新赋值，以数据库为准
 		$catid = $CATEGORYS[$r['catid']]['catid'];
 		$modelid = $CATEGORYS[$catid]['modelid'];
@@ -169,6 +174,12 @@ class index {
 		require_once CACHE_MODEL_PATH.'content_output.class.php';
 		$content_output = new content_output($modelid,$catid,$CATEGORYS);
 		$data = $content_output->get($rs);
+/*
+		echo "<pre>";
+		print_r($data);
+		echo "<pre>";
+		exit();
+*/
 		extract($data);
 		
 		//检查文章会员组权限

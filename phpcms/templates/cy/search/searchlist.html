@@ -1,0 +1,49 @@
+{template 'content', 'header'}
+
+    <link rel="stylesheet" href="{WEB_PATH}statics/cy/css/commen.css">    
+    <link rel="stylesheet" href="{WEB_PATH}statics/cy/css/search2.css">    
+    <div id="main" class="com-width mt90 clearfix">
+        <div class="list-wrap fl">
+            <div class="search-page-content com-width clearfix" style="margin-top:0">
+                <div class="search-left">
+                    <div class="search-page-number">
+                        <h1 class="keyword">{$q}</h1>
+                        {$totalnums}个结果
+                    </div>
+                    <div class="search-data-list">
+                    {loop $data $i $r}
+                        <div class="content-item clearfix">
+                            <div class="item-img fl">
+                                <a href="{$r[url]}" target="_blank">
+                                    <img src="{$r[thumb]}" alt="" title=""></a>
+                            </div>
+                            <div class="item-info fl">
+                                <h2 class="item-tit">
+                                    <a href="{$r[url]}" target="_blank">
+                                        {$r[title]}
+                                    </a>
+                                </h2>
+                                <p class="item-intro">{$r[description]}</p>
+                                <p class="item-other">
+                                    <!-- <span class="author fl">Nana</span> -->
+                                    <span class="tag fr">发布时间：{format::date($r[inputtime], 0)}</span>
+                                </p>
+                            </div>
+                        </div>
+                    {/loop}
+                    {if empty($data)}
+                        <div class="search-no-result">
+                            <span class="orange">抱歉 未找到结果</span>
+                            请尝试搜索其他关键词
+                        </div>                    
+                    {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧栏 -->
+        {template 'content','rightside'}
+        <!-- 右侧栏结束 -->
+    </div>
+
+{template 'content', 'footer'}

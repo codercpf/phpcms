@@ -146,6 +146,7 @@ final class mysql {
 		$data = implode(',', $field);
 
 		$sql = 'SELECT '.$data.' FROM `'.$this->config['database'].'`.`'.$table.'`'.$where.$group.$order.$limit;
+
 		$this->execute($sql);
 		$res = $this->fetch_next();
 		$this->free_result();
@@ -182,7 +183,7 @@ final class mysql {
 	 * @param $sql							查询sql语句
 	 * @return	boolean/query resource		如果为查询语句，返回资源句柄，否则返回true/false
 	 */
-	public function query($sql) {
+	public function query($sql) {		
 		return $this->execute($sql);
 	}
 	

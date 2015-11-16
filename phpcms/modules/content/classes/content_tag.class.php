@@ -146,7 +146,6 @@ class content_tag {
 	}
 
 
-
 // 全站排行榜
 /**
 * sitehits站点点击排行
@@ -176,7 +175,7 @@ function sitehits($data){
 		$id = substr($key['hitsid'],(strpos($key['hitsid'],'-',2)+1));
 		$tablename = $sitemodel_model_db->get_one(array('modelid'=>$modelid[1][0]),'tablename');
 		$this->db->table_name = $tablepre.$tablename['tablename'];
-		$return[] = array_merge($return,$this->db->get_one(array('id'=>$id)));
+		$return[] = array_merge($return,$this->db->get_one(array('id'=>$id,'status'=>99)));		
 	}
 	return $return;
 }

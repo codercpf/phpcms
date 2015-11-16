@@ -12,7 +12,7 @@
 
 <!-- new added -->
 <link rel="stylesheet" href="{WEB_PATH}statics/cy/css/commen.css">
-<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/member.css" />
+<link rel="stylesheet" href="{WEB_PATH}statics/cy/css/member.css"/>
 
 <!-- Not sure -->
 <!-- <script src="{WEB_PATH}statics/cy/js/jquery.min2.js"></script> -->
@@ -49,7 +49,9 @@
 				</script>
 					<tr>
 						<th>选择栏目：</th>
-						<td>{form::select_category('', $catid, 'name="info[catid]" class="duan1" onchange="javascript:c_c(this.value);"','','',0,1,$siteid,'1')}</td>
+						<td>
+							{form::select_category('', $catid, 'name="info[catid]" class="duan1" onchange="javascript:c_c(this.value);"','',1,0,1,$siteid,'1')}
+						</td>
 					</tr>
 				{else}
 					<tr>
@@ -72,7 +74,7 @@
 					</tr>
 					<tr>
 						<th width="100"><font color="red">*</font>{$forminfos[content][name]}：</th>
-						<td>{$forminfos[content][form]}<!-- {$forminfos[content][tips]} --></td>						
+						<td>{$forminfos[content][form]} {$forminfos[content][tips]}</td>						
 					</tr>
 					<tr>
 						<th></th>

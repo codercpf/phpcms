@@ -17,7 +17,7 @@
 </head>
 
 <body style="padding-top: 0px;">
-	<link rel="stylesheet" type="text/css" href="<?php echo WEB_PATH;?>statics/cy/css/header2.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo WEB_PATH;?>statics/cy/css/header.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo WEB_PATH;?>statics/cy/css/animate.min.css">
 
 	<header class="common-header J_commonHeaderWrapper animated fadeInDown" data-stat-module="dingbudaohang" style="position: relative;">
@@ -31,8 +31,8 @@
 						<a href="<?php echo APP_PATH;?>">首页</a>
 					</li>
 					
-<?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=9b7be0edd38f1ca1423251fdce9e2bfa&action=category&siteid=1&catid=0&num=4\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">编辑</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'category')) {$data = $content_tag->category(array('siteid'=>'1','catid'=>'0','limit'=>'4',));}?>
-<?php $n=1;if(is_array($data)) foreach($data AS $v) { ?>
+<?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=ad981eb984593a881cc18d6ad2c6a0da&action=category&siteid=1&catid=0&num=5&return=info\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">修改</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'category')) {$info = $content_tag->category(array('siteid'=>'1','catid'=>'0','limit'=>'5',));}?>
+<?php $n=1;if(is_array($info)) foreach($info AS $v) { ?>
 					<li>
 						<!-- <a href="<?php echo $v['url'];?>" ><?php echo $v['catname'];?><i class="headericon-arrow-drop-down"></i></a> -->
 						<a><?php echo $v['catname'];?><i class="headericon-arrow-drop-down"></i></a>
@@ -42,7 +42,7 @@
 							<?php $n=1;if(is_array(subcat($v['catid']))) foreach(subcat($v['catid']) AS $vv) { ?>
 								<a href="<?php echo $vv['url'];?>"><?php echo $vv['catname'];?></a>
 							<?php $n++;}unset($n); ?>
-							</div>							
+							</div>
 						</div>
 					</li>
 <?php $n++;}unset($n); ?>
@@ -64,30 +64,13 @@
 									<input type="hidden" name="m" value="search"/>
 									<input type="hidden" name="c" value="index"/>
 									<input type="hidden" name="a" value="init"/>
-									<input type="hidden" name="typeid" value="<?php echo $typeid;?>" id="typeid"/>
-									<input type="hidden" name="siteid" value="<?php echo $siteid;?>" id="siteid"/>
-					                <input type="text" class="text" name="q" id="q" placeholder="搜索"/>
-					                <button class="headericon-header-search search-icon" type="submit" data-stat-click="sousuo"></button>
-					                <!-- <input type="submit" value="搜 索" class="button" /> 源文件-->
-					            </form>
+									<input type="hidden" name="typeid" value="1" id="typeid"/>
+									<input type="hidden" name="siteid" value="1" id="siteid"/>
+					                <input type="text" class="text" name="q" id="q" placeholder="搜索" required/>
+					                <button class="headericon-header-search search-icon" type="submit"></button>
+					            </form>				            
 							</div>
-						</div>	
-
-
-<!-- 
-						<div class="search fr show-search clearfix" id="search" style="width: 32px;">
-							<form action="http://www.cyzone.cn/index.php" class="search-form fl" name="search-myform" method="get" style="display: none;">
-								<input type="hidden" name="m" value="search">
-								<input type="hidden" name="c" value="index">
-								<input type="hidden" name="a" value="init">
-								<input type="hidden" name="typeid" value="" id="typeid">
-								<input type="hidden" name="siteid" value="1" id="siteid">
-								<input type="text" name="wd" class="search-input" placeholder="创业">
-								<input type="submit" class="hide">
-							</form>
-							<i class="search-show FontAwesome fl"></i>
 						</div>
- -->
 					</li>						
 
 <?php if($_username) { ?>
@@ -120,7 +103,6 @@
 						</a>
 					</li>
 <?php } ?>
-
 
 <!-- 用户中心结束 -->
 
